@@ -1,0 +1,40 @@
+.header {
+    background-color: #1C1C21;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav {
+    display: flex;
+
+}
+
+.menu {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    width: 290px;
+    height: auto;
+    transform: translateX(-50%);
+}
+
+.profile {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}

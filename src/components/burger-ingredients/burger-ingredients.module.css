@@ -1,0 +1,10 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+.main {
+    overflow: scroll;
+    max-height: 716px;
+}
