@@ -6,7 +6,7 @@
 
 .main {
     overflow-y: scroll;
-    max-height: 686px;
+    max-height: 716px;
     scrollbar-width: 8px;
     scrollbar-color: #8585AD #2F2F37;
 }

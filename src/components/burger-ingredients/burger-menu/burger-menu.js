@@ -3,20 +3,35 @@ import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import burgerMenuStyles from './burger-menu.module.css';
 
 const BurgerMenu = () => {
-    const [currentTab, setCurrentTab] = useState('bun')
+    const [currentTab, setCurrentTab] = useState('bun');
+
+    const onTabClick = (tab) => {
+        const activeTab = document.getElementById(tab)
+        setCurrentTab(tab);
+
+        activeTab.scrollIntoView({behavior:"smooth"});
+    }
 
     return (
-        <div className={burgerMenuStyles.list}>
-            <Tab value="bun" active={currentTab === 'bun'} onClick={setCurrentTab}>
-                Булки
-            </Tab>
-            <Tab value="sauce" active={currentTab === 'sauce'} onClick={setCurrentTab}>
-                Соусы
-            </Tab>
-            <Tab value="main" active={currentTab === 'main'} onClick={setCurrentTab}>
-                Начинки
-            </Tab>
-    </div>
+        <nav>
+            <ul className={burgerMenuStyles.list}> 
+                <li>
+                   <Tab value="bun" active={currentTab === 'bun'} onClick={onTabClick}>
+                        Булки
+                    </Tab> 
+                </li>
+                <li>
+                    <Tab value="sauce" active={currentTab === 'sauce'} onClick={onTabClick}>
+                        Соусы
+                    </Tab>
+                </li>
+                <li>
+                   <Tab value="main" active={currentTab === 'main'} onClick={onTabClick}>
+                        Начинки
+                    </Tab> 
+                </li>
+            </ul>   
+        </nav>
     )
 }
 

@@ -21,9 +21,15 @@
     align-items: center;
 }
 
+.ingredient:last-child {
+    margin-bottom: 0;
+}
+
 .filling {
     overflow-y: scroll;
     max-height: 464px;
+    scrollbar-width: 8px;
+    scrollbar-color: #8585AD #2F2F37;
 }
 
 .filling::-webkit-scrollbar {

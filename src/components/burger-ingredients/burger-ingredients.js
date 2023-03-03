@@ -1,13 +1,25 @@
-
+import { useMemo } from "react";
 import BurgerIngredientsBlock from "./burger-ingredients-block/burger-ingredients-block";
 import BurgerMenu from "./burger-menu/burger-menu";
 import burgerIngredientsStyles from './burger-ingredients.module.css'
 
 
 const BurgerIngredients = ({items}) => {
-    const buns = items.filter((item) => item.type === 'bun');
-    const sauce = items.filter((item) => item.type === 'sauce');
-    const main = items.filter((item) => item.type === 'main');
+
+    const buns = useMemo(
+        () => items.filter((item) => item.type === 'bun'),
+        [items]
+    );
+
+    const sauces = useMemo(
+        () => items.filter((item) => item.type === 'sauce'),
+        [items]
+    );
+
+    const mains = useMemo(
+        () => items.filter((item) => item.type === 'main'),
+        [items]
+    );
 
 
     return (
@@ -16,11 +28,11 @@ const BurgerIngredients = ({items}) => {
             
             <BurgerMenu />
             <div className={burgerIngredientsStyles.main}> 
-                <BurgerIngredientsBlock title="Булки" items={buns} />
+                <BurgerIngredientsBlock title="Булки" titleId="bun" items={buns} />
 
-                <BurgerIngredientsBlock title="Соусы" items={sauce} />
+                <BurgerIngredientsBlock title="Соусы" titleId="sauce" items={sauces} />
 
-                <BurgerIngredientsBlock title="Начинки" items={main} />
+                <BurgerIngredientsBlock title="Начинки" titleId="main" items={mains} />
             </div>
         </section>
     )
