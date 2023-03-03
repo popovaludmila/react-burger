@@ -12,8 +12,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    max-height: 656px;
-    overflow: scroll;
+    
 }
 
 .ingredient {
@@ -21,3 +20,18 @@
     flex-direction: row;
     align-items: center;
 }
+
+.filling {
+    overflow-y: scroll;
+    max-height: 464px;
+}
+
+.filling::-webkit-scrollbar {
+    width: 8px;
+    background-color: #2F2F37;
+}
+
+.filling::-webkit-scrollbar-thumb {
+    background-color: #8585AD;        
+    height: 292px; 
+  }
