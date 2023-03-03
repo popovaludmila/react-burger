@@ -1,6 +1,7 @@
 import IngredientCard from '../ingredient-card/ingredient-card';
 import burgerIngredientsBlockStyles from './burger-ingredients-block.module.css';
-
+import PropTypes from 'prop-types';
+import ingredientPropTypes from '../../utils/prop-types.js';
 
 const BurgerIngredientsBlock = ({title, titleId, items}) => {
    const ingrediens = items.map((item) => (
@@ -18,5 +19,11 @@ const BurgerIngredientsBlock = ({title, titleId, items}) => {
       </div>  
    )
 }
+
+BurgerIngredientsBlock.propTypes = {
+   title: PropTypes.string.isRequired,
+   titleId: PropTypes.string.isRequired,
+   items: PropTypes.arrayOf(ingredientPropTypes.isRequired)
+};
 
 export default BurgerIngredientsBlock;

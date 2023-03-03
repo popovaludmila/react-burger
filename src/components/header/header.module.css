@@ -27,14 +27,28 @@
     transform: translateX(-50%);
 }
 
-.profile {
+.button {
     display: flex;
     flex-direction: row;
     align-items: center;
 }
 
+.profile {
+    padding-right: 0;
+}
+
 .item {
+    display: flex;
+}
+
+.link {
     display: flex;
     flex-direction: row;
     align-items: center;
 }
+
+.link:first-child {
+    padding-left: 0;
+}
+
+

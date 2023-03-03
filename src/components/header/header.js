@@ -14,14 +14,19 @@ const Header = () => {
                 <div className={`${headerStyles.wrapper} pt-6 pb-6`}>
                     <nav>
                         <ul className={headerStyles.menu}>
-                            <li className={headerStyles.item} >
-                                <BurgerIcon />
-                                <a className="text text_type_main-default p-4 pr-7 pl-2" href="1">Конструктор</a>
+                            <li className={`${headerStyles.item}`}>
+                               
+                                <a className={`${headerStyles.link} text text_type_main-default p-1`} href="1">
+                                    <BurgerIcon />
+                                    <span className={`${headerStyles.link} pl-2`}>Конструктор</span>
+                                </a>
                             </li>
 
-                            <li className={headerStyles.item}>
-                                <ListIcon type="secondary" />
-                                <a className="text text_type_main-default text_color_inactive p-4 pl-2" href="1">Лента заказов</a>
+                            <li className={`${headerStyles.item} ml-10`} >
+                                <a className={`${headerStyles.link} text text_type_main-default`} href="1">
+                                    <ListIcon type="secondary" />
+                                    <span className={`${headerStyles.link} text_color_inactive p-1 pl-2`}>Лента заказов</span>
+                                </a>
                             </li>
                         </ul>
                     </nav>
@@ -30,10 +35,10 @@ const Header = () => {
                         <Logo /> 
                     </a>
                     
-                    <div className={headerStyles.profile}>
-                        <ProfileIcon type="secondary" />
-                        <button className="text text_type_main-default text_color_inactive p-4 pl-2">
-                            Личный кабинет
+                    <div className={headerStyles.item}> 
+                        <button className={`${headerStyles.button}`}>
+                            <ProfileIcon type="secondary" />
+                            <span className={`${headerStyles.profile} text text_type_main-default p-4 pl-2 text_color_inactive`}>Личный кабинет</span>
                         </button>
                     </div>
                 </div>

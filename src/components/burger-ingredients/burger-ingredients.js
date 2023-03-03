@@ -2,7 +2,8 @@ import { useMemo } from "react";
 import BurgerIngredientsBlock from "./burger-ingredients-block/burger-ingredients-block";
 import BurgerMenu from "./burger-menu/burger-menu";
 import burgerIngredientsStyles from './burger-ingredients.module.css'
-
+import PropTypes from 'prop-types';
+import ingredientPropTypes from '../utils/prop-types.js';
 
 const BurgerIngredients = ({items}) => {
 
@@ -37,5 +38,9 @@ const BurgerIngredients = ({items}) => {
         </section>
     )
 }
+
+BurgerIngredients.propTypes = {
+    items: PropTypes.arrayOf(ingredientPropTypes.isRequired)
+};
 
 export default BurgerIngredients;
