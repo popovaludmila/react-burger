@@ -1,11 +1,11 @@
 import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import cartTotalStyles from './cart-total.module.css';
 
-const CartTotal = () => {
+const CartTotal = ({total}) => {
     return (
         <div className={`${cartTotalStyles.wrapper} pt-6`}>
             <div className={`${cartTotalStyles.price} mr-10`}>
-                <span className="text text_type_digits-medium mr-2">610</span>
+                <span className="text text_type_digits-medium mr-2">{total}</span>
                 <CurrencyIcon type="primary" />
             </div>
             

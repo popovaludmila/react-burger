@@ -1,0 +1,9 @@
+.ingredient {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.ingredient:last-child {
+    margin-bottom: 0;
+}

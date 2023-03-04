@@ -2,12 +2,12 @@ import ingredientCardStyles from './ingredient-card.module.css';
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import ingredientPropTypes from '../../utils/prop-types.js';
 
-const IngredientCard = ({item}) => {
+const IngredientCard = ({item, count, onClick}) => {
 
     return (
-      <li className={`${ingredientCardStyles.item} mr-6 ml-4 mb-10`}
+      <li className={`${ingredientCardStyles.item} mr-6 ml-4 mb-10`} onClick={onClick}
       >
-        <Counter count={1} size="default" extraClass="m-1" />
+        {count ? <Counter count={count} size="default" extraClass="m-1" /> : null}
 
         <img src={item.image} width="240" height="120" alt="" />
         <div className={ingredientCardStyles.price}>

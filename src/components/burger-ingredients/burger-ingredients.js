@@ -5,7 +5,13 @@ import burgerIngredientsStyles from './burger-ingredients.module.css'
 import PropTypes from 'prop-types';
 import ingredientPropTypes from '../utils/prop-types.js';
 
-const BurgerIngredients = ({items}) => {
+const BurgerIngredients = ({items, cart, onItemClick}) => {
+    let addedItems = {}
+
+    addedItems[cart.top._id] = (addedItems[cart.top._id] ?? 0) + 1
+    addedItems[cart.bottom._id] = (addedItems[cart.bottom._id] ?? 0) + 1
+
+    cart.fillings.forEach((item)=>(addedItems[item._id] = (addedItems[item._id] ?? 0) + 1));
 
     const buns = useMemo(
         () => items.filter((item) => item.type === 'bun'),
@@ -29,11 +35,11 @@ const BurgerIngredients = ({items}) => {
             
             <BurgerMenu />
             <div className={burgerIngredientsStyles.main}> 
-                <BurgerIngredientsBlock title="Булки" titleId="bun" items={buns} />
+                <BurgerIngredientsBlock title="Булки" titleId="bun" items={buns} addedItems={addedItems} onItemClick={onItemClick}/>
 
-                <BurgerIngredientsBlock title="Соусы" titleId="sauce" items={sauces} />
+                <BurgerIngredientsBlock title="Соусы" titleId="sauce" items={sauces} addedItems={addedItems} onItemClick={onItemClick}/>
 
-                <BurgerIngredientsBlock title="Начинки" titleId="main" items={mains} />
+                <BurgerIngredientsBlock title="Начинки" titleId="main" items={mains} addedItems={addedItems} onItemClick={onItemClick}/>
             </div>
         </section>
     )
