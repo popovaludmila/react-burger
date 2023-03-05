@@ -9,7 +9,7 @@ const IngredientCard = ({item, count, onClick}) => {
       >
         {count ? <Counter count={count} size="default" extraClass="m-1" /> : null}
 
-        <img src={item.image} width="240" height="120" alt="" />
+        <img src={item.image} width="240" height="120" alt="Картинка ингредиента" />
         <div className={ingredientCardStyles.price}>
           <span className="text text_type_main-medium pt-1 pb-1 pr-2">
             {item.price}

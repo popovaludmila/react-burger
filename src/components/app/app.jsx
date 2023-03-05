@@ -5,6 +5,7 @@ import appStyles from './app.module.css';
 
 import data from '../utils/data.js';
 import { useState } from 'react';
+import IngredientModal from '../modal/ingredient-modal/ingredient-modal';
 
 const App = () => {
   const [cart, setCart] = useState({
@@ -54,6 +55,7 @@ const App = () => {
                 <div className={appStyles.main}>
                     <BurgerIngredients items={data} cart={cart} onItemClick={onItemClick}/>
                     <BurgerConstructor cart={cart} />
+                    <IngredientModal />
                 </div>
             </div>
         </main>

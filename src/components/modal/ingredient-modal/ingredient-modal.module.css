@@ -1,0 +1,53 @@
+.container {
+    max-width: 720px;
+    max-height: 539px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #1C1C21;
+    border-radius: 40px;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+}
+
+.title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.close {
+    width: 24px;
+    height: 24px;
+    border: 1px solid #1C1C21;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    width: 520px;
+}
+
+.image {
+    margin: 0 auto;
+}
+
+.calories {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 112px;
+    word-wrap: break-word;
+}
