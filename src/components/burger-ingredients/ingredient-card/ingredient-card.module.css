@@ -5,6 +5,7 @@
     align-items: center;
     min-height: 208px;
     width: 272px;
+    cursor: pointer;
 }
 
 .item:nth-child(2n) {
