@@ -30,7 +30,7 @@ const BurgerIngredients = ({items, cart, onItemClick}) => {
 
 
     return (
-        <section className={`${burgerIngredientsStyles.wrapper} mr-4`}>
+        <section className={`${burgerIngredientsStyles.wrapper}`}>
             <h1 className="text text_type_main-large pt-10 pb-5">Соберите бургер</h1>
             
             <BurgerMenu />

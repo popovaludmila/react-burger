@@ -5,7 +5,7 @@ import ingredientPropTypes from '../../utils/prop-types.js';
 const IngredientCard = ({item, count, onClick}) => {
 
     return (
-      <li className={`${ingredientCardStyles.item} mr-6 ml-4 mb-10`} onClick={onClick}
+      <li className={`${ingredientCardStyles.item} mr-4 ml-4 mb-10`} onClick={onClick}
       >
         {count ? <Counter count={count} size="default" extraClass="m-1" /> : null}
 

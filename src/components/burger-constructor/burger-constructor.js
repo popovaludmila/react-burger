@@ -18,8 +18,8 @@ const BurgerConstructor = ({cart}) => {
             <ul className={burgerConstructorStyles.list}>
                 <ConstructorIngredient key={cart.top._id} item={cart.top} type={"top"}/>
                 
-                <li className={`${burgerConstructorStyles.filling} pr-2`}>
-                    <ul>
+                <li className={`${burgerConstructorStyles.item} pr-2`}>
+                    <ul className={`${burgerConstructorStyles.filling}`}>
                         {constructorIngredient}
                     </ul>
                 </li>
@@ -29,7 +29,7 @@ const BurgerConstructor = ({cart}) => {
 
             
         </div>
-        <div>
+        <div className="pr-4">
             <CartTotal total={total} />
         </div>
         </section>

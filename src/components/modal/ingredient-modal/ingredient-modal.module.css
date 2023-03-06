@@ -15,16 +15,20 @@
 }
 
 .title {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+    position: relative;
 }
 
 .close {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    right: 0;
+    top: 50%;
     width: 24px;
     height: 24px;
     border: 1px solid #1C1C21;
+    transform: translateY(-50%);
 }
 
 .info {
