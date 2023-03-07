@@ -4,6 +4,7 @@ import modalStyles from './modal.module.css';
 const modal = document.getElementById("modal");
 
 const Modal = ({children}) => {
+
     return ReactDOM.createPortal(
              
                 <div className={`${modalStyles.container}`}>

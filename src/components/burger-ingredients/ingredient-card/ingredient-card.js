@@ -3,9 +3,11 @@ import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-c
 import ingredientPropTypes from '../../utils/prop-types.js';
 import Modal from '../../modal/modal';
 import IngredientModal from '../../modal/ingredient-modal/ingredient-modal';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const IngredientCard = ({item, count, onClick}) => {
+
+
   const {image, price, name} = item;
   const [showIngredientModal, setShowIngredientModal] = useState(false);
 
@@ -14,9 +16,22 @@ const IngredientCard = ({item, count, onClick}) => {
     setShowIngredientModal(true);
   };
 
-  const onCloseButtonClick = () => {
+  const onCloseClick = () => {
     setShowIngredientModal(false);
   }
+
+  const onEscKeydown = (evt) => {
+    if( evt.key === 'Escape') {
+      onCloseClick()
+    };
+  } 
+
+  useEffect(() => {
+    document.addEventListener('keydown', onEscKeydown)
+    return () =>
+      document.removeEventListener('keydown', onEscKeydown)
+    
+  })
 
     return (
       <div>
@@ -41,7 +56,7 @@ const IngredientCard = ({item, count, onClick}) => {
         </li>
          {showIngredientModal && 
             <Modal>
-              <IngredientModal item={item} onClose={onCloseButtonClick}/>
+              <IngredientModal item={item} onClose={onCloseClick}/>
             </Modal>
           }
       </div>
