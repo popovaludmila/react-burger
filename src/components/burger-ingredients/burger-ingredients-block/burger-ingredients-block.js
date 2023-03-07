@@ -3,9 +3,9 @@ import burgerIngredientsBlockStyles from './burger-ingredients-block.module.css'
 import PropTypes from 'prop-types';
 import ingredientPropTypes from '../../utils/prop-types.js';
 
-const BurgerIngredientsBlock = ({title, titleId, items, addedItems, onItemClick}) => {
+const BurgerIngredientsBlock = ({title, titleId, items, addedItems, onItemClick}) => {   
    const ingrediens = items.map((item) => (
-      <IngredientCard key={item._id} item={item} count={addedItems[item._id]} onClick={() => onItemClick(item)}/>
+      <IngredientCard key={item._id} item={item} count={addedItems[item._id]} onClick={() => {onItemClick(item) }}/>
    ));
 
    return (

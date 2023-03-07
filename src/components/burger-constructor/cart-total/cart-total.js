@@ -12,6 +12,10 @@ const CartTotal = ({total}) => {
         setShowOrderModal(true);
      }
 
+     const onCloseButtonClick= () => {
+        setShowOrderModal(false);
+     }
+
     return (
         <div className={`${cartTotalStyles.wrapper} pt-6`}>
             <div className={`${cartTotalStyles.price} mr-10`}>
@@ -22,7 +26,7 @@ const CartTotal = ({total}) => {
             <Button htmlType="submit" type="primary" size="medium" onClick={onOrderButtonClick}>Оформить заказ</Button>
             {showOrderModal && 
                 <Modal>
-                    <OrderModal />
+                    <OrderModal onClose={onCloseButtonClick}/>
                 </Modal>
             }
         </div>

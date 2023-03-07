@@ -1,14 +1,14 @@
 import orderModalStyles from './order-modal.module.css';
-import { useState } from 'react';
+//import { useState } from 'react';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 //import {done} from '../../../images/done.png';
 
 
 
-const OrderModal = () => {
+const OrderModal = ({onClose}) => {
    return (
             <div>
-                <button className={`${orderModalStyles.close}`}>
+                <button onClick={onClose} className={`${orderModalStyles.close}`}>
                     <CloseIcon type="primary" />
                 </button>
                 <div className={`${orderModalStyles.content} p-25 pt-29 pb-29`}>
