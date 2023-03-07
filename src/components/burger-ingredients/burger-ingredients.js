@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import ingredientPropTypes from '../utils/prop-types.js';
 
 const BurgerIngredients = ({items, cart, onItemClick}) => {
-    let addedItems = {}
+    let addedItems = {};
 
     addedItems[cart.top._id] = (addedItems[cart.top._id] ?? 0) + 1
     addedItems[cart.bottom._id] = (addedItems[cart.bottom._id] ?? 0) + 1

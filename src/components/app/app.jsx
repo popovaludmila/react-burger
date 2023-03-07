@@ -2,15 +2,15 @@ import Header from '../header/header';
 import BurgerIngredients from "../burger-ingredients/burger-ingredients";
 import BurgerConstructor from "../burger-constructor/burger-constructor";
 import appStyles from './app.module.css';
+import Modal from '../modal/modal.js';
 
 import data from '../utils/data.js';
 import { useState } from 'react';
-import IngredientModal from '../modal/ingredient-modal/ingredient-modal';
 
 const App = () => {
   const [cart, setCart] = useState({
     top: {
-        "_id":"60666c42cc7b410027a1a9b1",
+        "_id":"60666c42cc7b10027a1a9b1",
         "name":"Краторная булка N-200i",
         "type":"bun",
         "proteins":80,
@@ -46,6 +46,8 @@ const App = () => {
         fillings: [...cart.fillings, item]
       })
   }
+
+
 
   return (
     <>
