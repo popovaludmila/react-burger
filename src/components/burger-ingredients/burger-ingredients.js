@@ -3,7 +3,7 @@ import BurgerIngredientsBlock from "./burger-ingredients-block/burger-ingredient
 import BurgerMenu from "./burger-menu/burger-menu";
 import burgerIngredientsStyles from './burger-ingredients.module.css'
 import PropTypes from 'prop-types';
-import ingredientPropTypes from '../utils/prop-types.js';
+import {ingredientPropTypes, cartPropTypes} from "../utils/prop-types";
 
 const BurgerIngredients = ({items, cart, onItemClick}) => {
     let addedItems = {};
@@ -46,7 +46,9 @@ const BurgerIngredients = ({items, cart, onItemClick}) => {
 }
 
 BurgerIngredients.propTypes = {
-    items: PropTypes.arrayOf(ingredientPropTypes.isRequired)
+    items: PropTypes.arrayOf(ingredientPropTypes.isRequired).isRequired,
+    cart: cartPropTypes.isRequired,
+    onItemClick: PropTypes.func.isRequired
 };
 
 export default BurgerIngredients;

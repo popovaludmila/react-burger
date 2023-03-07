@@ -15,4 +15,10 @@ const ingredientPropTypes = PropTypes.shape({
     }
 );
 
-export default ingredientPropTypes;
+const cartPropTypes = PropTypes.shape({
+    top: ingredientPropTypes.isRequired,
+    fillings: PropTypes.arrayOf(ingredientPropTypes.isRequired),
+    bottom: ingredientPropTypes.isRequired
+});
+
+export {ingredientPropTypes, cartPropTypes};

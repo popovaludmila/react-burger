@@ -1,5 +1,6 @@
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 import constructorFillingtStyles from './constructor-filling.module.css';
+import {ingredientPropTypes} from '../../utils/prop-types';
 
 const ConstructorFilling = ({item}) => {
     return (
@@ -17,6 +18,10 @@ const ConstructorFilling = ({item}) => {
             />
         </li>
     )
+}
+
+ConstructorFilling.propTypes = {
+    item: ingredientPropTypes.isRequired
 }
 
 export default ConstructorFilling;

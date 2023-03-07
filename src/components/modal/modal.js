@@ -1,5 +1,6 @@
 import ReactDOM from 'react-dom';
 import modalStyles from './modal.module.css';
+import PropTypes from 'prop-types';
 
 const modal = document.getElementById("modal");
 
@@ -15,4 +16,9 @@ const Modal = ({children}) => {
                modal
          )
  }
+
+Modal.propTypes = {
+    children: PropTypes.element.isRequired
+}
+
  export default Modal;

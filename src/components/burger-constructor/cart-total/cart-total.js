@@ -3,6 +3,7 @@ import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-co
 import cartTotalStyles from './cart-total.module.css';
 import Modal from '../../modal/modal';
 import OrderModal from '../../modal/order-modal/order-modal';
+import PropTypes from 'prop-types';
 
 const CartTotal = ({total}) => {
      const [showOrderModal, setShowOrderModal] = useState(false);
@@ -27,7 +28,7 @@ const CartTotal = ({total}) => {
           document.removeEventListener('keydown', onEscKeydown)
         
       })
-      
+
     return (
         <div className={`${cartTotalStyles.wrapper} pt-6`}>
             <div className={`${cartTotalStyles.price} mr-10`}>
@@ -44,5 +45,10 @@ const CartTotal = ({total}) => {
         </div>
     )
 }
+
+CartTotal.propTypes = {
+    total: PropTypes.number.isRequired
+}
+
 
 export default CartTotal;

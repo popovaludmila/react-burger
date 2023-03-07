@@ -2,6 +2,7 @@ import burgerConstructorStyles from "./burger-constructor.module.css";
 import CartTotal from './cart-total/cart-total';
 import ConstructorFilling from "./constructor-filling/constructor-filling";
 import ConstructorIngredient from './constructor-ingredient/constructor-ingredient.js';
+import { cartPropTypes } from "../utils/prop-types";
 
 const BurgerConstructor = ({cart}) => {
     const constructorIngredient = cart.fillings.map((item) => (
@@ -34,6 +35,10 @@ const BurgerConstructor = ({cart}) => {
         </div>
         </section>
     )
+}
+
+BurgerConstructor.propTypes = {
+    cart: cartPropTypes.isRequired
 }
 
 export default BurgerConstructor;
