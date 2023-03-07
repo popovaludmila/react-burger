@@ -2,7 +2,6 @@ import Header from '../header/header';
 import BurgerIngredients from "../burger-ingredients/burger-ingredients";
 import BurgerConstructor from "../burger-constructor/burger-constructor";
 import appStyles from './app.module.css';
-import Modal from '../modal/modal.js';
 
 import data from '../utils/data.js';
 import { useState } from 'react';

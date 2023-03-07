@@ -1,12 +1,11 @@
 import orderModalStyles from './order-modal.module.css';
-//import ReactDOM  from 'react';
+import { useState } from 'react';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 //import {done} from '../../../images/done.png';
 
-//const modal = document.getElementById("modal");
+
 
 const OrderModal = () => {
-  
    return (
             <div>
                 <button className={`${orderModalStyles.close}`}>
