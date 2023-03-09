@@ -5,9 +5,9 @@ import Modal from '../../modal/modal';
 import OrderModal from '../../modal/order-modal/order-modal';
 import PropTypes from 'prop-types';
 
-
 const CartTotal = ({total}) => {
     const [showOrderModal, setShowOrderModal] = useState(false);
+
 
     const onOrderButtonClick = (e) => {
         e.preventDefault();
@@ -42,7 +42,7 @@ const CartTotal = ({total}) => {
             
             <Button htmlType="submit" type="primary" size="medium" onClick={onOrderButtonClick}>Оформить заказ</Button>
             {showOrderModal && 
-                <Modal>
+                <Modal onOverlayClick={onCloseClick}>
                     <OrderModal onClose={onCloseClick}/>
                 </Modal>
             }

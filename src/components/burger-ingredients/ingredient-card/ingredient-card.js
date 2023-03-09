@@ -20,13 +20,14 @@ const IngredientCard = ({item, count, onClick}) => {
     setShowIngredientModal(false);
   }
 
-  const onEscKeydown = (evt) => {
+  useEffect(() => {
+    if (!showIngredientModal) return;
+
+     const onEscKeydown = (evt) => {
     if( evt.key === 'Escape') {
       onCloseClick()
     };
   } 
-
-  useEffect(() => {
     document.addEventListener('keydown', onEscKeydown)
     return () =>
       document.removeEventListener('keydown', onEscKeydown)
@@ -55,7 +56,7 @@ const IngredientCard = ({item, count, onClick}) => {
           </a>
         </li>
          {showIngredientModal && 
-            <Modal>
+            <Modal onOverlayClick={onCloseClick}>
               <IngredientModal item={item} onClose={onCloseClick}/>
             </Modal>
           }
