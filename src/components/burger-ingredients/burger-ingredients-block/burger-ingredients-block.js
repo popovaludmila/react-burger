@@ -13,7 +13,7 @@ const BurgerIngredientsBlock = ({title, titleId, items, addedItems, onItemClick}
          <h2 id={titleId} className="text text_type_main-medium pt-10 pb-6">
                {title}
          </h2>
-         <ul className={burgerIngredientsBlockStyles.list}>
+         <ul className={`${burgerIngredientsBlockStyles.list} mr-4 ml-4`}>
                {ingrediens}
          </ul>
       </div>  

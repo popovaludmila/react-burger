@@ -35,7 +35,7 @@ const IngredientCard = ({item, count, onClick}) => {
 
     return (
       <div>
-        <li className={`${ingredientCardStyles.item} mr-4 ml-4 mb-10`} onClick={onIngredientClick}
+        <li className={`${ingredientCardStyles.item} mb-10`} onClick={onIngredientClick}
         >
           {count ? <Counter count={count} size="default" extraClass="m-1" /> : null}
 
