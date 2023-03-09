@@ -4,9 +4,10 @@ import BurgerMenu from "./burger-menu/burger-menu";
 import burgerIngredientsStyles from './burger-ingredients.module.css'
 import PropTypes from 'prop-types';
 import {ingredientPropTypes, cartPropTypes} from "../utils/prop-types";
+import { BUN, MAIN, SAUCE } from "../utils/data";
 
 const BurgerIngredients = ({items, cart, onItemClick}) => {
-    let addedItems = {};
+    const addedItems = new Map();
 
     addedItems[cart.top._id] = (addedItems[cart.top._id] ?? 0) + 1
     addedItems[cart.bottom._id] = (addedItems[cart.bottom._id] ?? 0) + 1
@@ -14,17 +15,17 @@ const BurgerIngredients = ({items, cart, onItemClick}) => {
     cart.fillings.forEach((item)=>(addedItems[item._id] = (addedItems[item._id] ?? 0) + 1));
 
     const buns = useMemo(
-        () => items.filter((item) => item.type === 'bun'),
+        () => items.filter((item) => item.type === BUN),
         [items]
     );
 
     const sauces = useMemo(
-        () => items.filter((item) => item.type === 'sauce'),
+        () => items.filter((item) => item.type === SAUCE),
         [items]
     );
 
     const mains = useMemo(
-        () => items.filter((item) => item.type === 'main'),
+        () => items.filter((item) => item.type === MAIN),
         [items]
     );
 
@@ -35,11 +36,11 @@ const BurgerIngredients = ({items, cart, onItemClick}) => {
             
             <BurgerMenu />
             <div className={burgerIngredientsStyles.main}> 
-                <BurgerIngredientsBlock title="Булки" titleId="bun" items={buns} addedItems={addedItems} onItemClick={onItemClick}/>
+                <BurgerIngredientsBlock title="Булки" titleId={BUN} items={buns} addedItems={addedItems} onItemClick={onItemClick}/>
 
-                <BurgerIngredientsBlock title="Соусы" titleId="sauce" items={sauces} addedItems={addedItems} onItemClick={onItemClick}/>
+                <BurgerIngredientsBlock title="Соусы" titleId={SAUCE} items={sauces} addedItems={addedItems} onItemClick={onItemClick}/>
 
-                <BurgerIngredientsBlock title="Начинки" titleId="main" items={mains} addedItems={addedItems} onItemClick={onItemClick}/>
+                <BurgerIngredientsBlock title="Начинки" titleId={MAIN} items={mains} addedItems={addedItems} onItemClick={onItemClick}/>
             </div>
         </section>
     )

@@ -23,7 +23,9 @@ const BurgerIngredientsBlock = ({title, titleId, items, addedItems, onItemClick}
 BurgerIngredientsBlock.propTypes = {
    title: PropTypes.string.isRequired,
    titleId: PropTypes.string.isRequired,
-   items: PropTypes.arrayOf(ingredientPropTypes.isRequired).isRequired
+   items: PropTypes.arrayOf(ingredientPropTypes.isRequired).isRequired,
+   addedItems: PropTypes.instanceOf(Map).isRequired,
+   onItemClick: PropTypes.func.isRequired
 };
 
 export default BurgerIngredientsBlock;

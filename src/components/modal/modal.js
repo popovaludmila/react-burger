@@ -20,7 +20,8 @@ const Modal = ({children, onOverlayClick}) => {
  }
 
 Modal.propTypes = {
-    children: PropTypes.element.isRequired
+    children: PropTypes.element.isRequired,
+    onOverlayClick: PropTypes.func.isRequired
 }
 
  export default Modal;

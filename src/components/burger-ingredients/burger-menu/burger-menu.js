@@ -1,9 +1,10 @@
 import {useState} from "react";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import burgerMenuStyles from './burger-menu.module.css';
+import { BUN, MAIN, SAUCE } from "../../utils/data";
 
 const BurgerMenu = () => {
-    const [currentTab, setCurrentTab] = useState('bun');
+    const [currentTab, setCurrentTab] = useState(BUN);
 
     const onTabClick = (tab) => {
         const activeTab = document.getElementById(tab)
@@ -16,17 +17,17 @@ const BurgerMenu = () => {
         <nav>
             <ul className={burgerMenuStyles.list}> 
                 <li>
-                   <Tab value="bun" active={currentTab === 'bun'} onClick={onTabClick}>
+                   <Tab value={BUN} active={currentTab === BUN} onClick={onTabClick}>
                         Булки
                     </Tab> 
                 </li>
                 <li>
-                    <Tab value="sauce" active={currentTab === 'sauce'} onClick={onTabClick}>
+                    <Tab value={SAUCE} active={currentTab === SAUCE} onClick={onTabClick}>
                         Соусы
                     </Tab>
                 </li>
                 <li>
-                   <Tab value="main" active={currentTab === 'main'} onClick={onTabClick}>
+                   <Tab value={MAIN} active={currentTab === MAIN} onClick={onTabClick}>
                         Начинки
                     </Tab> 
                 </li>

@@ -3,7 +3,7 @@ import BurgerIngredients from "../burger-ingredients/burger-ingredients";
 import BurgerConstructor from "../burger-constructor/burger-constructor";
 import appStyles from './app.module.css';
 
-import { getIngredientData } from '../utils/data.js';
+import { getIngredientData } from '../utils/data-api.js';
 
 import { useState, useEffect} from 'react';
 
@@ -23,22 +23,6 @@ const App = () => {
     )
   }, []);
   
-  // useEffect(() => {
-  //    const getIngreduentData = async () => {
-  //       setState({...state, isLoading: true, hasError: false});
-  //       fetch(urlData)
-  //          .then(res => res.json())
-  //          .then(ingredientData => setState({...state, ingredientData: data, isLoading: false}))
-  //          .catch(e => {
-  //             setState({ ...state, hasError: true, isLoading: false });
-  //          });
-  //    }
-  //    getIngreduentData();
-  
-  // }, [state]);
-
- // const { data, isLoading, hasError } = state;
-
   const [cart, setCart] = useState({
     top: {
         "_id":"60666c42cc7b10027a1a9b1",
@@ -86,10 +70,6 @@ const App = () => {
       <main>
             <div className="container">
                 <div className={appStyles.main}>
-                    {/* {isLoading && 'Загрузка...'}
-                    {hasError && 'Произошла ошибка'}
-                    {!isLoading &&
-                      !hasError &&  */}
                     <BurgerIngredients items={ingredientData} cart={cart} onItemClick={onItemClick}/>
                     <BurgerConstructor cart={cart} />
 
