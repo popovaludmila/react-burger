@@ -3,12 +3,13 @@ import CartTotal from './cart-total/cart-total';
 import ConstructorFilling from "./constructor-filling/constructor-filling";
 import ConstructorIngredient from './constructor-ingredient/constructor-ingredient.js';
 import { cartPropTypes } from "../utils/prop-types";
+import uuid from 'react-uuid';
 
 const BurgerConstructor = ({cart}) => {
     const constructorIngredient = cart.fillings.map((item) => (
-        <ConstructorFilling key={item._id} item={item} />
-    ))
-
+        <ConstructorFilling key={uuid()} item={item} />
+    ));
+    
     let total = cart.top.price + cart.bottom.price;
 
     cart.fillings.forEach((item) => (total += item.price));
@@ -17,7 +18,7 @@ const BurgerConstructor = ({cart}) => {
         <section className={`${burgerConstructorStyles.constructor} mb-26`}>
         <div className={`${burgerConstructorStyles.wrapper} mt-25`}>
             <ul className={burgerConstructorStyles.list}>
-                <ConstructorIngredient key={cart.top._id} item={cart.top} type={"top"}/>
+                <ConstructorIngredient key={uuid()} item={cart.top} type={"top"}/>
                 
                 <li className={`${burgerConstructorStyles.item} pr-2`}>
                     <ul className={`${burgerConstructorStyles.filling}`}>
@@ -25,7 +26,7 @@ const BurgerConstructor = ({cart}) => {
                     </ul>
                 </li>
                 
-                <ConstructorIngredient key={cart.bottom._id} item={cart.bottom} type={"bottom"}/>
+                <ConstructorIngredient key={uuid()} item={cart.bottom} type={"bottom"}/>
             </ul>
 
             

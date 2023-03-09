@@ -5,29 +5,33 @@ import Modal from '../../modal/modal';
 import OrderModal from '../../modal/order-modal/order-modal';
 import PropTypes from 'prop-types';
 
-const CartTotal = ({total}) => {
-     const [showOrderModal, setShowOrderModal] = useState(false);
 
-     const onOrderButtonClick = (e) => {
+const CartTotal = ({total}) => {
+    const [showOrderModal, setShowOrderModal] = useState(false);
+
+    const onOrderButtonClick = (e) => {
         e.preventDefault();
         setShowOrderModal(true);
-     }
+    };
 
-     const onCloseClick= () => {
+    const onCloseClick= () => {
         setShowOrderModal(false);
-     }
-     const onEscKeydown = (evt) => {
-        if( evt.key === 'Escape') {
-          onCloseClick()
-        };
-      } 
-    
-      useEffect(() => {
+    };
+
+    useEffect(() => {
+        if (!showOrderModal) return;
+
+        const onEscKeydown = (evt) => {
+            if( evt.key === 'Escape') {
+              onCloseClick()
+            };
+          } 
+
         document.addEventListener('keydown', onEscKeydown)
-        return () =>
-          document.removeEventListener('keydown', onEscKeydown)
-        
-      })
+        return () => {
+            document.removeEventListener('keydown', onEscKeydown);
+        }
+    })
 
     return (
         <div className={`${cartTotalStyles.wrapper} pt-6`}>

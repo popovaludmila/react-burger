@@ -6,15 +6,14 @@ const modal = document.getElementById("modal");
 
 const Modal = ({children}) => {
 
-    return ReactDOM.createPortal(
-             
-                <div className={`${modalStyles.container}`}>
-                    <div className={`${modalStyles.content}`}>
-                        {children}
-                    </div>
-                </div>,
-               modal
-         )
+    return ReactDOM.createPortal(    
+        <div className={`${modalStyles.container}  ref={modalRef}`}>
+            <div className={`${modalStyles.content}`}>
+                {children}
+            </div>
+        </div>,
+        modal
+    )
  }
 
 Modal.propTypes = {
