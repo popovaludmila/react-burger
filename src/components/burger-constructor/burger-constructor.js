@@ -9,8 +9,8 @@ const BurgerConstructor = ({cart}) => {
     const constructorIngredient = cart.fillings.map((item) => (
         <ConstructorFilling key={uuid()} item={item} />
     ));
-    
-    let total = cart.top.price + cart.bottom.price;
+
+    let total = (cart.top.price ?? 0) + (cart.bottom.price ?? 0);
 
     cart.fillings.forEach((item) => (total += item.price));
 
@@ -18,7 +18,7 @@ const BurgerConstructor = ({cart}) => {
         <section className={`${burgerConstructorStyles.constructor} mb-26`}>
         <div className={`${burgerConstructorStyles.wrapper} mt-25`}>
             <ul className={burgerConstructorStyles.list}>
-                <ConstructorIngredient key={uuid()} item={cart.top} type={"top"}/>
+                {cart.top.name && <ConstructorIngredient key={uuid()} item={cart.top} type={"top"}/>}
                 
                 <li className={`${burgerConstructorStyles.item} pr-2`}>
                     <ul className={`${burgerConstructorStyles.filling}`}>
@@ -26,7 +26,7 @@ const BurgerConstructor = ({cart}) => {
                     </ul>
                 </li>
                 
-                <ConstructorIngredient key={uuid()} item={cart.bottom} type={"bottom"}/>
+                {cart.bottom.name && <ConstructorIngredient key={uuid()} item={cart.bottom} type={"bottom"}/>}
             </ul>
 
             

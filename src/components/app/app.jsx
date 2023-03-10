@@ -6,6 +6,7 @@ import appStyles from './app.module.css';
 import { getIngredientData } from '../utils/data-api.js';
 
 import { useState, useEffect} from 'react';
+import { BUN } from '../utils/data';
 
 const App = () => {
 
@@ -24,42 +25,26 @@ const App = () => {
   }, []);
   
   const [cart, setCart] = useState({
-    top: {
-        "_id":"60666c42cc7b10027a1a9b1",
-        "name":"Краторная булка N-200i",
-        "type":"bun",
-        "proteins":80,
-        "fat":24,
-        "carbohydrates":53,
-        "calories":420,
-        "price":1255,
-        "image":"https://code.s3.yandex.net/react/code/bun-02.png",
-        "image_mobile":"https://code.s3.yandex.net/react/code/bun-02-mobile.png",
-        "image_large":"https://code.s3.yandex.net/react/code/bun-02-large.png",
-        "__v":0
-    },
-   fillings: [],
-   bottom: {
-      "_id":"60666c42cc7b410027a1a9b1",
-      "name":"Краторная булка N-200i",
-      "type":"bun",
-      "proteins":80,
-      "fat":24,
-      "carbohydrates":53,
-      "calories":420,
-      "price":1255,
-      "image":"https://code.s3.yandex.net/react/code/bun-02.png",
-      "image_mobile":"https://code.s3.yandex.net/react/code/bun-02-mobile.png",
-      "image_large":"https://code.s3.yandex.net/react/code/bun-02-large.png",
-      "__v":0
-  }
+    top: {},
+    fillings: [],
+    bottom: {}
   })
 
   const onItemClick = (item) => {
-      setCart({
-        ...cart,
-        fillings: [...cart.fillings, item]
-      })
+      if(item.type === BUN) {
+        setCart({
+          ...cart,
+          top: item,
+          bottom: item
+        })
+      } else {
+        setCart({
+          ...cart, 
+          fillings: [...cart.fillings, item],
+        })
+      }
+
+     
   }
 
 
