@@ -3,7 +3,7 @@ import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-c
 import {ingredientPropTypes} from '../../utils/prop-types.js';
 import Modal from '../../modal/modal';
 import IngredientModal from '../../modal/ingredient-modal/ingredient-modal';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 
 const IngredientCard = ({item, count, onClick}) => {
@@ -19,20 +19,6 @@ const IngredientCard = ({item, count, onClick}) => {
   const onCloseClick = () => {
     setShowIngredientModal(false);
   }
-
-  useEffect(() => {
-    if (!showIngredientModal) return;
-
-     const onEscKeydown = (evt) => {
-    if( evt.key === 'Escape') {
-      onCloseClick()
-    };
-  } 
-    document.addEventListener('keydown', onEscKeydown)
-    return () =>
-      document.removeEventListener('keydown', onEscKeydown)
-    
-  })
 
     return (
       <div>
@@ -56,7 +42,7 @@ const IngredientCard = ({item, count, onClick}) => {
           </a>
         </li>
          {showIngredientModal && 
-            <Modal onOverlayClick={onCloseClick}>
+            <Modal onOverlayClick={onCloseClick} onCloseClick={onCloseClick}>
               <IngredientModal item={item} onClose={onCloseClick}/>
             </Modal>
           }
