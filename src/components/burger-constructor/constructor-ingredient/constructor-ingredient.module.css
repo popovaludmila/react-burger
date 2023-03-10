@@ -1,0 +1,15 @@
+.ingredient {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    max-width: 536px;
+}
+
+.ingredient:last-child {
+    margin-bottom: 0;
+}
+
+.ingredient:first-child {
+    margin-top: 0;
+}

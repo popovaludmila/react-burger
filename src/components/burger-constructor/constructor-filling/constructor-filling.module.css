@@ -1,0 +1,21 @@
+.ingredient {
+    position: relative;
+    display: flex;
+   justify-content: flex-end;
+    
+
+}
+
+.ingredient:last-child {
+    margin-bottom: 0;
+}
+
+.dots {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    left: -26px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+}
