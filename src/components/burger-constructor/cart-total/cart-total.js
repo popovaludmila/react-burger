@@ -5,6 +5,7 @@ import Modal from '../../modal/modal';
 import OrderModal from '../../modal/order-modal/order-modal';
 import PropTypes from 'prop-types';
 import { sendData } from '../../../utils/data-api';
+import { cartPropTypes } from '../../../utils/prop-types';
 
 const CartTotal = ({total, cart}) => {
     const [showOrderModal, setShowOrderModal] = useState(false);
@@ -44,8 +45,8 @@ const CartTotal = ({total, cart}) => {
             
             <Button htmlType="submit" type="primary" size="medium" onClick={onOrderButtonClick}>Оформить заказ</Button>
             {showOrderModal && 
-                <Modal onOverlayClick={onCloseClick} onCloseClick={onCloseClick}>
-                    <OrderModal orderNumber={orderNumber} onClose={onCloseClick}/>
+                <Modal onOverlayClick={onCloseClick} onCloseClick={onCloseClick} modalTitle={''}>
+                    <OrderModal orderNumber={orderNumber} />
                 </Modal>
             }
         </div>
@@ -53,7 +54,8 @@ const CartTotal = ({total, cart}) => {
 }
 
 CartTotal.propTypes = {
-    total: PropTypes.number.isRequired
+    total: PropTypes.number.isRequired,
+    cart: cartPropTypes.isRequired
 }
 
 

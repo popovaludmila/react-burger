@@ -3,6 +3,7 @@ import IngredientCard from '../ingredient-card/ingredient-card';
 import burgerIngredientsBlockStyles from './burger-ingredients-block.module.css';
 import PropTypes from 'prop-types';
 import { IngredientsDataContext } from "../../../utils/context";
+import uuid from "react-uuid";
 
 const BurgerIngredientsBlock = ({title, ingredientsType, addedItems, onItemClick}) => {   
    const [ingredientsData] = useContext(IngredientsDataContext);
@@ -14,7 +15,7 @@ const BurgerIngredientsBlock = ({title, ingredientsType, addedItems, onItemClick
    );
    
    const ingredientCarts = ingredients.map((item) => (
-      <IngredientCard key={item._id} item={item} count={addedItems[item._id]} onClick={() => {onItemClick(item) }}/>
+      <IngredientCard key={uuid()} item={item} count={addedItems[item._id]} onClick={() => {onItemClick(item) }}/>
    ));
 
    return (

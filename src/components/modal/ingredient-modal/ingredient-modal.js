@@ -1,20 +1,12 @@
 import ingredientModalStyles from './ingredient-modal.module.css';
-import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import PropTypes from 'prop-types';
 import { ingredientPropTypes } from '../../../utils/prop-types';
 
-const IngredientModal = ({item, onClose}) => {
+const IngredientModal = ({item}) => {
     const {image, name, calories, proteins, fat, carbohydrates} = item;
 
     return (
-        <div className={`${ingredientModalStyles.content} p-10 pb-15`}>
-            <div className={`${ingredientModalStyles.title} pt-2 pb-2`}>
-                <h3 className="text text_type_main-large">Детали ингредиента</h3>
-                <button onClick={onClose} className={`${ingredientModalStyles.close}`}>
-                    <CloseIcon type="primary" />
-                </button>
-            </div>
-            <div className={ingredientModalStyles.info}>
+        <div className={`${ingredientModalStyles.content} p-10 pb-15 pt-25`}>
+            <div className={`${ingredientModalStyles.info} pt-2`}>
                 <img src={image} className={`${ingredientModalStyles.image}`} width="480" height="240" alt="Детали ингредиента" />
                 <p className="text text_type_main-medium pt-4 pb-8 pr-3 pl-3">{name}</p>
                 <div className={`${ingredientModalStyles.calories}`}>
@@ -46,7 +38,6 @@ const IngredientModal = ({item, onClose}) => {
 
 IngredientModal.propTypes = {
     item: ingredientPropTypes.isRequired,
-    onClose: PropTypes.func.isRequired
 }
 
 export default IngredientModal;
