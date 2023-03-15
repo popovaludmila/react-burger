@@ -3,10 +3,10 @@ import BurgerIngredients from "../burger-ingredients/burger-ingredients";
 import BurgerConstructor from "../burger-constructor/burger-constructor";
 import appStyles from './app.module.css';
 
-import { getIngredientData } from '../utils/data-api.js';
+import { getIngredientData } from '../../utils/data-api.js';
 
 import { useState, useEffect} from 'react';
-import { BUN } from '../utils/data';
+import { BUN } from '../../utils/data';
 
 const App = () => {
 
@@ -57,7 +57,6 @@ const App = () => {
                 <div className={appStyles.main}>
                     <BurgerIngredients items={ingredientData} cart={cart} onItemClick={onItemClick}/>
                     <BurgerConstructor cart={cart} />
-
                 </div>
             </div>
         </main>

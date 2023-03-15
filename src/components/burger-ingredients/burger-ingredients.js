@@ -3,8 +3,8 @@ import BurgerIngredientsBlock from "./burger-ingredients-block/burger-ingredient
 import BurgerMenu from "./burger-menu/burger-menu";
 import burgerIngredientsStyles from './burger-ingredients.module.css'
 import PropTypes from 'prop-types';
-import {ingredientPropTypes, cartPropTypes} from "../utils/prop-types";
-import { BUN, MAIN, SAUCE } from "../utils/data";
+import {ingredientPropTypes, cartPropTypes} from "../../utils/prop-types";
+import { BUN, MAIN, SAUCE } from "../../utils/data";
 
 const BurgerIngredients = ({items, cart, onItemClick}) => {
     const addedItems = new Map();

@@ -1,7 +1,7 @@
 import ingredientModalStyles from './ingredient-modal.module.css';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import PropTypes from 'prop-types';
-import { ingredientPropTypes } from '../../utils/prop-types';
+import { ingredientPropTypes } from '../../../utils/prop-types';
 
 const IngredientModal = ({item, onClose}) => {
     const {image, name, calories, proteins, fat, carbohydrates} = item;

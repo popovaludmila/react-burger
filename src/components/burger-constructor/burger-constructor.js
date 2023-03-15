@@ -2,7 +2,7 @@ import burgerConstructorStyles from "./burger-constructor.module.css";
 import CartTotal from './cart-total/cart-total';
 import ConstructorFilling from "./constructor-filling/constructor-filling";
 import ConstructorIngredient from './constructor-ingredient/constructor-ingredient.js';
-import { cartPropTypes } from "../utils/prop-types";
+import { cartPropTypes } from "../../utils/prop-types";
 import uuid from 'react-uuid';
 
 const BurgerConstructor = ({cart}) => {

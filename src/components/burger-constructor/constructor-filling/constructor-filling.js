@@ -1,6 +1,6 @@
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 import constructorFillingtStyles from './constructor-filling.module.css';
-import {ingredientPropTypes} from '../../utils/prop-types';
+import {ingredientPropTypes} from '../../../utils/prop-types';
 
 const ConstructorFilling = ({item}) => {
     return (
