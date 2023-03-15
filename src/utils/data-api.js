@@ -1,4 +1,4 @@
-import { URL } from "./data.js";
+import { URL, URL_SEND } from "./data.js";
 
 const checkResponse = (response) => {
    if (response.ok) {
@@ -18,5 +18,27 @@ const getIngredientData = (onSuccess, onError) => {
        });
 }
 
- export { getIngredientData};
+const sendData = async(onSuccess, onError, body) => {
+   fetch(URL_SEND,
+     {
+       method: 'POST',
+       headers: {
+        "Content-Type": "application/json",
+      },
+       body
+     },
+   ).then((response) => {
+     if (response.ok) {
+       return response.json();
+     }
+     onError();
+   }).then((data) => {
+      onSuccess(data);
+   })
+     .catch(() => {
+       onError();
+     });
+ };
+
+ export { getIngredientData, sendData};
  

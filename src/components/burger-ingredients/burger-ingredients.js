@@ -8,8 +8,8 @@ import { BUN, MAIN, SAUCE } from "../../utils/data";
 const BurgerIngredients = ({cart, onItemClick}) => {
     const addedItems = new Map();
 
-    addedItems[cart.top._id] = (addedItems[cart.top._id] ?? 0) + 1
-    addedItems[cart.bottom._id] = (addedItems[cart.bottom._id] ?? 0) + 1
+    addedItems[cart.top._id] = (addedItems[cart.top._id] ?? 0) + 1;
+    addedItems[cart.bottom._id] = (addedItems[cart.bottom._id] ?? 0) + 1;
 
     cart.fillings.forEach((item)=>(addedItems[item._id] = (addedItems[item._id] ?? 0) + 1));
 

@@ -31,7 +31,6 @@ const BurgerIngredientsBlock = ({title, ingredientsType, addedItems, onItemClick
 
 BurgerIngredientsBlock.propTypes = {
    title: PropTypes.string.isRequired,
-   titleId: PropTypes.string.isRequired,
    ingredientsType:PropTypes.string.isRequired,
    addedItems: PropTypes.instanceOf(Map).isRequired,
    onItemClick: PropTypes.func.isRequired

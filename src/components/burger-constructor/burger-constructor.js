@@ -6,7 +6,7 @@ import { cartPropTypes } from "../../utils/prop-types";
 import uuid from 'react-uuid';
 
 const BurgerConstructor = ({cart}) => {
-    
+
     const constructorIngredient = cart.fillings.map((item) => (
         <ConstructorFilling key={uuid()} item={item} />
     ));
@@ -33,7 +33,7 @@ const BurgerConstructor = ({cart}) => {
             
         </div>
         <div className="pr-4">
-            <CartTotal total={total} />
+            <CartTotal total={total} cart={cart} />
         </div>
         </section>
     )

@@ -4,14 +4,31 @@ import cartTotalStyles from './cart-total.module.css';
 import Modal from '../../modal/modal';
 import OrderModal from '../../modal/order-modal/order-modal';
 import PropTypes from 'prop-types';
+import { sendData } from '../../../utils/data-api';
 
-const CartTotal = ({total}) => {
+const CartTotal = ({total, cart}) => {
     const [showOrderModal, setShowOrderModal] = useState(false);
-
+    const [orderNumber, setOrderNumber] = useState("");
 
     const onOrderButtonClick = (e) => {
         e.preventDefault();
-        setShowOrderModal(true);
+
+        const orderIngredients = [
+            cart.top._id,
+            ...cart.fillings.map((ingredient) => ingredient._id),
+            cart.bottom._id,
+        ];
+       
+        sendData(
+            (data) => {
+                setOrderNumber(data.order.number)
+                setShowOrderModal(true);
+            },
+            () => {
+                alert("Произошла ошибка отправки данных...")
+            },
+            JSON.stringify({"ingredients": orderIngredients})
+        )
     };
 
     const onCloseClick= () => {
@@ -28,7 +45,7 @@ const CartTotal = ({total}) => {
             <Button htmlType="submit" type="primary" size="medium" onClick={onOrderButtonClick}>Оформить заказ</Button>
             {showOrderModal && 
                 <Modal onOverlayClick={onCloseClick} onCloseClick={onCloseClick}>
-                    <OrderModal onClose={onCloseClick}/>
+                    <OrderModal orderNumber={orderNumber} onClose={onCloseClick}/>
                 </Modal>
             }
         </div>
