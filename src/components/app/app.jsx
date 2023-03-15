@@ -20,9 +20,7 @@ const App = () => {
         if (data["data"]) {
           setIngredientsData([...ingredientsData, ...data["data"]]);
         }
-      },
-      (error) => alert(error)
-    )
+      }).catch((error) => alert(error));
   }, []);
   
   const [cart, setCart] = useState({

@@ -7,14 +7,14 @@ const checkResponse = (response) => {
     throw new Error(`${response.status} ${response.statusText}`);
 }
 
-const getIngredientData = (onSuccess, onError) => {
+const getIngredientData = (onSuccess) => {
    return fetch(URL)
       .then(checkResponse)
       .then((data) => {
          onSuccess(data);
        })
        .catch((err) => {
-         onError(err);
+         alert(err);
        });
 }
 
