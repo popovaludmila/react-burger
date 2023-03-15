@@ -7,17 +7,18 @@ import { getIngredientData } from '../../utils/data-api.js';
 
 import { useState, useEffect} from 'react';
 import { BUN } from '../../utils/data';
+import { IngredientDataContext } from '../../utils/context.js';
 
 const App = () => {
 
-  const [ingredientData, setIngredientData] = useState([]);
+  const [ingredientsData, setIngredientsData] = useState([]);
   
 
   useEffect(() => {
     getIngredientData(
       (data) => {
         if (data["data"]) {
-          setIngredientData([...ingredientData, ...data["data"]]);
+          setIngredientsData([...ingredientsData, ...data["data"]]);
         }
       },
       (error) => alert(error)
@@ -55,8 +56,10 @@ const App = () => {
       <main>
             <div className="container">
                 <div className={appStyles.main}>
-                    <BurgerIngredients items={ingredientData} cart={cart} onItemClick={onItemClick}/>
-                    <BurgerConstructor cart={cart} />
+                    <IngredientDataContext.Provider value={[ingredientsData, setIngredientsData]}>
+                      <BurgerIngredients cart={cart} onItemClick={onItemClick}/>
+                      <BurgerConstructor cart={cart} />
+                    </IngredientDataContext.Provider>
                 </div>
             </div>
         </main>

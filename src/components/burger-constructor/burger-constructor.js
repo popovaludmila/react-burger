@@ -6,6 +6,7 @@ import { cartPropTypes } from "../../utils/prop-types";
 import uuid from 'react-uuid';
 
 const BurgerConstructor = ({cart}) => {
+    
     const constructorIngredient = cart.fillings.map((item) => (
         <ConstructorFilling key={uuid()} item={item} />
     ));

@@ -1,12 +1,16 @@
-import { useMemo } from "react";
+import { useContext, useMemo } from "react";
 import BurgerIngredientsBlock from "./burger-ingredients-block/burger-ingredients-block";
 import BurgerMenu from "./burger-menu/burger-menu";
 import burgerIngredientsStyles from './burger-ingredients.module.css'
 import PropTypes from 'prop-types';
-import {ingredientPropTypes, cartPropTypes} from "../../utils/prop-types";
+import {cartPropTypes} from "../../utils/prop-types";
 import { BUN, MAIN, SAUCE } from "../../utils/data";
+import { IngredientDataContext } from "../../utils/context";
 
-const BurgerIngredients = ({items, cart, onItemClick}) => {
+const BurgerIngredients = ({cart, onItemClick}) => {
+
+    const [ingredientsData] = useContext(IngredientDataContext);
+
     const addedItems = new Map();
 
     addedItems[cart.top._id] = (addedItems[cart.top._id] ?? 0) + 1
@@ -15,18 +19,18 @@ const BurgerIngredients = ({items, cart, onItemClick}) => {
     cart.fillings.forEach((item)=>(addedItems[item._id] = (addedItems[item._id] ?? 0) + 1));
 
     const buns = useMemo(
-        () => items.filter((item) => item.type === BUN),
-        [items]
+        () => ingredientsData.filter((item) => item.type === BUN),
+        [ingredientsData]
     );
 
     const sauces = useMemo(
-        () => items.filter((item) => item.type === SAUCE),
-        [items]
+        () => ingredientsData.filter((item) => item.type === SAUCE),
+        [ingredientsData]
     );
 
     const mains = useMemo(
-        () => items.filter((item) => item.type === MAIN),
-        [items]
+        () => ingredientsData.filter((item) => item.type === MAIN),
+        [ingredientsData]
     );
 
 
@@ -34,7 +38,7 @@ const BurgerIngredients = ({items, cart, onItemClick}) => {
         <section className={`${burgerIngredientsStyles.wrapper}`}>
             <h1 className="text text_type_main-large pt-10 pb-5">Соберите бургер</h1>
             
-            <BurgerMenu />
+            <BurgerMenu /> 
             <div className={burgerIngredientsStyles.main}> 
                 <BurgerIngredientsBlock title="Булки" titleId={BUN} items={buns} addedItems={addedItems} onItemClick={onItemClick}/>
 
@@ -47,7 +51,6 @@ const BurgerIngredients = ({items, cart, onItemClick}) => {
 }
 
 BurgerIngredients.propTypes = {
-    items: PropTypes.arrayOf(ingredientPropTypes.isRequired).isRequired,
     cart: cartPropTypes.isRequired,
     onItemClick: PropTypes.func.isRequired
 };

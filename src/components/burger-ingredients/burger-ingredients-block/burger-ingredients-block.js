@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 import {ingredientPropTypes} from '../../../utils/prop-types.js';
 
 const BurgerIngredientsBlock = ({title, titleId, items, addedItems, onItemClick}) => {   
-   const ingrediens = items.map((item) => (
+   
+   const ingredients = items.map((item) => (
       <IngredientCard key={item._id} item={item} count={addedItems[item._id]} onClick={() => {onItemClick(item) }}/>
    ));
 
@@ -14,7 +15,7 @@ const BurgerIngredientsBlock = ({title, titleId, items, addedItems, onItemClick}
                {title}
          </h2>
          <ul className={`${burgerIngredientsBlockStyles.list} mr-4 ml-4`}>
-               {ingrediens}
+               {ingredients}
          </ul>
       </div>  
    )
