@@ -7,7 +7,7 @@ import { getIngredientData } from '../../utils/data-api.js';
 
 import { useState, useEffect} from 'react';
 import { BUN } from '../../utils/data';
-import { IngredientDataContext } from '../../utils/context.js';
+import { IngredientsDataContext } from '../../utils/context.js';
 
 const App = () => {
 
@@ -56,10 +56,10 @@ const App = () => {
       <main>
             <div className="container">
                 <div className={appStyles.main}>
-                    <IngredientDataContext.Provider value={[ingredientsData, setIngredientsData]}>
+                    <IngredientsDataContext.Provider value={[ingredientsData]}>
                       <BurgerIngredients cart={cart} onItemClick={onItemClick}/>
                       <BurgerConstructor cart={cart} />
-                    </IngredientDataContext.Provider>
+                    </IngredientsDataContext.Provider>
                 </div>
             </div>
         </main>
