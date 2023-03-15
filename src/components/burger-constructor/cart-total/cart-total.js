@@ -20,16 +20,12 @@ const CartTotal = ({total, cart}) => {
             cart.bottom._id,
         ];
        
-        sendData(
-            (data) => {
-                setOrderNumber(data.order.number)
+        sendData({"ingredients": orderIngredients})
+            .then((data) => {
+                setOrderNumber(data.order.number);
                 setShowOrderModal(true);
-            },
-            () => {
-                alert("Произошла ошибка отправки данных...")
-            },
-            JSON.stringify({"ingredients": orderIngredients})
-        )
+            })
+            .catch(alert);
     };
 
     const onCloseClick= () => {
