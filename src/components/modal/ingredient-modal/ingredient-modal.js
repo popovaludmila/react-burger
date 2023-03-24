@@ -1,8 +1,8 @@
 import ingredientModalStyles from './ingredient-modal.module.css';
-import { ingredientPropTypes } from '../../../utils/prop-types';
+import { useSelector } from 'react-redux';
 
-const IngredientModal = ({item}) => {
-    const {image, name, calories, proteins, fat, carbohydrates} = item;
+const IngredientModal = () => {
+    const {image, name, calories, proteins, fat, carbohydrates} = useSelector(state => state.detailIngredient);
 
     return (
         <div className={`${ingredientModalStyles.content} p-10 pb-15 pt-25`}>
@@ -34,10 +34,6 @@ const IngredientModal = ({item}) => {
             </div>
         </div>
     )
-}
-
-IngredientModal.propTypes = {
-    item: ingredientPropTypes.isRequired,
 }
 
 export default IngredientModal;

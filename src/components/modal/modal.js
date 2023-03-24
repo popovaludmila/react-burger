@@ -4,10 +4,17 @@ import PropTypes from 'prop-types';
 import ModalOverlay from './modal-overlay/modal-overlay';
 import { useEffect } from 'react';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { useDispatch } from 'react-redux';
+import { closeModal } from '../../services/actions';
 
 const modal = document.getElementById("modal");
 
-const Modal = ({children, onOverlayClick, onCloseClick, modalTitle}) => {
+const Modal = ({children, modalTitle}) => {
+    const dispatch = useDispatch();
+
+    const onCloseClick = () => {
+        dispatch(closeModal())
+    }
 
     useEffect(() => {
         const onEscKeydown = (evt) => {
@@ -36,7 +43,7 @@ const Modal = ({children, onOverlayClick, onCloseClick, modalTitle}) => {
                     {children}
                 </div>
             </div>
-            <ModalOverlay onClick={onOverlayClick}/>
+            <ModalOverlay onClick={onCloseClick}/>
         </> ,
         modal
     )
@@ -44,8 +51,6 @@ const Modal = ({children, onOverlayClick, onCloseClick, modalTitle}) => {
 
 Modal.propTypes = {
     children: PropTypes.element.isRequired,
-    onOverlayClick: PropTypes.func.isRequired,
-    onCloseClick: PropTypes.func.isRequired,
     modalTitle: PropTypes.string.isRequired
 }
 

@@ -1,17 +1,13 @@
 import BurgerIngredientsBlock from "./burger-ingredients-block/burger-ingredients-block";
 import BurgerMenu from "./burger-menu/burger-menu";
 import burgerIngredientsStyles from './burger-ingredients.module.css'
-import PropTypes from 'prop-types';
-import {cartPropTypes} from "../../utils/prop-types";
 import { BUN, MAIN, SAUCE } from "../../utils/data";
+import IngredientModal from "../modal/ingredient-modal/ingredient-modal";
+import Modal from "../modal/modal";
+import { useSelector } from "react-redux";
 
-const BurgerIngredients = ({cart, onItemClick}) => {
-    const addedItems = new Map();
-
-    addedItems[cart.top._id] = (addedItems[cart.top._id] ?? 0) + 1;
-    addedItems[cart.bottom._id] = (addedItems[cart.bottom._id] ?? 0) + 1;
-
-    cart.fillings.forEach((item)=>(addedItems[item._id] = (addedItems[item._id] ?? 0) + 1));
+const BurgerIngredients = () => {
+    const detailIngredient = useSelector(state => state.detailIngredient)
 
     return (
         <section className={`${burgerIngredientsStyles.wrapper}`}>
@@ -19,19 +15,19 @@ const BurgerIngredients = ({cart, onItemClick}) => {
             
             <BurgerMenu /> 
             <div className={burgerIngredientsStyles.main}> 
-                <BurgerIngredientsBlock title="Булки" ingredientsType={BUN} addedItems={addedItems} onItemClick={onItemClick}/>
+                <BurgerIngredientsBlock title="Булки" ingredientsType={BUN}/>
 
-                <BurgerIngredientsBlock title="Соусы" ingredientsType={SAUCE} addedItems={addedItems} onItemClick={onItemClick}/>
+                <BurgerIngredientsBlock title="Соусы" ingredientsType={SAUCE}/>
 
-                <BurgerIngredientsBlock title="Начинки" ingredientsType={MAIN} addedItems={addedItems} onItemClick={onItemClick}/>
+                <BurgerIngredientsBlock title="Начинки" ingredientsType={MAIN}/>
             </div>
+            {detailIngredient !== null && 
+                <Modal modalTitle={'Детали ингредиента'}>
+                    <IngredientModal />
+                </Modal>
+            }
         </section>
     )
 }
-
-BurgerIngredients.propTypes = {
-    cart: cartPropTypes.isRequired,
-    onItemClick: PropTypes.func.isRequired
-};
 
 export default BurgerIngredients;

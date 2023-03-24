@@ -1,52 +1,18 @@
 import Header from '../header/header';
 import BurgerIngredients from "../burger-ingredients/burger-ingredients";
-import BurgerConstructor from "../burger-constructor/burger-constructor";
+// import BurgerConstructor from "../burger-constructor/burger-constructor";
 import appStyles from './app.module.css';
 
-import { getIngredientData } from '../../utils/data-api.js';
-
-import { useState, useEffect} from 'react';
-import { BUN } from '../../utils/data';
-import { IngredientsDataContext } from '../../utils/context.js';
+import { useDispatch } from 'react-redux';
+import { useEffect} from 'react';
+import { getIngredients } from '../../services/actions';
 
 const App = () => {
+  const dispatch = useDispatch();
 
-  const [ingredientsData, setIngredientsData] = useState([]);
-  
-
-  useEffect(() => {
-    getIngredientData(
-      (data) => {
-        if (data["data"]) {
-          setIngredientsData([...ingredientsData, ...data["data"]]);
-        }
-      }).catch((error) => alert(error));
-  }, []);
-  
-  const [cart, setCart] = useState({
-    top: {},
-    fillings: [],
-    bottom: {}
-  })
-
-  const onItemClick = (item) => {
-      if(item.type === BUN) {
-        setCart({
-          ...cart,
-          top: item,
-          bottom: item
-        })
-      } else {
-        setCart({
-          ...cart, 
-          fillings: [...cart.fillings, item],
-        })
-      }
-
-     
-  }
-
-
+  useEffect(()=> {
+      dispatch(getIngredients())
+  }, [dispatch])
 
   return (
     <>
@@ -54,10 +20,8 @@ const App = () => {
       <main>
             <div className="container">
                 <div className={appStyles.main}>
-                    <IngredientsDataContext.Provider value={[ingredientsData]}>
-                      <BurgerIngredients cart={cart} onItemClick={onItemClick}/>
-                      <BurgerConstructor cart={cart} />
-                    </IngredientsDataContext.Provider>
+                      <BurgerIngredients />
+                      {/* <BurgerConstructor /> */}
                 </div>
             </div>
         </main>
