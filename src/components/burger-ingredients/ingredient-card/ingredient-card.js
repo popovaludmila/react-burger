@@ -1,6 +1,6 @@
 import ingredientCardStyles from './ingredient-card.module.css';
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import {ingredientPropTypes} from '../../utils/prop-types.js';
+import {ingredientPropTypes} from '../../../utils/prop-types.js';
 import Modal from '../../modal/modal';
 import IngredientModal from '../../modal/ingredient-modal/ingredient-modal';
 import { useState } from 'react';
@@ -12,13 +12,13 @@ const IngredientCard = ({item, count, onClick}) => {
   const [showIngredientModal, setShowIngredientModal] = useState(false);
 
   const onIngredientClick = () => {
-    onClick();
     setShowIngredientModal(true);
   };
 
-  const onCloseClick = () => {
+  const onCloseClick= () => {
     setShowIngredientModal(false);
-  }
+    onClick();
+  };
 
     return (
       <div>
@@ -26,7 +26,7 @@ const IngredientCard = ({item, count, onClick}) => {
         >
           {count ? <Counter count={count} size="default" extraClass="m-1" /> : null}
 
-          <img src={image} width="240" height="120" alt="Картинка ингредиента" />
+          <img src={image} width="240" height="120" alt={name} />
           
           <div className={ingredientCardStyles.price}>
             <span className="text text_type_main-medium pt-1 pb-1 pr-2">
@@ -42,8 +42,8 @@ const IngredientCard = ({item, count, onClick}) => {
           </a>
         </li>
          {showIngredientModal && 
-            <Modal onOverlayClick={onCloseClick} onCloseClick={onCloseClick}>
-              <IngredientModal item={item} onClose={onCloseClick}/>
+            <Modal onOverlayClick={onCloseClick} onCloseClick={onCloseClick} modalTitle={'Детали ингредиента'}>
+              <IngredientModal item={item} />
             </Modal>
           }
       </div>

@@ -16,9 +16,9 @@ const ingredientPropTypes = PropTypes.shape({
 );
 
 const cartPropTypes = PropTypes.shape({
-    top: ingredientPropTypes.isRequired,
+    top:  PropTypes.object,
     fillings: PropTypes.arrayOf(ingredientPropTypes.isRequired),
-    bottom: ingredientPropTypes.isRequired
+    bottom: PropTypes.object
 });
 
 export {ingredientPropTypes, cartPropTypes};

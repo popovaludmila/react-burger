@@ -3,25 +3,24 @@ import BurgerIngredients from "../burger-ingredients/burger-ingredients";
 import BurgerConstructor from "../burger-constructor/burger-constructor";
 import appStyles from './app.module.css';
 
-import { getIngredientData } from '../utils/data-api.js';
+import { getIngredientData } from '../../utils/data-api.js';
 
 import { useState, useEffect} from 'react';
-import { BUN } from '../utils/data';
+import { BUN } from '../../utils/data';
+import { IngredientsDataContext } from '../../utils/context.js';
 
 const App = () => {
 
-  const [ingredientData, setIngredientData] = useState([]);
+  const [ingredientsData, setIngredientsData] = useState([]);
   
 
   useEffect(() => {
     getIngredientData(
       (data) => {
         if (data["data"]) {
-          setIngredientData([...ingredientData, ...data["data"]]);
+          setIngredientsData([...ingredientsData, ...data["data"]]);
         }
-      },
-      (error) => alert(error)
-    )
+      }).catch((error) => alert(error));
   }, []);
   
   const [cart, setCart] = useState({
@@ -55,9 +54,10 @@ const App = () => {
       <main>
             <div className="container">
                 <div className={appStyles.main}>
-                    <BurgerIngredients items={ingredientData} cart={cart} onItemClick={onItemClick}/>
-                    <BurgerConstructor cart={cart} />
-
+                    <IngredientsDataContext.Provider value={[ingredientsData]}>
+                      <BurgerIngredients cart={cart} onItemClick={onItemClick}/>
+                      <BurgerConstructor cart={cart} />
+                    </IngredientsDataContext.Provider>
                 </div>
             </div>
         </main>
