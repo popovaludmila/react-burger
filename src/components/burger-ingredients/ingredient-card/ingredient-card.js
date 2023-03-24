@@ -3,7 +3,7 @@ import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-c
 import {ingredientPropTypes} from '../../../utils/prop-types.js';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-import { showDetailIngredient } from '../../../services/actions';
+import { addIngredientToCart, showDetailIngredient } from '../../../services/actions';
 
 const IngredientCard = ({item, count}) => {
   const {image, price, name} = item;
@@ -12,6 +12,7 @@ const IngredientCard = ({item, count}) => {
 
   const onIngredientClick = () => {
     dispatch(showDetailIngredient(item))
+    dispatch(addIngredientToCart(item))
   }
 
   return (

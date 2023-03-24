@@ -2,16 +2,25 @@ import burgerConstructorStyles from "./burger-constructor.module.css";
 import CartTotal from './cart-total/cart-total';
 import ConstructorFilling from "./constructor-filling/constructor-filling";
 import ConstructorIngredient from './constructor-ingredient/constructor-ingredient.js';
-import { cartPropTypes } from "../../utils/prop-types";
 import uuid from 'react-uuid';
+import { useSelector } from "react-redux";
 
-const BurgerConstructor = ({cart}) => {
+const BurgerConstructor = () => {
+    const cart = useSelector(state => state.cart);
 
     const constructorIngredient = cart.fillings.map((item) => (
         <ConstructorFilling key={uuid()} item={item} />
     ));
 
-    let total = (cart.top.price ?? 0) + (cart.bottom.price ?? 0);
+    let total = 0;
+
+    if (cart.top !== null) {
+        total += cart.top.price
+    }
+
+    if (cart.bottom !== null) {
+        total += cart.bottom.price
+    }
 
     cart.fillings.forEach((item) => (total += item.price));
 
@@ -19,7 +28,7 @@ const BurgerConstructor = ({cart}) => {
         <section className={`${burgerConstructorStyles.constructor} mb-26`}>
         <div className={`${burgerConstructorStyles.wrapper} mt-25`}>
             <ul className={burgerConstructorStyles.list}>
-                {cart.top.name && <ConstructorIngredient key={uuid()} item={cart.top} type={"top"}/>}
+                {cart.top && <ConstructorIngredient key={uuid()} item={cart.top} type={"top"}/>}
                 
                 <li className={`${burgerConstructorStyles.item} pr-2`}>
                     <ul className={`${burgerConstructorStyles.filling}`}>
@@ -27,7 +36,7 @@ const BurgerConstructor = ({cart}) => {
                     </ul>
                 </li>
                 
-                {cart.bottom.name && <ConstructorIngredient key={uuid()} item={cart.bottom} type={"bottom"}/>}
+                {cart.bottom && <ConstructorIngredient key={uuid()} item={cart.bottom} type={"bottom"}/>}
             </ul>
 
             
@@ -37,10 +46,6 @@ const BurgerConstructor = ({cart}) => {
         </div>
         </section>
     )
-}
-
-BurgerConstructor.propTypes = {
-    cart: cartPropTypes.isRequired
 }
 
 export default BurgerConstructor;

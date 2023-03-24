@@ -3,6 +3,7 @@ import constructorFillingtStyles from './constructor-filling.module.css';
 import {ingredientPropTypes} from '../../../utils/prop-types';
 
 const ConstructorFilling = ({item}) => {
+    const {name, price, image} = item;
     return (
         <li className={`${constructorFillingtStyles.ingredient} mb-4`}> 
             <div className={`${constructorFillingtStyles.dots}`}>
@@ -12,9 +13,9 @@ const ConstructorFilling = ({item}) => {
                 </svg>
             </div>
             <ConstructorElement
-            text={item.name}
-            price={item.price}
-            thumbnail={item.image}
+            text={name}
+            price={price}
+            thumbnail={image}
             />
         </li>
     )

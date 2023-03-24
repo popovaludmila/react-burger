@@ -1,8 +1,17 @@
-import { GET_INGREDIENTS_DATA_SUCCESS, GET_INGREDIENTS_DATA_FAILED, SHOW_DETAIL_INGREDIENT, CLOSE_MODAL } from "../actions";
+import { BUN } from "../../utils/data";
+import { GET_INGREDIENTS_DATA_SUCCESS, 
+    GET_INGREDIENTS_DATA_FAILED, 
+    SHOW_DETAIL_INGREDIENT, 
+    CLOSE_MODAL, 
+    ADD_INGREDIENT_TO_CART} from "../actions";
 
 const initialState = {
     ingredients: [],
-    cart: [],
+    cart: {
+        top: null,
+        fillings: [],
+        bottom: null,
+    },
     detailIngredient: null,
     order: null
 }
@@ -26,6 +35,25 @@ export const rootReducer = (state = initialState, action) => {
                 ...state,
                 detailIngredient: null,
                 order: null
+            }
+        case ADD_INGREDIENT_TO_CART:
+            if (action.ingredient.type  === BUN) {
+                return{
+                    ...state,
+                    cart: {
+                        ...state.cart,
+                        top: action.ingredient,
+                        bottom: action.ingredient
+                    }
+                }
+            } else {
+                return{
+                    ...state,
+                    cart: {
+                        ...state.cart,
+                        fillings: [...state.cart.fillings, action.ingredient]
+                    }
+                }
             }
         default:
             return state;
