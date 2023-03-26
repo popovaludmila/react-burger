@@ -32,17 +32,17 @@ const BurgerConstructor = () => {
         <div className={`${burgerConstructorStyles.wrapper} mt-25`}>
             <ul className={burgerConstructorStyles.list}>
                 {(cart.top && <ConstructorIngredient key={uuid()} item={cart.top} type={"top"}/>) || 
-                    <BurgerSample text={"Добавить булки"}/>} 
+                    <BurgerSample text={"Добавить булки"} margin={"mb-4"}/>} 
                
                 
                 <li className={`${burgerConstructorStyles.item} pr-2`} key={uuid}>
                     <ul className={`${burgerConstructorStyles.fillings}`}>
-                        {hasIngredients ? constructorIngredient : <BurgerSample text={"Добавить начинкуы"}/>} 
+                        {hasIngredients ? constructorIngredient : <BurgerSample text={"Добавить начинкуы"} margin=""/>} 
                     </ul>
                 </li>
                 
                 {(cart.bottom && <ConstructorIngredient key={uuid()} item={cart.bottom} type={"bottom"}/>) ||
-                    <BurgerSample text={"Добавить булки"}/>}
+                    <BurgerSample text={"Добавить булки"} margin={"mt-4"}/>}
             </ul>
 
             

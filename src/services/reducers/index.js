@@ -3,7 +3,8 @@ import { GET_INGREDIENTS_DATA_SUCCESS,
     GET_INGREDIENTS_DATA_FAILED, 
     SHOW_DETAIL_INGREDIENT, 
     CLOSE_MODAL, 
-    ADD_INGREDIENT_TO_CART} from "../actions";
+    ADD_INGREDIENT_TO_CART,
+    GET_ORDER_DATA_SUCCESS} from "../actions";
 
 const initialState = {
     ingredients: [],
@@ -55,6 +56,14 @@ export const rootReducer = (state = initialState, action) => {
                         ...state.cart,
                         fillings: [...state.cart.fillings, action.ingredient]
                     }
+                }
+            }
+
+        case GET_ORDER_DATA_SUCCESS:
+            return {
+                ...state,
+                order: {
+                    id: action.order.number,
                 }
             }
         default:

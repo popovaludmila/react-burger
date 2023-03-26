@@ -1,9 +1,9 @@
 import burgerSampletStyles from './burger-sample.module.css'
 
-export const BurgerSample = ({text}) => {
+export const BurgerSample = ({text, margin}) => {
     return (
         <>
-            <li className={`${burgerSampletStyles.ingredient} mb-4 mr-4 mt-4`}> 
+            <li className={`${burgerSampletStyles.ingredient} mr-4 ${margin}`}> 
                 <span>{text}</span>
             </li>
         </>

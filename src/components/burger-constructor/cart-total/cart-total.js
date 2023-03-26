@@ -1,35 +1,29 @@
-import { useState } from 'react';
 import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import cartTotalStyles from './cart-total.module.css';
 import Modal from '../../modal/modal';
 import OrderModal from '../../modal/order-modal/order-modal';
 import PropTypes from 'prop-types';
-import { sendData } from '../../../utils/data-api';
 import { cartPropTypes } from '../../../utils/prop-types';
+import { useDispatch, useSelector } from 'react-redux';
+import { createOrder } from '../../../services/actions';
 
-const CartTotal = ({total, cart}) => {
-    const [showOrderModal, setShowOrderModal] = useState(false);
-    const [orderNumber, setOrderNumber] = useState("");
+const CartTotal = ({total}) => {
+    const cart = useSelector(state => state.cart);
+    const dispatch = useDispatch();
+    const order = useSelector(state => state.order);
+
+    
 
     const onOrderButtonClick = (e) => {
         e.preventDefault();
-
         const orderIngredients = [
             cart.top._id,
             ...cart.fillings.map((ingredient) => ingredient._id),
             cart.bottom._id,
         ];
-       
-        sendData({"ingredients": orderIngredients})
-            .then((data) => {
-                setOrderNumber(data.order.number);
-                setShowOrderModal(true);
-            })
-            .catch(alert);
-    };
 
-    const onCloseClick= () => {
-        setShowOrderModal(false);
+        console.log(orderIngredients)
+        dispatch(createOrder({"ingredients": orderIngredients}));
     };
 
     return (
@@ -40,9 +34,9 @@ const CartTotal = ({total, cart}) => {
             </div>
             
             <Button htmlType="submit" type="primary" size="medium" onClick={onOrderButtonClick}>Оформить заказ</Button>
-            {showOrderModal && 
-                <Modal onOverlayClick={onCloseClick} onCloseClick={onCloseClick} modalTitle={''}>
-                    <OrderModal orderNumber={orderNumber} />
+            {order !== null && 
+                <Modal modalTitle={''}>
+                    <OrderModal orderNumber={order.id} />
                 </Modal>
             }
         </div>
