@@ -10,6 +10,15 @@ export const ADD_INGREDIENT_TO_CART = 'ADD_INGREDIENT_TO_CART';
 export const DELETE_INGREDIENT = 'DELETE_INGREDIENT';
 export const GET_ORDER_DATA_SUCCESS = 'SEND_DATA_SUCCESS';
 export const SEND_DATA_FAILED = 'SEND_DATA_FAILED';
+export const REPLACE_INGREDIENTS = 'REPLACE_INGREDIENTS';
+
+export const replaceIngredient = (draggingKey, hoverKey) => {
+    return {
+        type: REPLACE_INGREDIENTS,
+        draggingKey: draggingKey,
+        hoverKey: hoverKey
+    }
+}
 
 export const deleteIngredient = (key) => {
     return {

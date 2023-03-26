@@ -3,17 +3,19 @@ import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-c
 import {ingredientPropTypes} from '../../../utils/prop-types.js';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { addIngredientToCart, showDetailIngredient } from '../../../services/actions';
-import uuid from 'react-uuid';
+import { showDetailIngredient } from '../../../services/actions';
+import { useDrag } from 'react-dnd';
 
 const IngredientCard = ({item}) => {
+  const [, dragRef] = useDrag({
+    type: 'ingredient',
+    item: item
+  });
+
   const {image, price, name} = item;
   const dispatch = useDispatch();
 
-  const onIngredientClick = () => {
-    dispatch(showDetailIngredient(item))
-    dispatch(addIngredientToCart(item, uuid()))
-  }
+  const onIngredientClick = () => dispatch(showDetailIngredient(item));
 
   const cart = useSelector((state) => state.cart)
 
@@ -32,7 +34,7 @@ const IngredientCard = ({item}) => {
 
   return (
     <div>
-      <li className={`${ingredientCardStyles.item} mb-10`} onClick={onIngredientClick}>
+      <li ref={dragRef} className={`${ingredientCardStyles.item} mb-10`} onClick={onIngredientClick}>
         {count ? <Counter count={count} size="default" extraClass="m-1" /> : null}
         
         <img src={image} width="240" height="120" alt={name} />

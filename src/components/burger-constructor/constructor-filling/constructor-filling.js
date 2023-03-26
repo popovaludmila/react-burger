@@ -2,16 +2,49 @@ import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-comp
 import constructorFillingtStyles from './constructor-filling.module.css';
 import {ingredientPropTypes} from '../../../utils/prop-types';
 import { useDispatch } from 'react-redux';
-import { deleteIngredient } from '../../../services/actions';
+import { deleteIngredient, replaceIngredient } from '../../../services/actions';
+import { useDrag, useDrop } from 'react-dnd';
+import { useRef } from 'react';
 
 const ConstructorFilling = ({item}) => {
-    const {name, price, image} = item;
     const dispatch = useDispatch();
+    const ref = useRef();
+
+    const [, drop] = useDrop({
+        accept: "item",
+        hover: (hoverItem, monitor) => {
+
+            const hoverKey = hoverItem.key;
+            const dragIndex = item.key;
+            if (dragIndex === hoverKey) {
+                return;
+            }
+
+            dispatch(replaceIngredient(item.key, hoverItem.key));
+        }
+    });
+
+    const [{isDragging}, drag] = useDrag({
+        type: "item",
+        collect: monitor => ({
+            isDragging: monitor.isDragging()
+        }),
+        item: () => ({
+            key: item.key
+        })
+    });
+
+    drag(drop(ref))
+
+    const opacity = isDragging ? 0 : 1;
+
+
+    const {name, price, image} = item;
 
     const handleClose = () => dispatch(deleteIngredient(item.key));
 
     return (
-        <li className={`${constructorFillingtStyles.ingredient} mb-4`}> 
+        <li ref={ref} className={`${constructorFillingtStyles.ingredient} mb-4`} style={{opacity}}> 
             <div className={`${constructorFillingtStyles.dots}`}>
                 <svg width="14" height="19" viewBox="0 0 14 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path fillRule="evenodd" clipRule="evenodd" d="M4.5 2.15375C4.5 3.34325 3.60455 4.3075 2.5 4.3075C1.39545 4.3075 0.5 3.34325 0.5 2.15375C0.5 0.96427 1.39545 0 2.5 0C3.60455 0 4.5 0.96427 4.5 2.15375ZM2.5 11.3075C3.60455 11.3075 4.5 10.3433 4.5 9.15375C4.5 7.96425 3.60455 7 2.5 7C1.39545 7 0.5 7.96425 0.5 9.15375C0.5 10.3433 1.39545 11.3075 2.5 11.3075ZM2.5 18.3075C3.60455 18.3075 4.5 17.3433 4.5 16.1537C4.5 14.9642 3.60455 14 2.5 14C1.39545 14 0.5 14.9642 0.5 16.1537C0.5 17.3433 1.39545 18.3075 2.5 18.3075Z" fill="#F2F2F3"/>

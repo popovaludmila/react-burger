@@ -5,7 +5,8 @@ import { GET_INGREDIENTS_DATA_SUCCESS,
     CLOSE_MODAL, 
     ADD_INGREDIENT_TO_CART,
     GET_ORDER_DATA_SUCCESS,
-    DELETE_INGREDIENT} from "../actions";
+    DELETE_INGREDIENT,
+    REPLACE_INGREDIENTS} from "../actions";
 
 const initialState = {
     ingredients: [],
@@ -73,6 +74,22 @@ export const rootReducer = (state = initialState, action) => {
                 cart: {
                     ...state.cart,
                     fillings: state.cart.fillings.filter((filling) => filling.key !== action.key)
+                }
+            }
+        case REPLACE_INGREDIENTS:
+            let fillings = [...state.cart.fillings]
+
+            const hoverIndex = fillings.findIndex((filling) => filling.key === action.hoverKey);
+            const draggingIndex = fillings.findIndex((filling) => filling.key === action.draggingKey);
+
+            fillings.splice(draggingIndex, 1)
+            fillings.splice(hoverIndex, 0, state.cart.fillings[draggingIndex])
+
+            return {
+                ...state,
+                cart: {
+                    ...state.cart,
+                    fillings: fillings
                 }
             }
         default:
