@@ -2,16 +2,32 @@ import ingredientCardStyles from './ingredient-card.module.css';
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import {ingredientPropTypes} from '../../../utils/prop-types.js';
 import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addIngredientToCart, showDetailIngredient } from '../../../services/actions';
+import uuid from 'react-uuid';
 
-const IngredientCard = ({item, count}) => {
+const IngredientCard = ({item}) => {
   const {image, price, name} = item;
   const dispatch = useDispatch();
 
   const onIngredientClick = () => {
     dispatch(showDetailIngredient(item))
-    dispatch(addIngredientToCart(item))
+    dispatch(addIngredientToCart(item, uuid()))
+  }
+
+  const cart = useSelector((state) => state.cart)
+
+  let count = 0;
+  cart.fillings.forEach(filling =>  {
+    if (filling._id === item._id) {
+      count++;
+    }
+  })
+  if (cart.top !== null && cart.top._id === item._id) {
+    count++;
+  }
+  if (cart.bottom !== null && cart.bottom._id === item._id) {
+    count++;
   }
 
   return (

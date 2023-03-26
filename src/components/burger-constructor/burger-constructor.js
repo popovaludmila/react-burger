@@ -10,7 +10,7 @@ const BurgerConstructor = () => {
     const cart = useSelector(state => state.cart);
    
     const constructorIngredient = cart.fillings.map((item) => (
-        <ConstructorFilling key={uuid()} item={item} />
+        <ConstructorFilling key={item.key} item={item} />
     ));
 
     const hasIngredients = constructorIngredient.length > 0;
@@ -32,12 +32,12 @@ const BurgerConstructor = () => {
         <div className={`${burgerConstructorStyles.wrapper} mt-25`}>
             <ul className={burgerConstructorStyles.list}>
                 {(cart.top && <ConstructorIngredient key={uuid()} item={cart.top} type={"top"}/>) || 
-                    <BurgerSample text={"Добавить булки"} margin={"mb-4"}/>} 
+                    <BurgerSample text={"Добавить булки"} margin={"mb-4"} />} 
                
                 
                 <li className={`${burgerConstructorStyles.item} pr-2`} key={uuid}>
                     <ul className={`${burgerConstructorStyles.fillings}`}>
-                        {hasIngredients ? constructorIngredient : <BurgerSample text={"Добавить начинкуы"} margin=""/>} 
+                        {hasIngredients ? constructorIngredient : <BurgerSample text={"Добавить начинку"} margin=""/>} 
                     </ul>
                 </li>
                 

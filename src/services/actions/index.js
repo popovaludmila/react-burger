@@ -11,6 +11,12 @@ export const DELETE_INGREDIENT = 'DELETE_INGREDIENT';
 export const GET_ORDER_DATA_SUCCESS = 'SEND_DATA_SUCCESS';
 export const SEND_DATA_FAILED = 'SEND_DATA_FAILED';
 
+export const deleteIngredient = (key) => {
+    return {
+        type: DELETE_INGREDIENT,
+        key: key
+    }
+}
 
 export const showDetailIngredient = (ingredient) => {
     return {
@@ -25,11 +31,12 @@ export const closeModal = () => {
     }
 }
 
-export const addIngredientToCart = (ingredient) => {
+export const addIngredientToCart = (ingredient, key) => {
     return {
         type: ADD_INGREDIENT_TO_CART,
-        ingredient: ingredient
-    } 
+        ingredient: ingredient,
+        key: key
+    }
 }
 
 export const getIngredients = () => {

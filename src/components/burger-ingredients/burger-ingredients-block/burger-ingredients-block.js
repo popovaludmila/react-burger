@@ -14,7 +14,7 @@ const BurgerIngredientsBlock = ({title, ingredientsType}) => {
    );
    
    const ingredientCarts = ingredients.map((item) => (
-      <IngredientCard key={item.id} item={item}/>
+      <IngredientCard key={item._id} item={item}/>
    ));
 
    return (

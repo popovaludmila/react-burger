@@ -1,9 +1,15 @@
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 import constructorFillingtStyles from './constructor-filling.module.css';
 import {ingredientPropTypes} from '../../../utils/prop-types';
+import { useDispatch } from 'react-redux';
+import { deleteIngredient } from '../../../services/actions';
 
 const ConstructorFilling = ({item}) => {
     const {name, price, image} = item;
+    const dispatch = useDispatch();
+
+    const handleClose = () => dispatch(deleteIngredient(item.key));
+
     return (
         <li className={`${constructorFillingtStyles.ingredient} mb-4`}> 
             <div className={`${constructorFillingtStyles.dots}`}>
@@ -16,6 +22,7 @@ const ConstructorFilling = ({item}) => {
             text={name}
             price={price}
             thumbnail={image}
+            handleClose={handleClose}
             />
         </li>
     )

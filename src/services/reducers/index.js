@@ -4,7 +4,8 @@ import { GET_INGREDIENTS_DATA_SUCCESS,
     SHOW_DETAIL_INGREDIENT, 
     CLOSE_MODAL, 
     ADD_INGREDIENT_TO_CART,
-    GET_ORDER_DATA_SUCCESS} from "../actions";
+    GET_ORDER_DATA_SUCCESS,
+    DELETE_INGREDIENT} from "../actions";
 
 const initialState = {
     ingredients: [],
@@ -54,7 +55,7 @@ export const rootReducer = (state = initialState, action) => {
                     ...state,
                     cart: {
                         ...state.cart,
-                        fillings: [...state.cart.fillings, action.ingredient]
+                        fillings: [...state.cart.fillings, {...action.ingredient, key: action.key}]
                     }
                 }
             }
@@ -64,6 +65,14 @@ export const rootReducer = (state = initialState, action) => {
                 ...state,
                 order: {
                     id: action.order.number,
+                }
+            }
+        case DELETE_INGREDIENT:
+            return {
+                ...state,
+                cart: {
+                    ...state.cart,
+                    fillings: state.cart.fillings.filter((filling) => filling.key !== action.key)
                 }
             }
         default:
