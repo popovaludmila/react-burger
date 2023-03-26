@@ -4,13 +4,16 @@ import ConstructorFilling from "./constructor-filling/constructor-filling";
 import ConstructorIngredient from './constructor-ingredient/constructor-ingredient.js';
 import uuid from 'react-uuid';
 import { useSelector } from "react-redux";
+import { BurgerSample } from "./burger-sample/burger-sample";
 
 const BurgerConstructor = () => {
     const cart = useSelector(state => state.cart);
-
+   
     const constructorIngredient = cart.fillings.map((item) => (
         <ConstructorFilling key={uuid()} item={item} />
     ));
+
+    const hasIngredients = constructorIngredient.length > 0;
 
     let total = 0;
 
@@ -28,15 +31,18 @@ const BurgerConstructor = () => {
         <section className={`${burgerConstructorStyles.constructor} mb-26`}>
         <div className={`${burgerConstructorStyles.wrapper} mt-25`}>
             <ul className={burgerConstructorStyles.list}>
-                {cart.top && <ConstructorIngredient key={uuid()} item={cart.top} type={"top"}/>}
+                {(cart.top && <ConstructorIngredient key={uuid()} item={cart.top} type={"top"}/>) || 
+                    <BurgerSample text={"Добавить булки"}/>} 
+               
                 
-                <li className={`${burgerConstructorStyles.item} pr-2`}>
-                    <ul className={`${burgerConstructorStyles.filling}`}>
-                        {constructorIngredient}
+                <li className={`${burgerConstructorStyles.item} pr-2`} key={uuid}>
+                    <ul className={`${burgerConstructorStyles.fillings}`}>
+                        {hasIngredients ? constructorIngredient : <BurgerSample text={"Добавить начинкуы"}/>} 
                     </ul>
                 </li>
                 
-                {cart.bottom && <ConstructorIngredient key={uuid()} item={cart.bottom} type={"bottom"}/>}
+                {(cart.bottom && <ConstructorIngredient key={uuid()} item={cart.bottom} type={"bottom"}/>) ||
+                    <BurgerSample text={"Добавить булки"}/>}
             </ul>
 
             

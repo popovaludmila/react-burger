@@ -7,7 +7,6 @@ import { addIngredientToCart, showDetailIngredient } from '../../../services/act
 
 const IngredientCard = ({item, count}) => {
   const {image, price, name} = item;
-
   const dispatch = useDispatch();
 
   const onIngredientClick = () => {

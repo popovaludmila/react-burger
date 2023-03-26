@@ -13,7 +13,8 @@ const initialState = {
         bottom: null,
     },
     detailIngredient: null,
-    order: null
+    order: null,
+    count: 0
 }
 
 export const rootReducer = (state = initialState, action) => {
@@ -40,6 +41,7 @@ export const rootReducer = (state = initialState, action) => {
             if (action.ingredient.type  === BUN) {
                 return{
                     ...state,
+                
                     cart: {
                         ...state.cart,
                         top: action.ingredient,

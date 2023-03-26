@@ -7,6 +7,9 @@ export const CLOSE_MODAL = 'CLOSE_MODAL';
 export const ADD_BUN_TO_CART = 'ADD_BUN_TO_CART';
 export const ADD_FILLING_TO_CART = 'ADD_FILLING_TO_CART';
 export const ADD_INGREDIENT_TO_CART = 'ADD_INGREDIENT_TO_CART';
+export const DELETE_INGREDIENT = 'DELETE_INGREDIENT';
+
+
 
 export const showDetailIngredient = (ingredient) => {
     return {
