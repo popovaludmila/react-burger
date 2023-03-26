@@ -45,7 +45,6 @@ const CartTotal = ({total}) => {
 
 CartTotal.propTypes = {
     total: PropTypes.number.isRequired,
-    cart: cartPropTypes.isRequired
 }
 
 

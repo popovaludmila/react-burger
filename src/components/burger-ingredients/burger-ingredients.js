@@ -6,14 +6,17 @@ import IngredientModal from "../modal/ingredient-modal/ingredient-modal";
 import Modal from "../modal/modal";
 import { useSelector } from "react-redux";
 
+
 const BurgerIngredients = () => {
-    const detailIngredient = useSelector(state => state.detailIngredient)
+    
+    const detailIngredient = useSelector(state => state.detailIngredient);
 
     return (
         <section className={`${burgerIngredientsStyles.wrapper}`}>
             <h1 className="text text_type_main-large pt-10 pb-5">Соберите бургер</h1>
             
-            <BurgerMenu /> 
+            <BurgerMenu  /> 
+
             <div className={burgerIngredientsStyles.main}> 
                 <BurgerIngredientsBlock title="Булки" ingredientsType={BUN}/>
 

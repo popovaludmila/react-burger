@@ -44,13 +44,14 @@ const BurgerConstructor = () => {
     }
 
     cart.fillings.forEach((item) => (total += item.price));
+    
 
     return (
         <section className={`${burgerConstructorStyles.constructor} mb-26`}>
         <div className={`${burgerConstructorStyles.wrapper} mt-25`}>
             <ul className={burgerConstructorStyles.list} ref={dropRef} >
                 {(cart.top && <ConstructorIngredient key={uuid()} item={cart.top} type={"top"}/>) || 
-                    <BurgerSample text={"Добавить булки"} margin={"mb-4"} isHover={isBun && isHover}/>} 
+                    <BurgerSample text={"Добавить булки"} margin={"mb-4"}  isHover={isBun && isHover}/>} 
                
                 
                 <li className={`${burgerConstructorStyles.item} pr-2`} key={uuid}>

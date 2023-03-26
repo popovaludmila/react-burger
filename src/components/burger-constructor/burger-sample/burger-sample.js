@@ -1,4 +1,5 @@
 import burgerSampletStyles from './burger-sample.module.css'
+import PropTypes from 'prop-types';
 
 export const BurgerSample = ({text, margin, isHover}) => {
     const border = isHover ? "solid lightgreen" : "";
@@ -8,5 +9,10 @@ export const BurgerSample = ({text, margin, isHover}) => {
             <span>{text}</span>
         </li>
     )
+}
 
+BurgerSample.propTypes = {
+    text: PropTypes.string.isRequired,
+    margin: PropTypes.string.isRequired,
+    isHover: PropTypes.bool
 }

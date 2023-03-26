@@ -1,7 +1,6 @@
 import ingredientCardStyles from './ingredient-card.module.css';
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import {ingredientPropTypes} from '../../../utils/prop-types.js';
-import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { showDetailIngredient } from '../../../services/actions';
 import { useDrag } from 'react-dnd';
@@ -57,8 +56,7 @@ const IngredientCard = ({item}) => {
 }
 
 IngredientCard.propTypes = {
-  item: ingredientPropTypes.isRequired,
-  count: PropTypes.number
+  item: ingredientPropTypes.isRequired
 };
 
 
