@@ -19,7 +19,6 @@ const CartTotal = ({total}) => {
             cart.bottom._id,
         ];
 
-        console.log(orderIngredients)
         dispatch(createOrder({"ingredients": orderIngredients}));
     };
 

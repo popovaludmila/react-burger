@@ -60,7 +60,6 @@ export const rootReducer = (state = initialState, action) => {
                     }
                 }
             }
-
         case GET_ORDER_DATA_SUCCESS:
             return {
                 ...state,

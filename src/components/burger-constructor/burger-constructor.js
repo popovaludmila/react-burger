@@ -50,17 +50,17 @@ const BurgerConstructor = () => {
         <section className={`${burgerConstructorStyles.constructor} mb-26`}>
         <div className={`${burgerConstructorStyles.wrapper} mt-25`}>
             <ul className={burgerConstructorStyles.list} ref={dropRef} >
-                {(cart.top && <ConstructorIngredient key={uuid()} item={cart.top} type={"top"}/>) || 
+                {(cart.top && <ConstructorIngredient item={cart.top} type={"top"} typeBun={"вверx"} />) || 
                     <BurgerSample text={"Добавить булки"} margin={"mb-4"}  isHover={isBun && isHover}/>} 
                
                 
-                <li className={`${burgerConstructorStyles.item} pr-2`} key={uuid}>
+                <li className={`${burgerConstructorStyles.item} pr-2`}>
                     <ul className={`${burgerConstructorStyles.fillings}`}>
                         {hasIngredients ? constructorIngredient : <BurgerSample text={"Добавить начинку"} margin="" isHover={!isBun && isHover}/>} 
                     </ul>
                 </li>
                 
-                {(cart.bottom && <ConstructorIngredient key={uuid()} item={cart.bottom} type={"bottom"}/>) ||
+                {(cart.bottom && <ConstructorIngredient item={cart.bottom} type={"bottom"} typeBun={"низ"}/>) ||
                     <BurgerSample text={"Добавить булки"} margin={"mt-4"} isHover={isBun && isHover} />}
             </ul>
 
