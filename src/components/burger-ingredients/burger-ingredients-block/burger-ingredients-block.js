@@ -1,10 +1,23 @@
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import IngredientCard from '../ingredient-card/ingredient-card';
 import burgerIngredientsBlockStyles from './burger-ingredients-block.module.css';
 import PropTypes from 'prop-types';
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useInView } from "react-intersection-observer";
+import { switchTab } from "../../../services/actions";
+
+
 
 const BurgerIngredientsBlock = ({title, ingredientsType}) => {
+   const {ref, inView} = useInView({
+      threshold: 0
+   });
+   const dispatch = useDispatch();
+
+   useEffect(() => {
+      dispatch(switchTab(ingredientsType, inView));
+   }, [inView]);
+
    const ingredientsData = useSelector(state => state.ingredients)
 
    const ingredients = useMemo(
@@ -18,7 +31,7 @@ const BurgerIngredientsBlock = ({title, ingredientsType}) => {
    ));
 
    return (
-      <div>
+      <div ref={ref}> 
          <h2 id={ingredientsType} className="text text_type_main-medium pt-10 pb-6">
                {title}
          </h2>

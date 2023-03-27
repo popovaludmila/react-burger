@@ -1,4 +1,4 @@
-import { BUN } from "../../utils/data";
+import { BUN, MAIN, SAUCE } from "../../utils/data";
 import { GET_INGREDIENTS_DATA_SUCCESS, 
     GET_INGREDIENTS_DATA_FAILED, 
     SHOW_DETAIL_INGREDIENT, 
@@ -6,7 +6,8 @@ import { GET_INGREDIENTS_DATA_SUCCESS,
     ADD_INGREDIENT_TO_CART,
     GET_ORDER_DATA_SUCCESS,
     DELETE_INGREDIENT,
-    REPLACE_INGREDIENTS} from "../actions";
+    REPLACE_INGREDIENTS,
+    SWITCH_TAB} from "../actions";
 
 const initialState = {
     ingredients: [],
@@ -17,7 +18,11 @@ const initialState = {
     },
     detailIngredient: null,
     order: null,
-    count: 0
+    tabs: [
+        {tab: BUN, isActive: true},
+        {tab: SAUCE, isActive: false},
+        {tab: MAIN, isActive: false},
+    ]
 }
 
 export const rootReducer = (state = initialState, action) => {
@@ -90,6 +95,17 @@ export const rootReducer = (state = initialState, action) => {
                     ...state.cart,
                     fillings: fillings
                 }
+            }
+        case SWITCH_TAB:
+            return {
+                ...state,
+                tabs: state.tabs.map((tab) => {
+                    if (tab.tab !== action.tab) {
+                        return tab
+                    }
+
+                    return {tab: action.tab, isActive: action.isActive};
+                })
             }
         default:
             return state;

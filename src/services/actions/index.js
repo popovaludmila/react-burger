@@ -12,6 +12,15 @@ export const DELETE_INGREDIENT = 'DELETE_INGREDIENT';
 export const GET_ORDER_DATA_SUCCESS = 'SEND_DATA_SUCCESS';
 export const SEND_DATA_FAILED = 'SEND_DATA_FAILED';
 export const REPLACE_INGREDIENTS = 'REPLACE_INGREDIENTS';
+export const SWITCH_TAB = 'SWITCH_TAB';
+
+export const switchTab = (tab, isActive) => {
+    return {
+        type: SWITCH_TAB,
+        tab: tab,
+        isActive: isActive
+    }
+}
 
 export const replaceIngredient = (draggingKey, hoverKey) => {
     return {
