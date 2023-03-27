@@ -5,23 +5,24 @@ import ModalOverlay from './modal-overlay/modal-overlay';
 import { useEffect } from 'react';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDispatch } from 'react-redux';
-import { cleanCart, closeModal } from '../../services/actions';
+import { closeModal } from '../../services/actions';
 
 const modal = document.getElementById("modal");
 
-const Modal = ({children, modalTitle}) => {
+const Modal = ({children, modalTitle, onCloseClick}) => {
     const dispatch = useDispatch();
 
-    const onCloseClick = () => {
+    const onClick = () => {
+        if (onCloseClick) {
+            onCloseClick();
+        }
         dispatch(closeModal());
-
-        
     }
-console.log(document.querySelector('.order'))
+
     useEffect(() => {
         const onEscKeydown = (evt) => {
             if( evt.key === 'Escape') {
-              onCloseClick()
+                onClick()
             };
           } 
 
@@ -37,7 +38,7 @@ console.log(document.querySelector('.order'))
                 <div className={`${modalStyles.content}`}>
                     <div className={`${modalStyles.title}`}>
                         <h3 className="text text_type_main-large">{modalTitle}</h3>
-                        <button className={`${modalStyles.close}`} onClick={onCloseClick}>
+                        <button className={`${modalStyles.close}`} onClick={onClick}>
                             <CloseIcon type="primary" />
                         </button>
                     </div>
@@ -45,7 +46,7 @@ console.log(document.querySelector('.order'))
                     {children}
                 </div>
             </div>
-            <ModalOverlay onClick={onCloseClick}/>
+            <ModalOverlay onClick={onClick}/>
         </> ,
         modal
     )
@@ -53,7 +54,8 @@ console.log(document.querySelector('.order'))
 
 Modal.propTypes = {
     children: PropTypes.element.isRequired,
-    modalTitle: PropTypes.string.isRequired
+    modalTitle: PropTypes.string.isRequired,
+    onCloseClick: PropTypes.func
 }
 
  export default Modal;

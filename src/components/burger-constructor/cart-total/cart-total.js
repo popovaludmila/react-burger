@@ -13,15 +13,22 @@ const CartTotal = ({total}) => {
 
     const onOrderButtonClick = (e) => {
         e.preventDefault();
-        const orderIngredients = [
-            cart.top._id,
-            ...cart.fillings.map((ingredient) => ingredient._id),
-            cart.bottom._id,
-        ];
-
-        dispatch(createOrder({"ingredients": orderIngredients}));
-        dispatch(cleanCart());
+        
+        if(cart.top && cart.bottom ) {
+            const orderIngredients = [
+                cart.top._id,
+                ...cart.fillings.map((ingredient) => ingredient._id),
+                cart.bottom._id,
+            ];
+            dispatch(createOrder({"ingredients": orderIngredients}));
+        } else {
+            alert('ДОБАВЬТЕ БУЛКИ');
+        }
     };
+
+    const onOrderCloseClick = () => {
+        dispatch(cleanCart());
+    }
 
     return (
         <div className={`${cartTotalStyles.wrapper} pt-6`}>
@@ -31,11 +38,11 @@ const CartTotal = ({total}) => {
             </div>
             
             <Button htmlType="submit" type="primary" size="medium" onClick={onOrderButtonClick}>Оформить заказ</Button>
-            {order !== null && 
-                <Modal modalTitle={''}>
+            {order !== null &&
+                <Modal onCloseClick={onOrderCloseClick} modalTitle={''}>
                     <OrderModal orderNumber={order.id} />
                 </Modal>
-            }
+             } 
         </div>
     )
 }

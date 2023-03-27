@@ -60,13 +60,9 @@ export const addIngredientToCart = (ingredient, key) => {
 }
 
 export const cleanCart = () => {
-    return (dispatch) => {
-        setTimeout(() => {
-            dispatch({
-                type: CLEAN_CART
-            })
-        }, 1500)
-    }
+   return {
+        type: CLEAN_CART
+   }
 }
   
 export const getIngredients = () => {
