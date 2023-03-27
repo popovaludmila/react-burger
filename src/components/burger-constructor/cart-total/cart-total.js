@@ -4,7 +4,7 @@ import Modal from '../../modal/modal';
 import OrderModal from '../../modal/order-modal/order-modal';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { createOrder } from '../../../services/actions';
+import {  cleanCart, createOrder } from '../../../services/actions';
 
 const CartTotal = ({total}) => {
     const cart = useSelector(state => state.cart);
@@ -20,6 +20,7 @@ const CartTotal = ({total}) => {
         ];
 
         dispatch(createOrder({"ingredients": orderIngredients}));
+        dispatch(cleanCart());
     };
 
     return (

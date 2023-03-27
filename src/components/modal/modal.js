@@ -5,7 +5,7 @@ import ModalOverlay from './modal-overlay/modal-overlay';
 import { useEffect } from 'react';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDispatch } from 'react-redux';
-import { closeModal } from '../../services/actions';
+import { cleanCart, closeModal } from '../../services/actions';
 
 const modal = document.getElementById("modal");
 
@@ -13,9 +13,11 @@ const Modal = ({children, modalTitle}) => {
     const dispatch = useDispatch();
 
     const onCloseClick = () => {
-        dispatch(closeModal())
-    }
+        dispatch(closeModal());
 
+        
+    }
+console.log(document.querySelector('.order'))
     useEffect(() => {
         const onEscKeydown = (evt) => {
             if( evt.key === 'Escape') {

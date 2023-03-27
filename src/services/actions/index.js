@@ -13,6 +13,7 @@ export const GET_ORDER_DATA_SUCCESS = 'SEND_DATA_SUCCESS';
 export const SEND_DATA_FAILED = 'SEND_DATA_FAILED';
 export const REPLACE_INGREDIENTS = 'REPLACE_INGREDIENTS';
 export const SWITCH_TAB = 'SWITCH_TAB';
+export const CLEAN_CART = 'CLEAN_CART';
 
 export const switchTab = (tab, isActive) => {
     return {
@@ -57,6 +58,16 @@ export const addIngredientToCart = (ingredient, key) => {
         key: key
     }
 }
+
+export const cleanCart = () => {
+    return (dispatch) => {
+        setTimeout(() => {
+            dispatch({
+                type: CLEAN_CART
+            })
+        }, 1500)
+    }
+}
   
 export const getIngredients = () => {
     return function(dispatch) {
@@ -87,15 +98,6 @@ export const createOrder = (body) => {
               },
               body: JSON.stringify(body)
           })
-        // fetch(URL_SEND,
-        //     {
-        //       method: 'POST',
-        //       headers: {
-        //         "Content-Type": "application/json",
-        //         },
-        //         body: JSON.stringify(body)
-        //     }
-        // ).then(checkResponse)
         .then((data) => {
             dispatch({
                 type: GET_ORDER_DATA_SUCCESS,

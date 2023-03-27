@@ -7,7 +7,8 @@ import { GET_INGREDIENTS_DATA_SUCCESS,
     GET_ORDER_DATA_SUCCESS,
     DELETE_INGREDIENT,
     REPLACE_INGREDIENTS,
-    SWITCH_TAB} from "../actions";
+    SWITCH_TAB,
+    CLEAN_CART} from "../actions";
 
 const initialState = {
     ingredients: [],
@@ -106,6 +107,15 @@ export const rootReducer = (state = initialState, action) => {
 
                     return {tab: action.tab, isActive: action.isActive};
                 })
+            }
+        case CLEAN_CART: 
+            return {
+                ...state,
+                cart: {
+                    top: null,
+                    fillings: [],
+                    bottom: null,
+                }
             }
         default:
             return state;
