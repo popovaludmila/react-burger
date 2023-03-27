@@ -3,7 +3,6 @@ import cartTotalStyles from './cart-total.module.css';
 import Modal from '../../modal/modal';
 import OrderModal from '../../modal/order-modal/order-modal';
 import PropTypes from 'prop-types';
-import { cartPropTypes } from '../../../utils/prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { createOrder } from '../../../services/actions';
 
@@ -11,8 +10,6 @@ const CartTotal = ({total}) => {
     const cart = useSelector(state => state.cart);
     const dispatch = useDispatch();
     const order = useSelector(state => state.order);
-
-    
 
     const onOrderButtonClick = (e) => {
         e.preventDefault();

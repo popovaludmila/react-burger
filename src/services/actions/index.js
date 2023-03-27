@@ -1,4 +1,5 @@
-import { URL, URL_SEND } from "../../utils/data";
+import { BASE_URL} from "../../utils/data";
+import { request } from "../../utils/data-api";
 
 export const GET_INGREDIENTS_DATA_SUCCESS = 'GET_INGREDIENTS_DATA_SUCCESS';
 export const GET_INGREDIENTS_DATA_FAILED = 'GET_INGREDIENTS_DATA_FAILED';
@@ -47,17 +48,10 @@ export const addIngredientToCart = (ingredient, key) => {
         key: key
     }
 }
-
+  
 export const getIngredients = () => {
     return function(dispatch) {
-        fetch(URL)
-            .then((response) => {
-                if (response.ok) {
-                    return response.json();
-                }
-
-                throw new Error(`${response.status} ${response.statusText}`);
-            })
+        request(`${BASE_URL}/ingredients`)
             .then((data) => {
                 dispatch({
                     type: GET_INGREDIENTS_DATA_SUCCESS,
@@ -77,21 +71,23 @@ export const getIngredients = () => {
 
 export const createOrder = (body) => {
     return (dispatch) => {
-        fetch(URL_SEND,
-            {
-              method: 'POST',
-              headers: {
-                "Content-Type": "application/json",
-                },
-                body: JSON.stringify(body)
-            }
-        ).then((response) => {
-            if (response.ok) {
-              return response.json();
-            }
-            throw new Error(`${response.status} ${response.statusText}`);
-
-        }).then((data) => {
+        request(`${BASE_URL}/orders`, {
+            method: 'POST',
+            headers: {
+              "Content-Type": "application/json",
+              },
+              body: JSON.stringify(body)
+          })
+        // fetch(URL_SEND,
+        //     {
+        //       method: 'POST',
+        //       headers: {
+        //         "Content-Type": "application/json",
+        //         },
+        //         body: JSON.stringify(body)
+        //     }
+        // ).then(checkResponse)
+        .then((data) => {
             dispatch({
                 type: GET_ORDER_DATA_SUCCESS,
                 order: data.order
