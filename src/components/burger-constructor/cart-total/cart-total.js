@@ -1,36 +1,34 @@
-import { useState } from 'react';
 import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import cartTotalStyles from './cart-total.module.css';
 import Modal from '../../modal/modal';
 import OrderModal from '../../modal/order-modal/order-modal';
 import PropTypes from 'prop-types';
-import { sendData } from '../../../utils/data-api';
-import { cartPropTypes } from '../../../utils/prop-types';
+import { useDispatch, useSelector } from 'react-redux';
+import {  cleanCart, createOrder } from '../../../services/actions';
 
-const CartTotal = ({total, cart}) => {
-    const [showOrderModal, setShowOrderModal] = useState(false);
-    const [orderNumber, setOrderNumber] = useState("");
+const CartTotal = ({total}) => {
+    const cart = useSelector(state => state.cart);
+    const dispatch = useDispatch();
+    const order = useSelector(state => state.order);
 
     const onOrderButtonClick = (e) => {
         e.preventDefault();
-
-        const orderIngredients = [
-            cart.top._id,
-            ...cart.fillings.map((ingredient) => ingredient._id),
-            cart.bottom._id,
-        ];
-       
-        sendData({"ingredients": orderIngredients})
-            .then((data) => {
-                setOrderNumber(data.order.number);
-                setShowOrderModal(true);
-            })
-            .catch(alert);
+        
+        if(cart.top && cart.bottom ) {
+            const orderIngredients = [
+                cart.top._id,
+                ...cart.fillings.map((ingredient) => ingredient._id),
+                cart.bottom._id,
+            ];
+            dispatch(createOrder({"ingredients": orderIngredients}));
+        } else {
+            alert('ДОБАВЬТЕ БУЛКИ');
+        }
     };
 
-    const onCloseClick= () => {
-        setShowOrderModal(false);
-    };
+    const onOrderCloseClick = () => {
+        dispatch(cleanCart());
+    }
 
     return (
         <div className={`${cartTotalStyles.wrapper} pt-6`}>
@@ -40,18 +38,17 @@ const CartTotal = ({total, cart}) => {
             </div>
             
             <Button htmlType="submit" type="primary" size="medium" onClick={onOrderButtonClick}>Оформить заказ</Button>
-            {showOrderModal && 
-                <Modal onOverlayClick={onCloseClick} onCloseClick={onCloseClick} modalTitle={''}>
-                    <OrderModal orderNumber={orderNumber} />
+            {order !== null &&
+                <Modal onCloseClick={onOrderCloseClick} modalTitle={''}>
+                    <OrderModal orderNumber={order.id} />
                 </Modal>
-            }
+             } 
         </div>
     )
 }
 
 CartTotal.propTypes = {
     total: PropTypes.number.isRequired,
-    cart: cartPropTypes.isRequired
 }
 
 

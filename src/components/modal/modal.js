@@ -4,15 +4,25 @@ import PropTypes from 'prop-types';
 import ModalOverlay from './modal-overlay/modal-overlay';
 import { useEffect } from 'react';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { useDispatch } from 'react-redux';
+import { closeModal } from '../../services/actions';
 
 const modal = document.getElementById("modal");
 
-const Modal = ({children, onOverlayClick, onCloseClick, modalTitle}) => {
+const Modal = ({children, modalTitle, onCloseClick}) => {
+    const dispatch = useDispatch();
+
+    const onClick = () => {
+        if (onCloseClick) {
+            onCloseClick();
+        }
+        dispatch(closeModal());
+    }
 
     useEffect(() => {
         const onEscKeydown = (evt) => {
             if( evt.key === 'Escape') {
-              onCloseClick()
+                onClick()
             };
           } 
 
@@ -28,7 +38,7 @@ const Modal = ({children, onOverlayClick, onCloseClick, modalTitle}) => {
                 <div className={`${modalStyles.content}`}>
                     <div className={`${modalStyles.title}`}>
                         <h3 className="text text_type_main-large">{modalTitle}</h3>
-                        <button className={`${modalStyles.close}`} onClick={onCloseClick}>
+                        <button className={`${modalStyles.close}`} onClick={onClick}>
                             <CloseIcon type="primary" />
                         </button>
                     </div>
@@ -36,7 +46,7 @@ const Modal = ({children, onOverlayClick, onCloseClick, modalTitle}) => {
                     {children}
                 </div>
             </div>
-            <ModalOverlay onClick={onOverlayClick}/>
+            <ModalOverlay onClick={onClick}/>
         </> ,
         modal
     )
@@ -44,9 +54,8 @@ const Modal = ({children, onOverlayClick, onCloseClick, modalTitle}) => {
 
 Modal.propTypes = {
     children: PropTypes.element.isRequired,
-    onOverlayClick: PropTypes.func.isRequired,
-    onCloseClick: PropTypes.func.isRequired,
-    modalTitle: PropTypes.string.isRequired
+    modalTitle: PropTypes.string.isRequired,
+    onCloseClick: PropTypes.func
 }
 
  export default Modal;

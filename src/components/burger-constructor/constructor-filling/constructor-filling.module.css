@@ -2,8 +2,6 @@
     position: relative;
     display: flex;
    justify-content: flex-end;
-    
-
 }
 
 .ingredient:last-child {

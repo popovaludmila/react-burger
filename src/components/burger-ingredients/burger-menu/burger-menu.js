@@ -1,17 +1,8 @@
-import {useState} from "react";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import burgerMenuStyles from './burger-menu.module.css';
 import { BUN, MAIN, SAUCE } from "../../../utils/data";
 
-const BurgerMenu = () => {
-    const [currentTab, setCurrentTab] = useState(BUN);
-
-    const onTabClick = (tab) => {
-        const activeTab = document.getElementById(tab)
-        setCurrentTab(tab);
-
-        activeTab.scrollIntoView({behavior:"smooth"});
-    }
+const BurgerMenu = ({onTabClick, currentTab}) => {
 
     return (
         <nav>

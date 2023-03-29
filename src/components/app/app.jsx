@@ -3,50 +3,19 @@ import BurgerIngredients from "../burger-ingredients/burger-ingredients";
 import BurgerConstructor from "../burger-constructor/burger-constructor";
 import appStyles from './app.module.css';
 
-import { getIngredientData } from '../../utils/data-api.js';
-
-import { useState, useEffect} from 'react';
-import { BUN } from '../../utils/data';
-import { IngredientsDataContext } from '../../utils/context.js';
+import { useDispatch } from 'react-redux';
+import { useEffect} from 'react';
+import { getIngredients } from '../../services/actions';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 
 const App = () => {
-
-  const [ingredientsData, setIngredientsData] = useState([]);
   
-
-  useEffect(() => {
-    getIngredientData(
-      (data) => {
-        if (data["data"]) {
-          setIngredientsData([...ingredientsData, ...data["data"]]);
-        }
-      }).catch((error) => alert(error));
-  }, []);
-  
-  const [cart, setCart] = useState({
-    top: {},
-    fillings: [],
-    bottom: {}
-  })
-
-  const onItemClick = (item) => {
-      if(item.type === BUN) {
-        setCart({
-          ...cart,
-          top: item,
-          bottom: item
-        })
-      } else {
-        setCart({
-          ...cart, 
-          fillings: [...cart.fillings, item],
-        })
-      }
-
-     
-  }
-
-
+  const dispatch = useDispatch();
+ 
+  useEffect(()=> {
+      dispatch(getIngredients())
+  }, [dispatch])
 
   return (
     <>
@@ -54,10 +23,10 @@ const App = () => {
       <main>
             <div className="container">
                 <div className={appStyles.main}>
-                    <IngredientsDataContext.Provider value={[ingredientsData]}>
-                      <BurgerIngredients cart={cart} onItemClick={onItemClick}/>
-                      <BurgerConstructor cart={cart} />
-                    </IngredientsDataContext.Provider>
+                  <DndProvider backend={HTML5Backend}>
+                      <BurgerIngredients />
+                      <BurgerConstructor /> 
+                  </DndProvider>
                 </div>
             </div>
         </main>

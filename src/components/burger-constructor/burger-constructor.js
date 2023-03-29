@@ -2,32 +2,66 @@ import burgerConstructorStyles from "./burger-constructor.module.css";
 import CartTotal from './cart-total/cart-total';
 import ConstructorFilling from "./constructor-filling/constructor-filling";
 import ConstructorIngredient from './constructor-ingredient/constructor-ingredient.js';
-import { cartPropTypes } from "../../utils/prop-types";
 import uuid from 'react-uuid';
+import { useDispatch, useSelector } from "react-redux";
+import { BurgerSample } from "./burger-sample/burger-sample";
+import { useDrop } from "react-dnd";
+import { addIngredientToCart } from "../../services/actions";
+import { BUN } from "../../utils/data";
 
-const BurgerConstructor = ({cart}) => {
+const BurgerConstructor = () => {
+    const dispatch = useDispatch()
+    
+    const [{isHover, monitorItem}, dropRef] = useDrop({
+        accept: "ingredient",
+        drop(item) {
+            dispatch(addIngredientToCart(item, uuid()));
+        },
+        collect: monitor => ({
+            isHover: monitor.isOver(),
+            monitorItem: monitor.getItem(),
+        })     
+    })
 
+    const isBun = monitorItem && monitorItem.type === BUN;
+
+    const cart = useSelector(state => state.cart);
+   
     const constructorIngredient = cart.fillings.map((item) => (
-        <ConstructorFilling key={uuid()} item={item} />
+        <ConstructorFilling key={item.key} item={item} />
     ));
 
-    let total = (cart.top.price ?? 0) + (cart.bottom.price ?? 0);
+    const hasIngredients = constructorIngredient.length > 0;
+
+    let total = 0;
+
+    if (cart.top !== null) {
+        total += cart.top.price
+    }
+
+    if (cart.bottom !== null) {
+        total += cart.bottom.price
+    }
 
     cart.fillings.forEach((item) => (total += item.price));
+    
 
     return (
         <section className={`${burgerConstructorStyles.constructor} mb-26`}>
         <div className={`${burgerConstructorStyles.wrapper} mt-25`}>
-            <ul className={burgerConstructorStyles.list}>
-                {cart.top.name && <ConstructorIngredient key={uuid()} item={cart.top} type={"top"}/>}
+            <ul className={burgerConstructorStyles.list} ref={dropRef} >
+                {(cart.top && <ConstructorIngredient item={cart.top} type={"top"} typeBun={"вверx"} />) || 
+                    <BurgerSample text={"Добавить булки"} margin={"mb-4"}  isHover={isBun && isHover}/>} 
+               
                 
                 <li className={`${burgerConstructorStyles.item} pr-2`}>
-                    <ul className={`${burgerConstructorStyles.filling}`}>
-                        {constructorIngredient}
+                    <ul className={`${burgerConstructorStyles.fillings}`}>
+                        {hasIngredients ? constructorIngredient : <BurgerSample text={"Добавить начинку"} margin="" isHover={!isBun && isHover}/>} 
                     </ul>
                 </li>
                 
-                {cart.bottom.name && <ConstructorIngredient key={uuid()} item={cart.bottom} type={"bottom"}/>}
+                {(cart.bottom && <ConstructorIngredient item={cart.bottom} type={"bottom"} typeBun={"низ"}/>) ||
+                    <BurgerSample text={"Добавить булки"} margin={"mt-4"} isHover={isBun && isHover} />}
             </ul>
 
             
@@ -37,10 +71,6 @@ const BurgerConstructor = ({cart}) => {
         </div>
         </section>
     )
-}
-
-BurgerConstructor.propTypes = {
-    cart: cartPropTypes.isRequired
 }
 
 export default BurgerConstructor;

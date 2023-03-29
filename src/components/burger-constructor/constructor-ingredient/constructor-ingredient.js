@@ -3,14 +3,15 @@ import constructorIngredientStyles from './constructor-ingredient.module.css';
 import PropTypes from 'prop-types';
 import {ingredientPropTypes} from '../../../utils/prop-types.js';
 
-const ConstructorIngredient = ({item, type}) => {
+const ConstructorIngredient = ({item, type, typeBun}) => {
+    const {name, price, image} = item;
     return (
     <li className={`${constructorIngredientStyles.ingredient} mb-4 mr-4 mt-4`}> 
         <ConstructorElement
-            text={item.name}
+            text={`${name} (${typeBun})`}
             type={type}
-            price={item.price}
-            thumbnail={item.image}
+            price={price}
+            thumbnail={image}
             isLocked={true}
         />
     </li>
@@ -19,7 +20,8 @@ const ConstructorIngredient = ({item, type}) => {
 
 ConstructorIngredient.propTypes = {
     item: ingredientPropTypes.isRequired,
-    type: PropTypes.string.isRequired
+    type: PropTypes.string.isRequired,
+    typeBun: PropTypes.string.isRequired
 }
 
 export default ConstructorIngredient;
