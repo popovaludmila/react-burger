@@ -4,7 +4,6 @@ import {ProfileIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import {Logo} from '@ya.praktikum/react-developer-burger-ui-components';
 import { Outlet } from 'react-router-dom';
 
-import '../../index.css'
 import headerStyles from './header.module.css';
 
 const Header = () => {

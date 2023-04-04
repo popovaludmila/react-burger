@@ -2,7 +2,8 @@ import { useDispatch } from 'react-redux';
 import { useEffect} from 'react';
 import { getIngredients } from '../../services/actions';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { HomePage } from '../../pages';
+import { HomePage, LoginPage } from '../../pages';
+import Header from '../header/header';
 
 const App = () => {
   
@@ -15,7 +16,10 @@ const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/"  element={<HomePage/>}/>
+        <Route path="/" element={<Header />}>
+          <Route index element={<HomePage />} />
+          <Route path="login" element={<LoginPage />} />
+        </Route>
       </Routes>
     </BrowserRouter>
 

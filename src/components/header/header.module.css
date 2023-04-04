@@ -24,7 +24,7 @@
     display: flex;
     width: 290px;
     height: auto;
-    transform: translateX(-50%);
+    transform: translateX(-30%);
 }
 
 .button {
