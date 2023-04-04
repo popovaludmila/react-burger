@@ -3,55 +3,57 @@ import { useState } from 'react';
 import registerStyles from './register.module.css';
 
 export const RegisterPage = () => {
-    const [password, setPassword] = useState('');
-    const [email, setEmail] = useState('');
-    const [value, setValue] = useState('');
+    const [form, setValue] = useState({ 
+        firstName: '',
+        email: '', 
+        password: '', 
+    });
 
-    const onPasswordChange = e => {
-        setPassword(e.target.value)
-    }
-
-    const onEmailChange = e => {
-        setEmail(e.target.value)
-    }
+   const onChange = e => {
+    setValue({ ...form, [e.target.name]: e.target.value });
+  };
+    
 
     return (
         <>
             <div className={registerStyles.wrapper}>
-                <h2 className='text text_type_main-medium mb-6'>Регистрация</h2>
+                <form className={registerStyles.form}>
+                    <h2 className='text text_type_main-medium mb-6'>Регистрация</h2>
                     <div className="mb-6">
                         <Input
                         type={'text'}
                         placeholder={'Имя'}
-                        onChange={e => setValue(e.target.value)}
-                        value={value}
-                        
+                        onChange={onChange}
+                        value={form.firstName}
+                        name="firstName"
                         />
                     </div>
                     <div className="mb-6">
                         <EmailInput
-                        name={'email'}
+                        name='email'
                         isIcon={false}
-                        value={email}
-                        onChange={onEmailChange}
+                        value={form.email}
+                        onChange={onChange}
                         />  
                     </div>
                     <div className="mb-6">
                         <PasswordInput
-                        onChange={onPasswordChange}
-                        name={'password'}
+                        onChange={onChange}
+                        name='password'
                         icon="ShowIcon"
-                        value={password}
+                        value={form.password}
                         />   
                     </div>
                     <Button htmlType="button" type="primary" size="medium">
                         Зарегистрироваться
                     </Button>
-                    <p className="text text_type_main-default text_color_inactive pt-20">
+                </form>
+               
+                <p className="text text_type_main-default text_color_inactive pt-20">
                         Уже зарегистрированы?
                         <a className={`${registerStyles.link} pl-2`} href='1'>Войти</a>
-                    </p>
-                </div>
+                </p>
+            </div>
         </>
     )
 }

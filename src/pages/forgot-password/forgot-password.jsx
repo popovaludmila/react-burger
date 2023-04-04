@@ -3,30 +3,34 @@ import { useState } from 'react';
 import forgotPasswordStyles from './forgot-password.module.css';
 
 export const ForgotPasswordPage = () => {
-    const [email, setEmail] = useState('');
+    const [form, setValue] = useState({ 
+        email: ''
+    });
 
-    const onEmailChange = e => {
-        setEmail(e.target.value)
-    }
+   const onChange = e => {
+    setValue({ ...form, [e.target.name]: e.target.value });
+  };
 
 
 
     return (
         <>
             <div className={forgotPasswordStyles.wrapper}>
-                <h2 className='text text_type_main-medium mb-6'>Восстановление пароля</h2>
+                <form className={forgotPasswordStyles.form}>
+                    <h2 className='text text_type_main-medium mb-6'>Восстановление пароля</h2>
                     <div className="mb-6">
                         <EmailInput
-                        name={'email'}
+                        name='email'
                         isIcon={false}
-                        value={email}
-                        onChange={onEmailChange}
+                        value={form.email}
+                        onChange={onChange}
                         placeholder={'Укажите e-mail'}
                         />  
                     </div>
                     <Button htmlType="button" type="primary" size="medium">
                         Восстановить
                     </Button>
+                </form>
                     <p className="text text_type_main-default text_color_inactive pt-20">
                         Вспомнили пароль?
                         <a className={`${forgotPasswordStyles.link} pl-2`} href='1'>Войти</a>

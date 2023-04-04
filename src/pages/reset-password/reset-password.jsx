@@ -3,23 +3,27 @@ import { useState } from 'react';
 import resetPasswordStyles from './reset-password.module.css';
 
 export const ResetPasswordPage = () => {
-    const [password, setPassword] = useState('');
-    const [value, setValue] = useState('');
+    const [form, setValue] = useState({ 
+        password: '', 
+        code: ''
+    });
 
-    const onPasswordChange = e => {
-        setPassword(e.target.value)
-    }
+   const onChange = e => {
+    setValue({ ...form, [e.target.name]: e.target.value });
+  };
+    
 
     return (
         <>
             <div className={resetPasswordStyles.wrapper}>
-                <h2 className='text text_type_main-medium mb-6'>Восстановление пароля</h2>
+                <form className={resetPasswordStyles.form}>
+                    <h2 className='text text_type_main-medium mb-6'>Восстановление пароля</h2>
                     <div className="mb-6">
                         <PasswordInput
-                        onChange={onPasswordChange}
-                        name={'password'}
+                        onChange={onChange}
+                        name='password'
                         icon="ShowIcon"
-                        value=''
+                        value={form.password}
                         placeholder='Введите новый пароль'
                         />   
                     </div>
@@ -27,14 +31,15 @@ export const ResetPasswordPage = () => {
                         <Input
                         type={'text'}
                         placeholder={'Введите код из письма'}
-                        onChange={e => setValue(e.target.value)}
-                        value={value}
-                        
+                        onChange={onChange}
+                        value={form.code}
+                        name="code"
                         />
                     </div>
                     <Button htmlType="button" type="primary" size="medium">
                         Сохранить
                     </Button>
+                </form>
                     <p className="text text_type_main-default text_color_inactive pt-20">
                         Вспомнили пароль?
                         <a className={`${resetPasswordStyles.link} pl-2`} href='1'>Войти</a>

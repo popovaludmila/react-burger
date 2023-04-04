@@ -1,21 +1,28 @@
 .wrapper {
     position: absolute;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
-    align-items: center;
-    min-width: 480px;
+    align-items: flex-start;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    word-wrap: break-word;
 }
 
-.form {
+.nav {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    max-width: 320px;
 }
-.link {
-    color: #4C4CFF;
+
+.item {
+    display: flex;
+    align-items: center;
+    height: 64px;
+   
+}
+
+.caption {
+    opacity: 0.4;
 }
