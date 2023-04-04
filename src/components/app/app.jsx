@@ -2,7 +2,7 @@ import { useDispatch } from 'react-redux';
 import { useEffect} from 'react';
 import { getIngredients } from '../../services/actions';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { HomePage, LoginPage } from '../../pages';
+import { HomePage, LoginPage, RegisterPage } from '../../pages';
 import Header from '../header/header';
 
 const App = () => {
@@ -19,6 +19,7 @@ const App = () => {
         <Route path="/" element={<Header />}>
           <Route index element={<HomePage />} />
           <Route path="login" element={<LoginPage />} />
+          <Route path="register" element={<RegisterPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
