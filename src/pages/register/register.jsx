@@ -1,5 +1,6 @@
 import { Button, EmailInput, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import registerStyles from './register.module.css';
 
 export const RegisterPage = () => {
@@ -51,7 +52,7 @@ export const RegisterPage = () => {
                
                 <p className="text text_type_main-default text_color_inactive pt-20">
                         Уже зарегистрированы?
-                        <a className={`${registerStyles.link} pl-2`} href='1'>Войти</a>
+                        <Link to="/login" className={`${registerStyles.link} pl-2`} >Войти</Link>
                 </p>
             </div>
         </>

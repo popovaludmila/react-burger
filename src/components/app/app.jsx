@@ -20,7 +20,7 @@ const App = () => {
           <Route index element={<HomePage />} />
           <Route path="login" element={<LoginPage />} />
           <Route path="register" element={<RegisterPage />} />
-          <Route path="forgotPassword" element={<ForgotPasswordPage />} />
+          <Route path="forgot-password" element={<ForgotPasswordPage />} />
           <Route path="resetPassword" element={<ResetPasswordPage />} />
           <Route path="profile" element={<ProfilePage />} />
         </Route>

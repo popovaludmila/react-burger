@@ -2,7 +2,7 @@ import { BurgerIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import {ListIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import {ProfileIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import {Logo} from '@ya.praktikum/react-developer-burger-ui-components';
-import { Outlet } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 
 import headerStyles from './header.module.css';
 
@@ -37,10 +37,10 @@ const Header = () => {
                         </a>
                         
                         <div className={headerStyles.item}> 
-                            <button className={`${headerStyles.button}`}>
+                            <Link to="/profile" className={`${headerStyles.button}`}>
                                 <ProfileIcon type="secondary" />
                                 <span className={`${headerStyles.profile} text text_type_main-default p-4 pl-2 text_color_inactive`}>Личный кабинет</span>
-                            </button>
+                            </Link>
                         </div>
                     </div>
                 </div>
