@@ -1,22 +1,39 @@
 import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useState } from 'react';
+import { BASE_URL } from '../../utils/data';
+import { request } from '../../utils/data-api';
 import resetPasswordStyles from './reset-password.module.css';
 
 export const ResetPasswordPage = () => {
     const [form, setValue] = useState({ 
         password: '', 
-        code: ''
+        token: ''
     });
 
-   const onChange = e => {
-    setValue({ ...form, [e.target.name]: e.target.value });
-  };
-    
+    const onChange = e => {
+        setValue({ ...form, [e.target.name]: e.target.value });
+    };
+
+    const onSubmit = e => {
+        e.preventDefault();
+
+        request(`${BASE_URL}/password-reset/reset`, {
+            method: 'POST',
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(form)
+        }).then((data) =>{
+            if (data.success) {
+                console.log(data);
+            }
+        }).catch((err) => {
+            alert(err);
+        });
+    }
 
     return (
         <>
             <div className={resetPasswordStyles.wrapper}>
-                <form className={resetPasswordStyles.form}>
+                <form className={resetPasswordStyles.form} onSubmit={onSubmit}>
                     <h2 className='text text_type_main-medium mb-6'>Восстановление пароля</h2>
                     <div className="mb-6">
                         <PasswordInput
@@ -32,11 +49,11 @@ export const ResetPasswordPage = () => {
                         type={'text'}
                         placeholder={'Введите код из письма'}
                         onChange={onChange}
-                        value={form.code}
+                        value={form.token}
                         name="code"
                         />
                     </div>
-                    <Button htmlType="button" type="primary" size="medium">
+                    <Button htmlType="submit" type="primary" size="medium">
                         Сохранить
                     </Button>
                 </form>

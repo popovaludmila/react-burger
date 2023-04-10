@@ -1,6 +1,5 @@
 import { BUN, MAIN, SAUCE } from "../../utils/data";
-import { GET_INGREDIENTS_DATA_SUCCESS, 
-    GET_INGREDIENTS_DATA_FAILED, 
+import { GET_INGREDIENTS_DATA_SUCCESS,  
     SHOW_DETAIL_INGREDIENT, 
     CLOSE_MODAL, 
     ADD_INGREDIENT_TO_CART,
@@ -8,7 +7,10 @@ import { GET_INGREDIENTS_DATA_SUCCESS,
     DELETE_INGREDIENT,
     REPLACE_INGREDIENTS,
     SWITCH_TAB,
-    CLEAN_CART} from "../actions";
+    CLEAN_CART,
+    LOGIN_SUCCESS,
+    ACTION_FAILED,
+    SET_USER} from "../actions";
 
 const initialState = {
     ingredients: [],
@@ -23,7 +25,13 @@ const initialState = {
         {tab: BUN, isActive: true},
         {tab: SAUCE, isActive: false},
         {tab: MAIN, isActive: false},
-    ]
+    ],
+    user: {
+        email: null, 
+        name: null,
+        token: null
+   }
+
 }
 
 export const rootReducer = (state = initialState, action) => {
@@ -33,7 +41,7 @@ export const rootReducer = (state = initialState, action) => {
                 ...state,
                 ingredients: action.ingredients
             }
-        case GET_INGREDIENTS_DATA_FAILED:
+        case ACTION_FAILED:
             return state;
         case SHOW_DETAIL_INGREDIENT:
             return {
@@ -115,6 +123,24 @@ export const rootReducer = (state = initialState, action) => {
                     top: null,
                     fillings: [],
                     bottom: null,
+                }
+            }
+        case SET_USER:
+            return {
+                ...state,
+                user: {
+                    email: action.data.email,
+                    name: action.data.name,
+                    token: action.data.accessToken
+                }
+            }
+        case LOGIN_SUCCESS:
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    email: action.data.email,
+                    name: action.data.name
                 }
             }
         default:

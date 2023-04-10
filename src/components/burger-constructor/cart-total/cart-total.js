@@ -20,7 +20,7 @@ const CartTotal = ({total}) => {
                 ...cart.fillings.map((ingredient) => ingredient._id),
                 cart.bottom._id,
             ];
-            dispatch(createOrder({"ingredients": orderIngredients}));
+            dispatch(createOrder(orderIngredients));
         } else {
             alert('ДОБАВЬТЕ БУЛКИ');
         }

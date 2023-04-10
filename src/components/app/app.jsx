@@ -1,9 +1,10 @@
 import { useDispatch } from 'react-redux';
 import { useEffect} from 'react';
 import { getIngredients } from '../../services/actions';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { ForgotPasswordPage, HomePage, LoginPage, ProfilePage, RegisterPage, ResetPasswordPage } from '../../pages';
+import { Route, Routes } from 'react-router-dom';
+import { ForgotPasswordPage, HomePage, LoginPage, OrdersPage, ProfilePage, RegisterPage, ResetPasswordPage } from '../../pages';
 import Header from '../header/header';
+import { ProfileNav } from '../profile-nav/profile-nav';
 
 const App = () => {
   
@@ -14,18 +15,19 @@ const App = () => {
   }, [dispatch])
 
   return (
-    <BrowserRouter>
       <Routes>
         <Route path="/" element={<Header />}>
           <Route index element={<HomePage />} />
           <Route path="login" element={<LoginPage />} />
           <Route path="register" element={<RegisterPage />} />
           <Route path="forgot-password" element={<ForgotPasswordPage />} />
-          <Route path="resetPassword" element={<ResetPasswordPage />} />
-          <Route path="profile" element={<ProfilePage />} />
+          <Route path="reset-password" element={<ResetPasswordPage />} />
+          <Route path="profile" element={<ProfileNav />} >
+            <Route index element={<ProfilePage />} />
+            <Route path="orders" element={<OrdersPage />} />
+          </Route>
         </Route>
       </Routes>
-    </BrowserRouter>
 
   );
 }
