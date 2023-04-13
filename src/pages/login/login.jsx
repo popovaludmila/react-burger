@@ -1,9 +1,14 @@
 import { Button, EmailInput, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import { login } from '../../services/actions';
 import loginStyles from './login.module.css';
 
 export const LoginPage = () => {
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
     const [form, setValue] = useState({ 
         email: '', 
         password: '', 
@@ -13,12 +18,20 @@ export const LoginPage = () => {
     setValue({ ...form, [e.target.name]: e.target.value });
   };
     
+  const onFormSubmit = e => {
+    e.preventDefault();
+    const user = {
+        email: form.email,
+        password: form.password
+    }
+    dispatch(login(user, () => navigate('/')));
+}
 
 
     return (
         <>
             <div className={loginStyles.wrapper}>
-                <form className={loginStyles.form}>
+                <form className={loginStyles.form} onSubmit={onFormSubmit}>
                     <h2 className='text text_type_main-medium mb-6'>Вход</h2>
                     <div className="mb-6">
                         <EmailInput
@@ -36,7 +49,7 @@ export const LoginPage = () => {
                         value={form.password}
                         />   
                     </div>
-                    <Button htmlType="button" type="primary" size="medium">
+                    <Button htmlType="submit" type="primary" size="medium">
                         Войти
                     </Button>
                 </form>

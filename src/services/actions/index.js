@@ -1,5 +1,5 @@
-import { BASE_URL} from "../../utils/data";
-import { loginRequest, request, setCookie } from "../../utils/data-api";
+import { BASE_URL } from "../../utils/data";
+import { request } from "../../utils/data-api";
 
 export const GET_INGREDIENTS_DATA_SUCCESS = 'GET_INGREDIENTS_DATA_SUCCESS';
 export const SHOW_DETAIL_INGREDIENT = 'SHOW_DETAIL_INGREDIENT';
@@ -127,6 +127,7 @@ export const register = (user, onSuccess) => {
                     type: SET_USER,
                     data: data
                 })
+                localStorage.setItem('refreshToken', data.refreshToken)
                 onSuccess();
             }
         }).catch((err) => {
@@ -138,10 +139,10 @@ export const register = (user, onSuccess) => {
     }
 }
 
-export const login = (body) => {
 
+export const login = (email, password, onSuccess) => {
     return (dispatch) => {
-        loginRequest(`${BASE_URL}/auth/login`, {
+        fetch(`${BASE_URL}/auth/login`, {
             method: 'POST',
             mode: 'cors',
             cache: 'no-cache',
@@ -151,7 +152,7 @@ export const login = (body) => {
             },
             redirect: 'follow',
             referrerPolicy: 'no-referrer',
-            body: JSON.stringify(body)
+            body: JSON.stringify(email, password)
         }).then((res) =>{
             let authToken;
             res.headers.forEach(header => {
@@ -160,14 +161,17 @@ export const login = (body) => {
                 }
             })
             if (authToken) {
-                setCookie('token', authToken);
+                localStorage.setItem('accessToken')
             }
-            return res.json();
+            return res.json();   
         }).then((data) => {
-            dispatch({
-                type: LOGIN_SUCCESS,
-                data: data
-            })
+            if(data.success) {
+                dispatch({
+                    type: SET_USER,
+                    data: data
+                })
+                onSuccess();
+            }
         }).catch((err) => {
             dispatch({
                 type: ACTION_FAILED,
@@ -176,4 +180,3 @@ export const login = (body) => {
         })
     }
 }
-

@@ -129,8 +129,9 @@ export const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 user: {
-                    email: action.data.email,
-                    name: action.data.name,
+                    ...state.user,
+                    email: action.data.user.email,
+                    name: action.data.user.name,
                     token: action.data.accessToken
                 }
             }
@@ -139,8 +140,9 @@ export const rootReducer = (state = initialState, action) => {
                 ...state,
                 user: {
                     ...state.user,
-                    email: action.data.email,
-                    name: action.data.name
+                    email: action.data.user.email,
+                    name: action.data.user.name,
+                    token: action.data.accessToken
                 }
             }
         default:
