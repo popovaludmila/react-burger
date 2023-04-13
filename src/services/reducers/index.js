@@ -10,7 +10,8 @@ import { GET_INGREDIENTS_DATA_SUCCESS,
     CLEAN_CART,
     LOGIN_SUCCESS,
     ACTION_FAILED,
-    SET_USER} from "../actions";
+    SET_USER,
+    LOGOUT_SUCCESS} from "../actions";
 
 const initialState = {
     ingredients: [],
@@ -29,7 +30,6 @@ const initialState = {
     user: {
         email: null, 
         name: null,
-        token: null
    }
 
 }
@@ -132,7 +132,6 @@ export const rootReducer = (state = initialState, action) => {
                     ...state.user,
                     email: action.data.user.email,
                     name: action.data.user.name,
-                    token: action.data.accessToken
                 }
             }
         case LOGIN_SUCCESS:
@@ -142,7 +141,14 @@ export const rootReducer = (state = initialState, action) => {
                     ...state.user,
                     email: action.data.user.email,
                     name: action.data.user.name,
-                    token: action.data.accessToken
+                }
+            }
+        case LOGOUT_SUCCESS:
+            return {
+                ...state,
+                user: {
+                    email: null,
+                    name: null
                 }
             }
         default:
