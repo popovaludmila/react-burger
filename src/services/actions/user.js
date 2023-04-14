@@ -48,7 +48,7 @@ export const login = (email, password, onSuccess) => {
             },
             redirect: 'follow',
             referrerPolicy: 'no-referrer',
-            body: JSON.stringify(email, password)
+            body: JSON.stringify({email, password})
         }).then((data) => {
             if(data.success) {
                 dispatch({

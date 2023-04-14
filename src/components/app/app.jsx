@@ -6,10 +6,10 @@ import { ForgotPasswordPage, HomePage, LoginPage, OrdersPage, ProfilePage, Regis
 import Header from '../header/header';
 import { ProfileNav } from '../profile-nav/profile-nav';
 import { checkIsUserAuth } from '../../services/actions/user';
+import { ProtectedRouteElement } from '../protected-route/protected-route';
 
 const App = () => {
   const dispatch = useDispatch();
-  console.log(123);
  
   useEffect(()=> {
       dispatch(getIngredients());
@@ -20,17 +20,26 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Header />}>
           <Route index element={<HomePage />} />
-          <Route path="login" element={<LoginPage />} />
-          <Route path="register" element={<RegisterPage />} />
-          <Route path="forgot-password" element={<ForgotPasswordPage />} />
-          <Route path="reset-password" element={<ResetPasswordPage />} />
-          <Route path="profile/" element={<ProfileNav />} >
+          <Route path="login" element={
+            <ProtectedRouteElement onlyUnauth element={<LoginPage />}/> }
+          />
+          <Route path="register" element={
+            <ProtectedRouteElement onlyUnauth element={<RegisterPage />}/>}
+          />
+          <Route path="forgot-password" element={
+            <ProtectedRouteElement onlyUnauth element={<ForgotPasswordPage />}/> }
+          />
+          <Route path="reset-password" element={
+            <ProtectedRouteElement onlyUnauth element={<ResetPasswordPage />}/> }
+          />
+          <Route path="profile/" element={
+            <ProtectedRouteElement onlyAuth element={<ProfileNav />} />}
+          >
             <Route index element={<ProfilePage />} />
             <Route path="orders" element={<OrdersPage />} />
           </Route>
         </Route>
       </Routes>
-
   );
 }
 

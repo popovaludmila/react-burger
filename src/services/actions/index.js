@@ -1,6 +1,5 @@
-import { deleteCookie, getCookie, setCookie } from "../../utils/cookie";
 import { BASE_URL } from "../../utils/data";
-import { request } from "../../utils/data-api";
+import { fetchWithRefresh, request } from "../../utils/data-api";
 
 export const GET_INGREDIENTS_DATA_SUCCESS = 'GET_INGREDIENTS_DATA_SUCCESS';
 export const SHOW_DETAIL_INGREDIENT = 'SHOW_DETAIL_INGREDIENT';
@@ -87,7 +86,7 @@ export const getIngredients = () => {
 
 export const createOrder = (orderIngredientIds) => {
     return (dispatch) => {
-        request(`${BASE_URL}/orders`, {
+        fetchWithRefresh(`${BASE_URL}/orders`, {
             method: 'POST',
             headers: {
               "Content-Type": "application/json",

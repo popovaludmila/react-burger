@@ -1,17 +1,17 @@
-import { useLocation } from "react-router-dom";
-import { useAuth } from "../../hooks/use-auth"
+import { useSelector } from "react-redux";
+import { Navigate, useLocation } from "react-router-dom";
 
-export const ProtectedRouteElement = ({isAuth = false, children}) => {
-    const auth = useAuth();
+export const ProtectedRouteElement = ({onlyAuth, onlyUnauth, element}) => {
+    const isAuth = useSelector(state => state.user.isAuth);
     const location = useLocation();
 
-    if(isAuth && auth) {
-    
+    if (onlyAuth && !isAuth) {
+        return <Navigate to="/login/" state={{from: location}}/>
     }
 
-    return (
-        <>
+    if (onlyUnauth && isAuth) {
+        return <Navigate to={location.state ? location.state.from : "/"}/>
+    }
 
-        </>
-    )
+    return element;
 }

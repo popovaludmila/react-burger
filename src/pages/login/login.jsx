@@ -21,11 +21,7 @@ export const LoginPage = () => {
     
   const onFormSubmit = e => {
     e.preventDefault();
-    const user = {
-        email: form.email,
-        password: form.password
-    }
-    dispatch(login(user, () => navigate('/')));
+    dispatch(login(form.email, form.password, () => navigate('/')));
 }
 
 
