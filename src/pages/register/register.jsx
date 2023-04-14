@@ -20,7 +20,6 @@ export const RegisterPage = () => {
         setValue({ ...form, [e.target.name]: e.target.value });
     };
 
-    
     const onFormSubmit = e => {
         e.preventDefault();
         const user = {
@@ -29,6 +28,7 @@ export const RegisterPage = () => {
             password: form.password
         }
         dispatch(register(user, () => navigate('/')));
+       
     }
     
 

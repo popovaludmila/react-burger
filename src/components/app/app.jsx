@@ -5,13 +5,15 @@ import { Route, Routes } from 'react-router-dom';
 import { ForgotPasswordPage, HomePage, LoginPage, OrdersPage, ProfilePage, RegisterPage, ResetPasswordPage } from '../../pages';
 import Header from '../header/header';
 import { ProfileNav } from '../profile-nav/profile-nav';
+import { checkIsUserAuth } from '../../services/actions/user';
 
 const App = () => {
-  
   const dispatch = useDispatch();
+  console.log(123);
  
   useEffect(()=> {
-      dispatch(getIngredients())
+      dispatch(getIngredients());
+      dispatch(checkIsUserAuth());
   }, [dispatch])
 
   return (

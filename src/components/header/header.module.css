@@ -27,12 +27,6 @@
     transform: translateX(-30%);
 }
 
-.button {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-
 .profile {
     padding-right: 0;
 }
@@ -51,4 +45,8 @@
     padding-left: 0;
 }
 
+.active {
+    color: #F2F2F3;
+
+}
 

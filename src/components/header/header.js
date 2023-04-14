@@ -2,11 +2,14 @@ import { BurgerIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import {ListIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import {ProfileIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import {Logo} from '@ya.praktikum/react-developer-burger-ui-components';
-import { Link, Outlet } from 'react-router-dom';
+import { NavLink, Outlet } from 'react-router-dom';
 
 import headerStyles from './header.module.css';
 
 const Header = () => {
+
+    const setActive = ({isActive}) => isActive ? 'active' : 'text_color_inactive';
+
     return (
         <>
             <header className={headerStyles.header}>
@@ -17,30 +20,30 @@ const Header = () => {
                             <ul className={headerStyles.menu}>
                                 <li className={`${headerStyles.item}`}>
                                 
-                                    <a className={`${headerStyles.link} text text_type_main-default p-1`} href="1">
+                                    <NavLink  to="/" className={`${headerStyles.link}  text text_type_main-default p-1 `} >
                                         <BurgerIcon />
                                         <span className={`${headerStyles.link} pl-2`}>Конструктор</span>
-                                    </a>
+                                    </NavLink>
                                 </li>
 
                                 <li className={`${headerStyles.item} ml-10`} >
-                                    <a className={`${headerStyles.link} text text_type_main-default`} href="1">
+                                    <NavLink className={`${headerStyles.link} text text_type_main-default`}>
                                         <ListIcon type="secondary" />
-                                        <span className={`${headerStyles.link} text_color_inactive p-1 pl-2`}>Лента заказов</span>
-                                    </a>
+                                        <span className={`${headerStyles.link}  p-1 pl-2`}>Лента заказов</span>
+                                    </NavLink>
                                 </li>
                             </ul>
                         </nav>
 
-                        <a className={`${headerStyles.logo} pl-28`} href="index.html">
+                        <div className={`${headerStyles.logo} pl-28`}>
                             <Logo /> 
-                        </a>
+                        </div>
                         
                         <div className={headerStyles.item}> 
-                            <Link to="/profile" className={`${headerStyles.button}`}>
+                            <NavLink to="/profile" className={`${headerStyles.link}`}>
                                 <ProfileIcon type="secondary" />
-                                <span className={`${headerStyles.profile} text text_type_main-default p-4 pl-2 text_color_inactive`}>Личный кабинет</span>
-                            </Link>
+                                <span className={`${headerStyles.profile} text text_type_main-default p-4 pl-2`}>Личный кабинет</span>
+                            </NavLink>
                         </div>
                     </div>
                 </div>

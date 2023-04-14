@@ -3,11 +3,9 @@ import { request } from "../../utils/data-api";
 
 export const SET_USER = 'SET_USER';
 export const CHECK_USER = 'CHECK_USER';
-export const GET_USER = 'GET_USER';
 
 export const ACTION_FAILED = 'ACTION_FAILED';
 
-export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 
 export const register = (user, onSuccess) => {
@@ -91,20 +89,36 @@ export const logout = (token) => {
     }
 }
 
-export const getUser = () => {
+export const getUser = (token) => {
     return (dispatch) => {
         request(`${BASE_URL}/auth/user`, {
-
+            method: 'GET',
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": token,
+            },
+  
         }).then((data) => {
+            if (data.success) {
                 dispatch ({
-                    type: GET_USER,
+                    type: SET_USER,
                     data: data
                 })
+            }         
+        }).catch((err) => {
+            dispatch({
+                type: ACTION_FAILED,
+                err: err
             })
+        })
     }
 }
 
-export const checkUser = () => {
+export const checkIsUserAuth = () => {
     return (dispatch) => {
+        const authToken = localStorage.getItem('accessToken');
+        if (authToken) {
+            dispatch(getUser(authToken))
+        }
     }
 }
