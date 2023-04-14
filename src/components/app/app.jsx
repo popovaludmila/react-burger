@@ -22,7 +22,7 @@ const App = () => {
           <Route path="register" element={<RegisterPage />} />
           <Route path="forgot-password" element={<ForgotPasswordPage />} />
           <Route path="reset-password" element={<ResetPasswordPage />} />
-          <Route path="profile" element={<ProfileNav />} >
+          <Route path="profile/" element={<ProfileNav />} >
             <Route index element={<ProfilePage />} />
             <Route path="orders" element={<OrdersPage />} />
           </Route>

@@ -7,9 +7,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import {  cleanCart, createOrder } from '../../../services/actions';
 
 const CartTotal = ({total}) => {
-    const cart = useSelector(state => state.cart);
+    const cart = useSelector(state => state.constructorBurger.cart);
     const dispatch = useDispatch();
-    const order = useSelector(state => state.order);
+    const order = useSelector(state => state.constructorBurger.order);
 
     const onOrderButtonClick = (e) => {
         e.preventDefault();

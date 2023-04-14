@@ -1,3 +1,4 @@
+import { deleteCookie, getCookie, setCookie } from "../../utils/cookie";
 import { BASE_URL } from "../../utils/data";
 import { request } from "../../utils/data-api";
 
@@ -12,13 +13,7 @@ export const GET_ORDER_DATA_SUCCESS = 'SEND_DATA_SUCCESS';
 export const REPLACE_INGREDIENTS = 'REPLACE_INGREDIENTS';
 export const SWITCH_TAB = 'SWITCH_TAB';
 export const CLEAN_CART = 'CLEAN_CART';
-
-export const SET_USER = 'SET_USER';
-
 export const ACTION_FAILED = 'ACTION_FAILED';
-
-export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
-export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 
 export const switchTab = (tab, isActive) => {
     return {
@@ -110,96 +105,5 @@ export const createOrder = (orderIngredientIds) => {
                 err: err
             })
         });
-    }
-}
-
-export const register = (user, onSuccess) => {
-    return (dispatch) => {
-        request(`${BASE_URL}/auth/register`, {
-            method: 'POST',
-            headers: {
-              "Content-Type": "application/json",
-              },
-              body: JSON.stringify(user)
-        }).then((data) =>{
-            if(data.success) {
-                dispatch({
-                    type: SET_USER,
-                    data: data
-                })
-                localStorage.setItem('accessToken', data.accessToken)
-                localStorage.setItem('refreshToken', data.refreshToken)
-                onSuccess();
-            }
-        }).catch((err) => {
-            dispatch({
-                type: ACTION_FAILED,
-                err: err
-            })
-        })
-    }
-}
-
-
-export const login = (email, password, onSuccess) => {
-    return (dispatch) => {
-        fetch(`${BASE_URL}/auth/login`, {
-            method: 'POST',
-            mode: 'cors',
-            cache: 'no-cache',
-            credentials: 'same-origin',
-            headers: {
-            'Content-Type': 'application/json'
-            },
-            redirect: 'follow',
-            referrerPolicy: 'no-referrer',
-            body: JSON.stringify(email, password)
-        }).then((res) =>{
-            let authToken;
-            res.headers.forEach(header => {
-                if (header.indexOf('Bearer') === 0) {
-                    authToken = header.split('Bearer ')[1];
-                }
-            })
-            if (authToken) {
-                localStorage.setItem('accessToken', res.accessToken)
-                localStorage.setItem('refreshToken', res.refreshToken)
-            }
-            return res.json();   
-        }).then((data) => {
-            if(data.success) {
-                dispatch({
-                    type: SET_USER,
-                    data: data
-                })
-                onSuccess();
-            }
-        }).catch((err) => {
-            dispatch({
-                type: ACTION_FAILED,
-                err: err
-            })
-        })
-    }
-}
-
-export const logout = (token) => {
-    return (dispatch) => {
-        request(`${BASE_URL}/auth/logout`, {
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/json",
-                },
-                body: JSON.stringify(token)
-        }).then((data) => {
-            if(data.success) {
-                dispatch({
-                    type: LOGOUT_SUCCESS
-                })
-                localStorage.clear();
-            }
-        }).catch(() => 
-            alert('Ошибка выхода')
-        )
     }
 }

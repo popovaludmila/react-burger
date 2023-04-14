@@ -25,7 +25,7 @@ const BurgerConstructor = () => {
 
     const isBun = monitorItem && monitorItem.type === BUN;
 
-    const cart = useSelector(state => state.cart);
+    const cart = useSelector(state => state.constructorBurger.cart);
    
     const constructorIngredient = cart.fillings.map((item) => (
         <ConstructorFilling key={item.key} item={item} />

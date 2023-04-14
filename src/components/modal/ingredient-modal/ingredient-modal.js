@@ -2,7 +2,7 @@ import ingredientModalStyles from './ingredient-modal.module.css';
 import { useSelector } from 'react-redux';
 
 const IngredientModal = () => {
-    const {image, name, calories, proteins, fat, carbohydrates} = useSelector(state => state.detailIngredient);
+    const {image, name, calories, proteins, fat, carbohydrates} = useSelector(state => state.constructorBurger.detailIngredient);
 
     return (
         <div className={`${ingredientModalStyles.content} p-10 pb-15 pt-25`}>

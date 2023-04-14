@@ -1,8 +1,9 @@
 import { useSelector } from "react-redux";
+import { getCookie } from "../utils/cookie";
 
 export const useAuth = () => {
     const {email, name} = useSelector(state => state.user);
-    const token = localStorage.getItem('accessToken');
+    const token = getCookie('accessToken');
     
     return {
         isAuth: !!email,

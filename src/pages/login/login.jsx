@@ -2,7 +2,8 @@ import { Button, EmailInput, PasswordInput } from '@ya.praktikum/react-developer
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { login } from '../../services/actions';
+import { login } from '../../services/actions/user';
+
 import loginStyles from './login.module.css';
 
 export const LoginPage = () => {

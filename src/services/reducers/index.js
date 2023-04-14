@@ -1,3 +1,4 @@
+import { combineReducers } from "redux";
 import { BUN, MAIN, SAUCE } from "../../utils/data";
 import { GET_INGREDIENTS_DATA_SUCCESS,  
     SHOW_DETAIL_INGREDIENT, 
@@ -8,10 +9,9 @@ import { GET_INGREDIENTS_DATA_SUCCESS,
     REPLACE_INGREDIENTS,
     SWITCH_TAB,
     CLEAN_CART,
-    LOGIN_SUCCESS,
-    ACTION_FAILED,
-    SET_USER,
-    LOGOUT_SUCCESS} from "../actions";
+    ACTION_FAILED} from "../actions";
+
+import { userReducer } from "./user";
 
 const initialState = {
     ingredients: [],
@@ -26,15 +26,10 @@ const initialState = {
         {tab: BUN, isActive: true},
         {tab: SAUCE, isActive: false},
         {tab: MAIN, isActive: false},
-    ],
-    user: {
-        email: null, 
-        name: null,
-   }
-
+    ]
 }
 
-export const rootReducer = (state = initialState, action) => {
+const constructorReducer = (state = initialState, action) => {
     switch(action.type) {
         case GET_INGREDIENTS_DATA_SUCCESS:
             return {
@@ -125,33 +120,13 @@ export const rootReducer = (state = initialState, action) => {
                     bottom: null,
                 }
             }
-        case SET_USER:
-            return {
-                ...state,
-                user: {
-                    ...state.user,
-                    email: action.data.user.email,
-                    name: action.data.user.name,
-                }
-            }
-        case LOGIN_SUCCESS:
-            return {
-                ...state,
-                user: {
-                    ...state.user,
-                    email: action.data.user.email,
-                    name: action.data.user.name,
-                }
-            }
-        case LOGOUT_SUCCESS:
-            return {
-                ...state,
-                user: {
-                    email: null,
-                    name: null
-                }
-            }
         default:
             return state;
     }
 }
+
+
+export const rootReducer = combineReducers({
+    constructorBurger: constructorReducer,
+    user: userReducer
+});

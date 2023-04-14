@@ -32,4 +32,10 @@ export const setCookie = (name, value, props) => {
     );
     return matches ? decodeURIComponent(matches[1]) : undefined;
   } 
+
+  export const deleteCookie = (name) => {
+    return setCookie(name, "", {
+      'max-age': -1
+    })
+  }
   

@@ -2,7 +2,8 @@ import { Button, EmailInput, Input, PasswordInput } from '@ya.praktikum/react-de
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link,  useNavigate } from 'react-router-dom';
-import { register } from '../../services/actions';
+import { register } from '../../services/actions/user';
+
 import registerStyles from './register.module.css';
 
 export const RegisterPage = () => {

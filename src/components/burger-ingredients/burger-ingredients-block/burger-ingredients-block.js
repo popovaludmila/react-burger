@@ -16,9 +16,9 @@ const BurgerIngredientsBlock = ({title, ingredientsType}) => {
 
    useEffect(() => {
       dispatch(switchTab(ingredientsType, inView));
-   }, [inView]);
+   }, [inView, dispatch, ingredientsType]);
 
-   const ingredientsData = useSelector(state => state.ingredients)
+   const ingredientsData = useSelector(state => state.constructorBurger.ingredients)
 
    const ingredients = useMemo(
       () => ingredientsData
