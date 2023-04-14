@@ -2,6 +2,7 @@ import { BurgerIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import {ListIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import {ProfileIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import {Logo} from '@ya.praktikum/react-developer-burger-ui-components';
+import { useSelector } from 'react-redux';
 import { NavLink, Outlet } from 'react-router-dom';
 
 import headerStyles from './header.module.css';
@@ -9,7 +10,7 @@ import headerStyles from './header.module.css';
 const Header = () => {
 
     const setActive = ({isActive}) => isActive ? 'active' : 'text_color_inactive';
-
+    const userName = useSelector(state => state.user.user?.name) || 'Личный кабинет';
     return (
         <>
             <header className={headerStyles.header}>
@@ -42,7 +43,7 @@ const Header = () => {
                         <div className={headerStyles.item}> 
                             <NavLink to="/profile" className={`${headerStyles.link}`}>
                                 <ProfileIcon type="secondary" />
-                                <span className={`${headerStyles.profile} text text_type_main-default p-4 pl-2`}>Личный кабинет</span>
+                                <span className={`${headerStyles.profile} text text_type_main-default p-4 pl-2`}>{userName}</span>
                             </NavLink>
                         </div>
                     </div>

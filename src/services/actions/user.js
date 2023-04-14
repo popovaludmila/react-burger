@@ -3,9 +3,7 @@ import { request } from "../../utils/data-api";
 
 export const SET_USER = 'SET_USER';
 export const CHECK_USER = 'CHECK_USER';
-
 export const ACTION_FAILED = 'ACTION_FAILED';
-
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 
 export const register = (user, onSuccess) => {
@@ -120,5 +118,30 @@ export const checkIsUserAuth = () => {
         if (authToken) {
             dispatch(getUser(authToken))
         }
+    }
+}
+
+export const updateUserProfile = (name, email, password, token) => {
+    return (dispatch) => {
+        request(`${BASE_URL}/auth/user`, {
+            method: 'PATCH',
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": token,
+            },
+            body: JSON.stringify({name, email, password})
+        }).then((data) => {
+            if (data.success) {
+                dispatch ({
+                    type: SET_USER,
+                    data: data
+                })
+            }         
+        }).catch((err) => {
+            dispatch({
+                type: ACTION_FAILED,
+                err: err
+            })
+        })
     }
 }
