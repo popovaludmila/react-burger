@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { useEffect} from 'react';
 import { getIngredients } from '../../services/actions';
-import { Route, Routes, useLocation, useHistory } from 'react-router-dom';
+import { Route, Routes, useLocation} from 'react-router-dom';
 import { ForgotPasswordPage, HomePage, IngredientDetailPage, LoginPage, NotFoundPage, OrderFeedPage, OrdersPage, ProfilePage, RegisterPage, ResetPasswordPage } from '../../pages';
 import Header from '../header/header';
 import { ProfileNav } from '../profile-nav/profile-nav';
@@ -12,7 +12,6 @@ import IngredientModal from '../modal/ingredient-modal/ingredient-modal';
 
 const App = () => {
   const dispatch = useDispatch();
-  //const history = useHistory();
   const location = useLocation();
 
   const background = location.state && location.state.background;
