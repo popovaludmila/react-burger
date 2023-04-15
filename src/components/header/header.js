@@ -11,6 +11,11 @@ const Header = () => {
 
     const setActive = ({isActive}) => isActive ? 'active' : 'text_color_inactive';
     const userName = useSelector(state => state.user.user?.name) || 'Личный кабинет';
+
+    const isBurgerConstructor = `!!useRouteMatch("/")`;
+    const isOrdersFeed = !`!useRouteMatch("/orders-feed")`;
+    const isProfile = `!!useRouteMatch("/profile")`;
+
     return (
         <>
             <header className={headerStyles.header}>
@@ -22,14 +27,14 @@ const Header = () => {
                                 <li className={`${headerStyles.item}`}>
                                 
                                     <NavLink  to="/" className={`${headerStyles.link}  text text_type_main-default p-1 `} >
-                                        <BurgerIcon />
+                                        <BurgerIcon type={isBurgerConstructor ? "primary" : "secondary"} />
                                         <span className={`${headerStyles.link} pl-2`}>Конструктор</span>
                                     </NavLink>
                                 </li>
 
                                 <li className={`${headerStyles.item} ml-10`} >
-                                    <NavLink className={`${headerStyles.link} text text_type_main-default`}>
-                                        <ListIcon type="secondary" />
+                                    <NavLink to="/orders-feed" className={`${headerStyles.link} text text_type_main-default`}>
+                                        <ListIcon type={isOrdersFeed ? "primary" : "secondary"} />
                                         <span className={`${headerStyles.link}  p-1 pl-2`}>Лента заказов</span>
                                     </NavLink>
                                 </li>
@@ -42,7 +47,7 @@ const Header = () => {
                         
                         <div className={headerStyles.item}> 
                             <NavLink to="/profile" className={`${headerStyles.link}`}>
-                                <ProfileIcon type="secondary" />
+                                <ProfileIcon type={isProfile ? "primary" : "secondary"} />
                                 <span className={`${headerStyles.profile} text text_type_main-default p-4 pl-2`}>{userName}</span>
                             </NavLink>
                         </div>

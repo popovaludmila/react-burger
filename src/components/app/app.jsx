@@ -2,7 +2,7 @@ import { useDispatch } from 'react-redux';
 import { useEffect} from 'react';
 import { getIngredients } from '../../services/actions';
 import { Route, Routes, useLocation, useHistory } from 'react-router-dom';
-import { ForgotPasswordPage, HomePage, IngredientDetailPage, LoginPage, NotFoundPage, OrdersPage, ProfilePage, RegisterPage, ResetPasswordPage } from '../../pages';
+import { ForgotPasswordPage, HomePage, IngredientDetailPage, LoginPage, NotFoundPage, OrderFeedPage, OrdersPage, ProfilePage, RegisterPage, ResetPasswordPage } from '../../pages';
 import Header from '../header/header';
 import { ProfileNav } from '../profile-nav/profile-nav';
 import { checkIsUserAuth } from '../../services/actions/user';
@@ -38,6 +38,9 @@ const App = () => {
           />
           <Route path="reset-password" element={
             <ProtectedRouteElement onlyUnauth element={<ResetPasswordPage />}/> }
+          />
+          <Route path="orders-feed" element={
+            <ProtectedRouteElement onlyAuth element={<OrderFeedPage />}/> }
           />
           <Route path="profile/" element={
             <ProtectedRouteElement onlyAuth element={<ProfileNav />} />}>

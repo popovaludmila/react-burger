@@ -27,6 +27,7 @@ export const ProfilePage = () => {
         email: email, 
         password: '*****'
     })
+    setIsEdit(false);
   }
 
   const onFormUpdate = (e) => {
