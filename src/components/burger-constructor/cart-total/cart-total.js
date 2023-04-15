@@ -5,11 +5,14 @@ import OrderModal from '../../modal/order-modal/order-modal';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import {  cleanCart, createOrder } from '../../../services/actions';
+import { useNavigate } from 'react-router-dom';
 
 const CartTotal = ({total}) => {
     const cart = useSelector(state => state.constructorBurger.cart);
     const dispatch = useDispatch();
     const order = useSelector(state => state.constructorBurger.order);
+    const isAuth = useSelector(state => state.user.isAuth);
+    const navigate = useNavigate();
 
     const onOrderButtonClick = (e) => {
         e.preventDefault();
@@ -20,7 +23,11 @@ const CartTotal = ({total}) => {
                 ...cart.fillings.map((ingredient) => ingredient._id),
                 cart.bottom._id,
             ];
-            dispatch(createOrder(orderIngredients));
+            if(isAuth) {
+                dispatch(createOrder(orderIngredients));
+            } else {
+                navigate("/login");
+            }
         } else {
             alert('ДОБАВЬТЕ БУЛКИ');
         }

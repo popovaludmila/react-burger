@@ -86,7 +86,8 @@ export const getIngredients = () => {
 
 export const createOrder = (orderIngredientIds) => {
     return (dispatch) => {
-        fetchWithRefresh(`${BASE_URL}/orders`, {
+
+        request(`${BASE_URL}/orders`, {
             method: 'POST',
             headers: {
               "Content-Type": "application/json",

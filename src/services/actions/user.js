@@ -1,5 +1,5 @@
 import { BASE_URL } from "../../utils/data";
-import { request } from "../../utils/data-api";
+import { fetchWithRefresh, request } from "../../utils/data-api";
 
 export const SET_USER = 'SET_USER';
 export const CHECK_USER = 'CHECK_USER';
@@ -89,7 +89,7 @@ export const logout = (token) => {
 
 export const getUser = (token) => {
     return (dispatch) => {
-        request(`${BASE_URL}/auth/user`, {
+        fetchWithRefresh(`${BASE_URL}/auth/user`, {
             method: 'GET',
             headers: {
                 "Content-Type": "application/json",
