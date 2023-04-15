@@ -1,23 +1,30 @@
 import { useDispatch } from 'react-redux';
 import { useEffect} from 'react';
 import { getIngredients } from '../../services/actions';
-import { Route, Routes } from 'react-router-dom';
-import { ForgotPasswordPage, HomePage, LoginPage, OrdersPage, ProfilePage, RegisterPage, ResetPasswordPage } from '../../pages';
+import { Route, Routes, useLocation, useHistory } from 'react-router-dom';
+import { ForgotPasswordPage, HomePage, IngredientDetailPage, LoginPage, NotFoundPage, OrdersPage, ProfilePage, RegisterPage, ResetPasswordPage } from '../../pages';
 import Header from '../header/header';
 import { ProfileNav } from '../profile-nav/profile-nav';
 import { checkIsUserAuth } from '../../services/actions/user';
 import { ProtectedRouteElement } from '../protected-route/protected-route';
+import Modal from '../modal/modal';
+import IngredientModal from '../modal/ingredient-modal/ingredient-modal';
 
 const App = () => {
   const dispatch = useDispatch();
- 
+  //const history = useHistory();
+  const location = useLocation();
+
+  const background = location.state && location.state.background;
+
   useEffect(()=> {
       dispatch(getIngredients());
       dispatch(checkIsUserAuth());
   }, [dispatch])
 
   return (
-      <Routes>
+    <>
+      <Routes location={background || location}>
         <Route path="/" element={<Header />}>
           <Route index element={<HomePage />} />
           <Route path="login" element={
@@ -33,14 +40,26 @@ const App = () => {
             <ProtectedRouteElement onlyUnauth element={<ResetPasswordPage />}/> }
           />
           <Route path="profile/" element={
-            <ProtectedRouteElement onlyAuth element={<ProfileNav />} />}
-          >
-            <Route index element={<ProfilePage />} />
-            <Route path="orders" element={<OrdersPage />} />
+            <ProtectedRouteElement onlyAuth element={<ProfileNav />} />}>
+              <Route index element={<ProfilePage />} />
+              <Route path="orders" element={<OrdersPage />} />
           </Route>
+          <Route path='ingredients/:id' element={<IngredientDetailPage />} />
+          <Route path='*' element={<NotFoundPage />} />
         </Route>
       </Routes>
-  );
+
+      {background && 
+        <Routes>
+          <Route path='ingredients/:id' element={
+            <Modal modalTitle={'Детали ингредиента'}>
+              <IngredientModal />
+            </Modal>
+          } />
+        </Routes>
+      }
+    </>
+  )
 }
 
   
