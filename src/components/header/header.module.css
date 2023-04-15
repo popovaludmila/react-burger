@@ -39,7 +39,6 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    color: #8585AD;
 }
 
 .link:first-child {
@@ -47,6 +46,11 @@
 }
 
 .active {
+    padding-left: 8px;
     color: #F2F2F3;
 }
 
+.inactive {
+    padding-left: 8px;
+    color: #8585AD;
+}
