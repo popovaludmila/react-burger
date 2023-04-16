@@ -2,7 +2,7 @@ import { GET_USER_FAILED, GET_USER_REQUEST, GET_USER_SUCCESS,
     LOGIN_FAILED, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT_FAILED, 
     LOGOUT_REQUEST, LOGOUT_SUCCESS, REGISTER_FAILED, 
     REGISTER_REQUEST, REGISTER_SUCCESS, UPDATE_USER_FAILED, 
-    UPDATE_USER_REQUEST, UPDATE_USER_SUCCESS } from "../actions/user"
+    UPDATE_USER_REQUEST, UPDATE_USER_SUCCESS, ERROR_CLEAN } from "../actions/user"
 
 const initialState = {
     isAuth: false,
@@ -10,6 +10,8 @@ const initialState = {
         email: null, 
         name: null
    },
+
+    errorMessage: null,
 
     registrationRequest: false,
     registrationFailed: false,
@@ -48,7 +50,8 @@ export const userReducer = (state = initialState, action) => {
         case REGISTER_FAILED:
                 return {
                     ...state,
-                    registrationFailed: true
+                    registrationFailed: true,
+                    errorMessage: action.err
                 } 
 
         case LOGIN_REQUEST: 
@@ -70,7 +73,8 @@ export const userReducer = (state = initialState, action) => {
         case LOGIN_FAILED:
             return {
                 ...state,
-                loginFailed: true
+                loginFailed: true,
+                errorMessage: action.err
             } 
 
         case LOGOUT_REQUEST: 
@@ -135,6 +139,11 @@ export const userReducer = (state = initialState, action) => {
             return {
                 ...state,
                 updateUserFailed: true
+            } 
+        case ERROR_CLEAN:
+            return {
+                ...state,
+                errorMessage: null
             } 
         default:
             return state

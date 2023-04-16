@@ -4,6 +4,7 @@ import {ProfileIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import {Logo} from '@ya.praktikum/react-developer-burger-ui-components';
 import { useSelector } from 'react-redux';
 import { Link, NavLink, Outlet, useMatch } from 'react-router-dom';
+import { ORDERS_FEED, PROFILE } from '../../utils/data';
 
 import headerStyles from './header.module.css';
 
@@ -30,7 +31,7 @@ const Header = () => {
                                 </li>
 
                                 <li className={`${headerStyles.item} ml-10`} >
-                                    <NavLink to="/orders-feed" className={`${headerStyles.link} text text_type_main-default p-4`} >
+                                    <NavLink to={`/${ORDERS_FEED}`} className={`${headerStyles.link} text text_type_main-default p-4`} >
                                         <ListIcon type={matchOrdersFeed ? "primary" : "secondary"} />
                                         <span className={matchOrdersFeed ? `${headerStyles.active}` : `${headerStyles.inactive}` }>Лента заказов</span>
                                     </NavLink>
@@ -43,7 +44,7 @@ const Header = () => {
                         </Link>
                         
                         <div className={headerStyles.item}> 
-                            <NavLink to="/profile" className={`${headerStyles.link} text text_type_main-default `}>
+                            <NavLink to={`/${PROFILE}`} className={`${headerStyles.link} text text_type_main-default `}>
                                 <ProfileIcon type={matchProfile ? "primary" : "secondary"} />
                                 <span className={matchProfile ? `${headerStyles.active}` : `${headerStyles.inactive}`}>{userName}</span>
                             </NavLink>

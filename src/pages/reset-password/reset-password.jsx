@@ -1,7 +1,7 @@
 import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { BASE_URL } from '../../utils/data';
+import { BASE_URL, LOGIN } from '../../utils/data';
 import { request } from '../../utils/data-api';
 import resetPasswordStyles from './reset-password.module.css';
 
@@ -60,7 +60,7 @@ export const ResetPasswordPage = () => {
                 </form>
                     <p className="text text_type_main-default text_color_inactive pt-20">
                         Вспомнили пароль?
-                        <Link to="/login"  className={`${resetPasswordStyles.link} pl-2`}>
+                        <Link to={`/${LOGIN}`}  className={`${resetPasswordStyles.link} pl-2`}>
                             Войти
                         </Link>
                     </p>

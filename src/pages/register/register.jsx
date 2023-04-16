@@ -1,14 +1,19 @@
 import { Button, EmailInput, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link,  useNavigate } from 'react-router-dom';
-import { register } from '../../services/actions/user';
+import { ErrorModal } from '../../components/modal/error-modal/error-modal';
+import Modal from '../../components/modal/modal';
+import { errorClean, register } from '../../services/actions/user';
+import { LOGIN } from '../../utils/data';
 
 import registerStyles from './register.module.css';
 
 export const RegisterPage = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const errorMessage = useSelector(state => state.user.errorMessage);
+    const errorText = errorMessage?.toUpperCase();
 
     const [form, setValue] = useState({ 
         name: '',
@@ -65,11 +70,16 @@ export const RegisterPage = () => {
                     <Button htmlType="submit" type="primary" size="medium">
                         Зарегистрироваться
                     </Button>
+                    {errorMessage !== null &&
+                        <Modal modalTitle={''} onCloseClick={() => dispatch(errorClean())}>
+                            <ErrorModal errorMessage={errorText} />
+                        </Modal>
+                    }
                 </form>
                
                 <p className="text text_type_main-default text_color_inactive pt-20">
                         Уже зарегистрированы?
-                        <Link to="/login" className={`${registerStyles.link} pl-2`} >Войти</Link>
+                        <Link to={`/${LOGIN}`} className={`${registerStyles.link} pl-2`} >Войти</Link>
                 </p>
             </div>
         </>

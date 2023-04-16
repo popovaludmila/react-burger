@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import {  cleanCart, createOrder } from '../../../services/actions';
 import { useNavigate } from 'react-router-dom';
+import { LOGIN } from '../../../utils/data';
 
 const CartTotal = ({total}) => {
     const cart = useSelector(state => state.constructorBurger.cart);
@@ -26,7 +27,7 @@ const CartTotal = ({total}) => {
             if(isAuth) {
                 dispatch(createOrder(orderIngredients));
             } else {
-                navigate("/login");
+                navigate(`/${LOGIN}`);
             }
         } else {
             alert('ДОБАВЬТЕ БУЛКИ');

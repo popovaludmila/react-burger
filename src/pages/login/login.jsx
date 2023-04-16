@@ -1,14 +1,19 @@
 import { Button, EmailInput, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { login } from '../../services/actions/user';
+import { ErrorModal } from '../../components/modal/error-modal/error-modal';
+import Modal from '../../components/modal/modal';
+import { errorClean, login } from '../../services/actions/user';
+import { FORGOT_PASSWORD, REGISTER } from '../../utils/data';
 
 import loginStyles from './login.module.css';
 
 export const LoginPage = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const errorMessage = useSelector(state => state.user.errorMessage);
+    const errorText = errorMessage?.toUpperCase();
 
     const [form, setValue] = useState({ 
         email: '', 
@@ -19,9 +24,12 @@ export const LoginPage = () => {
     setValue({ ...form, [e.target.name]: e.target.value });
   };
     
+
+
   const onFormSubmit = e => {
     e.preventDefault();
-    dispatch(login(form.email, form.password, () => navigate('/')));
+    dispatch(login(form.email, form.password, () => navigate('/'), 
+    ));
 }
 
 
@@ -49,15 +57,20 @@ export const LoginPage = () => {
                     <Button htmlType="submit" type="primary" size="medium">
                         Войти
                     </Button>
+                    {errorMessage !== null &&
+                        <Modal modalTitle={''} onCloseClick={() => dispatch(errorClean())}>
+                            <ErrorModal errorMessage={errorText} />
+                        </Modal>
+                    }
                 </form>
                     
                     <p className="text text_type_main-default text_color_inactive pt-20">
                         Вы — новый пользователь?
-                        <Link to="/register" className={`${loginStyles.link} pl-2`}>Зарегистрироваться</Link>
+                        <Link to={`/${REGISTER}`} className={`${loginStyles.link} pl-2`}>Зарегистрироваться</Link>
                     </p>
                     <p className="text text_type_main-default text_color_inactive ">
                         Забыли пароль?
-                        <Link to="/forgot-password" className={`${loginStyles.link} pl-2`} >Восстановить пароль</Link>
+                        <Link to={`/${FORGOT_PASSWORD}`} className={`${loginStyles.link} pl-2`} >Восстановить пароль</Link>
                     </p>
                 </div>
         </>

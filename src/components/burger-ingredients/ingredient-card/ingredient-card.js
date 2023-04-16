@@ -5,6 +5,7 @@ import {  useSelector } from 'react-redux';
 //import { showDetailIngredient } from '../../../services/actions';
 import { useDrag } from 'react-dnd';
 import { Link, useLocation } from 'react-router-dom';
+import { INGREDIENTS } from '../../../utils/data';
 
 const IngredientCard = ({item}) => {
   const location = useLocation();
@@ -36,7 +37,7 @@ const IngredientCard = ({item}) => {
 
   return (
     <div>
-      <Link to={ `/ingredients/${_id}`} state={{background: location}}
+      <Link to={ `/${INGREDIENTS}/${_id}`} state={{background: location}}
       ref={dragRef} className={`${ingredientCardStyles.item} mb-10`} >
         {count ? <Counter count={count} size="default" extraClass="m-1" /> : null}
         

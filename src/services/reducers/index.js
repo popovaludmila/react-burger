@@ -36,6 +36,8 @@ const initialState = {
 
     getOrderDataRequest: false,
     getOrderDataFailed: false,
+
+    errorMessage: null
 }
 
 const constructorReducer = (state = initialState, action) => {
@@ -54,7 +56,7 @@ const constructorReducer = (state = initialState, action) => {
         case GET_INGREDIENTS_DATA_FAILED:
             return {
                 ...state,
-                getIngredientsFailed: true
+                getIngredientsFailed: true,
             } 
         case SHOW_DETAIL_INGREDIENT:
             return {

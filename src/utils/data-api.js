@@ -1,13 +1,7 @@
 import { BASE_URL } from "./data";
 
 const checkResponse = (response) => {
-   if (response.ok) {
-      return response.json();
-    }
-    if ([403, 404, 400].includes(response.status)) {
-      return response.json();
-  }
-    throw new Error(`${response.status} ${response.statusText}`);
+   return response.ok ? response.json() : response.json().then((err) => Promise.reject(err));
 }
  
 export const request = (url, options) => {
@@ -36,6 +30,7 @@ export const fetchWithRefresh = async (url, options) => {
     const res = await fetch(url, options);
     return await checkResponse(res);
   } catch (err) {
+    console.log(err.message);
     if (err.message === "jwt expired") {
       const refreshData = await refreshToken();
       if (!refreshData.success) {
@@ -51,4 +46,5 @@ export const fetchWithRefresh = async (url, options) => {
     }
   }
 };
+
 

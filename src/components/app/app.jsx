@@ -9,6 +9,7 @@ import { checkIsUserAuth } from '../../services/actions/user';
 import { ProtectedRouteElement } from '../protected-route/protected-route';
 import Modal from '../modal/modal';
 import IngredientModal from '../modal/ingredient-modal/ingredient-modal';
+import { FORGOT_PASSWORD, INGREDIENTS, LOGIN, ORDERS, ORDERS_FEED, PROFILE, REGISTER, RESET_PASSWORD } from '../../utils/data';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -26,34 +27,34 @@ const App = () => {
       <Routes location={background || location}>
         <Route path="/" element={<Header />}>
           <Route index element={<HomePage />} />
-          <Route path="login" element={
+          <Route path={LOGIN} element={
             <ProtectedRouteElement onlyUnauth element={<LoginPage />}/> }
           />
-          <Route path="register" element={
+          <Route path={REGISTER} element={
             <ProtectedRouteElement onlyUnauth element={<RegisterPage />}/>}
           />
-          <Route path="forgot-password" element={
+          <Route path={FORGOT_PASSWORD} element={
             <ProtectedRouteElement onlyUnauth element={<ForgotPasswordPage />}/> }
           />
-          <Route path="reset-password" element={
+          <Route path={RESET_PASSWORD} element={
             <ProtectedRouteElement onlyUnauth element={<ResetPasswordPage />}/> }
           />
-          <Route path="orders-feed" element={
+          <Route path={ORDERS_FEED} element={
             <ProtectedRouteElement onlyAuth element={<OrderFeedPage />}/> }
           />
-          <Route path="profile/" element={
+          <Route path={`${PROFILE}/`} element={
             <ProtectedRouteElement onlyAuth element={<ProfileNav />} />}>
               <Route index element={<ProfilePage />} />
-              <Route path="orders" element={<OrdersPage />} />
+              <Route path={ORDERS} element={<OrdersPage />} />
           </Route>
-          <Route path='ingredients/:id' element={<IngredientDetailPage />} />
+          <Route path={`${INGREDIENTS}/:id`} element={<IngredientDetailPage />} />
           <Route path='*' element={<NotFoundPage />} />
         </Route>
       </Routes>
 
       {background && 
         <Routes>
-          <Route path='ingredients/:id' element={
+          <Route path={`${INGREDIENTS}/:id`} element={
             <Modal modalTitle={'Детали ингредиента'}>
               <IngredientModal />
             </Modal>

@@ -21,7 +21,15 @@ export const UPDATE_USER_REQUEST = 'UPDATE_USER_REQUEST';
 export const UPDATE_USER_SUCCESS = 'UPDATE_USER_SUCCESS';
 export const UPDATE_USER_FAILED = 'UPDATE_USER_FAILED';
 
-export const register = (user, onSuccess) => {
+export const ERROR_CLEAN = 'ERROR_CLEAN';
+
+export const errorClean = () => {
+    return {
+        type: ERROR_CLEAN,
+    }
+}
+
+export const register = (user, onSuccess, onError) => {
     return (dispatch) => {
         dispatch({
             type: REGISTER_REQUEST
@@ -45,14 +53,14 @@ export const register = (user, onSuccess) => {
         }).catch((err) => {
             dispatch({
                 type: REGISTER_FAILED,
-                err: err
+                err: err.message
             })
         })
     }
 }
 
 
-export const login = (email, password, onSuccess) => {
+export const login = (email, password, onSuccess, onError) => {
     return (dispatch) => {
         dispatch({
             type: LOGIN_REQUEST
@@ -81,7 +89,7 @@ export const login = (email, password, onSuccess) => {
         }).catch((err) => {
             dispatch({
                 type: LOGIN_FAILED,
-                err: err
+                err: err.message
             })
         })
     }

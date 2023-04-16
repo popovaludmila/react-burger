@@ -1,7 +1,7 @@
 import { Button, EmailInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { BASE_URL } from '../../utils/data';
+import { Link, useNavigate } from 'react-router-dom';
+import { BASE_URL, LOGIN } from '../../utils/data';
 import { request } from '../../utils/data-api';
 import forgotPasswordStyles from './forgot-password.module.css';
 
@@ -51,7 +51,7 @@ export const ForgotPasswordPage = () => {
                 </form>
                     <p className="text text_type_main-default text_color_inactive pt-20">
                         Вспомнили пароль?
-                        <a className={`${forgotPasswordStyles.link} pl-2`} href='1'>Войти</a>
+                        <Link to={`/${LOGIN}`} className={`${forgotPasswordStyles.link} pl-2`}>Войти</Link>
                     </p>
                 </div>
         </>
