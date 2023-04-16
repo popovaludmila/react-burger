@@ -1,14 +1,21 @@
 import { BASE_URL } from "../../utils/data";
 import { fetchWithRefresh, request } from "../../utils/data-api";
 
+export const GET_INGREDIENTS_DATA_REQUEST = 'GET_INGREDIENTS_DATA_REQUEST';
 export const GET_INGREDIENTS_DATA_SUCCESS = 'GET_INGREDIENTS_DATA_SUCCESS';
+export const GET_INGREDIENTS_DATA_FAILED = 'GET_INGREDIENTS_DATA_FAILED';
+
 export const SHOW_DETAIL_INGREDIENT = 'SHOW_DETAIL_INGREDIENT';
 export const CLOSE_MODAL = 'CLOSE_MODAL';
 export const ADD_BUN_TO_CART = 'ADD_BUN_TO_CART';
 export const ADD_FILLING_TO_CART = 'ADD_FILLING_TO_CART';
 export const ADD_INGREDIENT_TO_CART = 'ADD_INGREDIENT_TO_CART';
 export const DELETE_INGREDIENT = 'DELETE_INGREDIENT';
-export const GET_ORDER_DATA_SUCCESS = 'SEND_DATA_SUCCESS';
+
+export const GET_ORDER_DATA_REQUEST= 'GET_ORDER_DATA_REQUEST';
+export const GET_ORDER_DATA_SUCCESS = 'GET_ORDER_DATA_SUCCESS';
+export const GET_ORDER_DATA_FAILED = 'GET_ORDER_DATA_FAILED';
+
 export const REPLACE_INGREDIENTS = 'REPLACE_INGREDIENTS';
 export const SWITCH_TAB = 'SWITCH_TAB';
 export const CLEAN_CART = 'CLEAN_CART';
@@ -66,6 +73,9 @@ export const cleanCart = () => {
   
 export const getIngredients = () => {
     return function(dispatch) {
+        dispatch({
+            type: GET_INGREDIENTS_DATA_REQUEST
+        });
         request(`${BASE_URL}/ingredients`)
             .then((data) => {
                 dispatch({
@@ -75,19 +85,19 @@ export const getIngredients = () => {
             })
             .catch((err) => {
                 dispatch({
-                    type: ACTION_FAILED,
+                    type: GET_INGREDIENTS_DATA_FAILED,
                     err: err
                 })
             });
     }
 }
 
-
-
 export const createOrder = (orderIngredientIds) => {
     return (dispatch) => {
-
-        request(`${BASE_URL}/orders`, {
+        dispatch({
+            type: GET_ORDER_DATA_REQUEST
+        });
+        fetchWithRefresh(`${BASE_URL}/orders`, {
             method: 'POST',
             headers: {
               "Content-Type": "application/json",
@@ -101,7 +111,7 @@ export const createOrder = (orderIngredientIds) => {
             })
         }).catch((err) => {
             dispatch({
-                type: ACTION_FAILED,
+                type: GET_ORDER_DATA_FAILED,
                 err: err
             })
         });

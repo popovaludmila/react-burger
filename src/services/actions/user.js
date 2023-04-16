@@ -1,13 +1,31 @@
 import { BASE_URL } from "../../utils/data";
 import { fetchWithRefresh, request } from "../../utils/data-api";
 
-export const SET_USER = 'SET_USER';
-export const CHECK_USER = 'CHECK_USER';
-export const ACTION_FAILED = 'ACTION_FAILED';
+export const REGISTER_REQUEST = 'REGISTER_REQUES';
+export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
+export const REGISTER_FAILED = 'REGISTER_FAILED';
+
+export const LOGIN_REQUEST = 'LOGIN_REQUES';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGIN_FAILED = 'LOGIN_FAILED';
+
+export const LOGOUT_REQUEST = 'LOGOUT_REQUEST';
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
+export const LOGOUT_FAILED = 'LOGOUT_FAILED';
+
+export const GET_USER_REQUEST = 'GET_USER_REQUEST';
+export const GET_USER_SUCCESS = 'GET_USER_SUCCESS';
+export const GET_USER_FAILED = 'GET_USER_FAILED';
+
+export const UPDATE_USER_REQUEST = 'UPDATE_USER_REQUEST';
+export const UPDATE_USER_SUCCESS = 'UPDATE_USER_SUCCESS';
+export const UPDATE_USER_FAILED = 'UPDATE_USER_FAILED';
 
 export const register = (user, onSuccess) => {
     return (dispatch) => {
+        dispatch({
+            type: REGISTER_REQUEST
+        });
         request(`${BASE_URL}/auth/register`, {
             method: 'POST',
             headers: {
@@ -17,7 +35,7 @@ export const register = (user, onSuccess) => {
         }).then((data) =>{
             if(data.success) {
                 dispatch({
-                    type: SET_USER,
+                    type: REGISTER_SUCCESS,
                     data: data
                 })
                 localStorage.setItem('accessToken', data.accessToken)
@@ -26,7 +44,7 @@ export const register = (user, onSuccess) => {
             }
         }).catch((err) => {
             dispatch({
-                type: ACTION_FAILED,
+                type: REGISTER_FAILED,
                 err: err
             })
         })
@@ -36,7 +54,10 @@ export const register = (user, onSuccess) => {
 
 export const login = (email, password, onSuccess) => {
     return (dispatch) => {
-       request(`${BASE_URL}/auth/login`, {
+        dispatch({
+            type: LOGIN_REQUEST
+        });
+        request(`${BASE_URL}/auth/login`, {
             method: 'POST',
             mode: 'cors',
             cache: 'no-cache',
@@ -50,7 +71,7 @@ export const login = (email, password, onSuccess) => {
         }).then((data) => {
             if(data.success) {
                 dispatch({
-                    type: SET_USER,
+                    type: LOGIN_SUCCESS,
                     data: data
                 })
                 localStorage.setItem('accessToken', data.accessToken)
@@ -59,7 +80,7 @@ export const login = (email, password, onSuccess) => {
             }
         }).catch((err) => {
             dispatch({
-                type: ACTION_FAILED,
+                type: LOGIN_FAILED,
                 err: err
             })
         })
@@ -68,6 +89,9 @@ export const login = (email, password, onSuccess) => {
 
 export const logout = (token) => {
     return (dispatch) => {
+        dispatch({
+            type: LOGOUT_REQUEST
+        });
         request(`${BASE_URL}/auth/logout`, {
             method: 'POST',
             headers: {
@@ -81,14 +105,20 @@ export const logout = (token) => {
                 })
                 localStorage.clear();
             }
-        }).catch(() => 
-            alert('Ошибка выхода')
+        }).catch((err) => 
+            dispatch({
+                type: LOGOUT_FAILED,
+                err: err
+            })
         )
     }
 }
 
 export const getUser = (token) => {
     return (dispatch) => {
+        dispatch({
+            type: GET_USER_REQUEST
+        });
         fetchWithRefresh(`${BASE_URL}/auth/user`, {
             method: 'GET',
             headers: {
@@ -99,13 +129,13 @@ export const getUser = (token) => {
         }).then((data) => {
             if (data.success) {
                 dispatch ({
-                    type: SET_USER,
+                    type: GET_USER_SUCCESS,
                     data: data
                 })
             }         
         }).catch((err) => {
             dispatch({
-                type: ACTION_FAILED,
+                type: GET_USER_FAILED,
                 err: err
             })
         })
@@ -123,7 +153,10 @@ export const checkIsUserAuth = () => {
 
 export const updateUserProfile = (name, email, password, token) => {
     return (dispatch) => {
-        request(`${BASE_URL}/auth/user`, {
+        dispatch({
+            type: UPDATE_USER_REQUEST
+        });
+        fetchWithRefresh(`${BASE_URL}/auth/user`, {
             method: 'PATCH',
             headers: {
                 "Content-Type": "application/json",
@@ -133,13 +166,13 @@ export const updateUserProfile = (name, email, password, token) => {
         }).then((data) => {
             if (data.success) {
                 dispatch ({
-                    type: SET_USER,
+                    type: UPDATE_USER_SUCCESS,
                     data: data
                 })
             }         
         }).catch((err) => {
             dispatch({
-                type: ACTION_FAILED,
+                type: UPDATE_USER_FAILED,
                 err: err
             })
         })

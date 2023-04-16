@@ -12,8 +12,8 @@ export const ProfilePage = () => {
 
     const [form, setValue] = useState({ 
         name: name,
-        email: email, 
-        password: '*****'
+        email: email,
+        password: ''
     });
 
    const onChange = e => {
@@ -21,22 +21,22 @@ export const ProfilePage = () => {
        setIsEdit(true);
   };
   
-  const resetForm = () => {
-    setValue({
-        name: name,
-        email: email, 
-        password: '*****'
-    })
-    setIsEdit(false);
-  }
+    const resetForm = () => {
+        setValue({
+            name: name,
+            email: email, 
+            password: ''
+        })
+        setIsEdit(false);
+    }
 
-  const onFormUpdate = (e) => {
-    e.preventDefault();
+    const onFormUpdate = (e) => {
+        e.preventDefault();
 
-    const authToken = localStorage.getItem('accessToken');
+        const authToken = localStorage.getItem('accessToken');
 
-    dispatch(updateUserProfile(form.name, form.email, form.password, authToken))
-  }
+        dispatch(updateUserProfile(form.name, form.email, form.password, authToken));
+    }
 
     return (
         <>

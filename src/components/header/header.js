@@ -3,7 +3,7 @@ import {ListIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import {ProfileIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import {Logo} from '@ya.praktikum/react-developer-burger-ui-components';
 import { useSelector } from 'react-redux';
-import { NavLink, Outlet, useMatch } from 'react-router-dom';
+import { Link, NavLink, Outlet, useMatch } from 'react-router-dom';
 
 import headerStyles from './header.module.css';
 
@@ -38,9 +38,9 @@ const Header = () => {
                             </ul>
                         </nav>
 
-                        <div className={`${headerStyles.logo} pl-28`}>
+                        <Link to="/" className={`${headerStyles.logo} pl-28`}>
                             <Logo /> 
-                        </div>
+                        </Link>
                         
                         <div className={headerStyles.item}> 
                             <NavLink to="/profile" className={`${headerStyles.link} text text_type_main-default `}>

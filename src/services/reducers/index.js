@@ -9,7 +9,10 @@ import { GET_INGREDIENTS_DATA_SUCCESS,
     REPLACE_INGREDIENTS,
     SWITCH_TAB,
     CLEAN_CART,
-    ACTION_FAILED} from "../actions";
+    GET_INGREDIENTS_DATA_FAILED,
+    GET_INGREDIENTS_DATA_REQUEST,
+    GET_ORDER_DATA_REQUEST,
+    GET_ORDER_DATA_FAILED} from "../actions";
 
 import { userReducer } from "./user";
 
@@ -26,18 +29,33 @@ const initialState = {
         {tab: BUN, isActive: true},
         {tab: SAUCE, isActive: false},
         {tab: MAIN, isActive: false},
-    ]
+    ],
+
+    getIngredientsRequest: false,
+    getIngredientsFailed: false,
+
+    getOrderDataRequest: false,
+    getOrderDataFailed: false,
 }
 
 const constructorReducer = (state = initialState, action) => {
     switch(action.type) {
+        case GET_INGREDIENTS_DATA_REQUEST:
+            return {
+                ...state,
+                getIngredientsRequest: true
+            }
         case GET_INGREDIENTS_DATA_SUCCESS:
             return {
                 ...state,
+                getIngredientsRequest: false,
                 ingredients: action.ingredients
             }
-        case ACTION_FAILED:
-            return state;
+        case GET_INGREDIENTS_DATA_FAILED:
+            return {
+                ...state,
+                getIngredientsFailed: true
+            } 
         case SHOW_DETAIL_INGREDIENT:
             return {
                 ...state,
@@ -69,13 +87,25 @@ const constructorReducer = (state = initialState, action) => {
                     }
                 }
             }
+
+        case GET_ORDER_DATA_REQUEST: 
+            return {
+                ...state, 
+                getOrderDataRequest: true
+            }    
         case GET_ORDER_DATA_SUCCESS:
             return {
                 ...state,
+                getOrderDataRequest: false,
                 order: {
                     id: action.order.number,
                 }
             }
+        case GET_ORDER_DATA_FAILED: 
+            return {
+                ...state, 
+                getOrderDataFailed: true
+        } 
         case DELETE_INGREDIENT:
             return {
                 ...state,

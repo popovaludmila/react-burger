@@ -1,5 +1,6 @@
 import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { BASE_URL } from '../../utils/data';
 import { request } from '../../utils/data-api';
 import resetPasswordStyles from './reset-password.module.css';
@@ -7,7 +8,7 @@ import resetPasswordStyles from './reset-password.module.css';
 export const ResetPasswordPage = () => {
     const [form, setValue] = useState({ 
         password: '', 
-        token: ''
+        message: ''
     });
 
     const onChange = e => {
@@ -49,8 +50,8 @@ export const ResetPasswordPage = () => {
                         type={'text'}
                         placeholder={'Введите код из письма'}
                         onChange={onChange}
-                        value={form.token}
-                        name="code"
+                        value={form.message}
+                        name="message"
                         />
                     </div>
                     <Button htmlType="submit" type="primary" size="medium">
@@ -59,7 +60,9 @@ export const ResetPasswordPage = () => {
                 </form>
                     <p className="text text_type_main-default text_color_inactive pt-20">
                         Вспомнили пароль?
-                        <a className={`${resetPasswordStyles.link} pl-2`} href='1'>Войти</a>
+                        <Link to="/login"  className={`${resetPasswordStyles.link} pl-2`}>
+                            Войти
+                        </Link>
                     </p>
                 </div>
         </>
