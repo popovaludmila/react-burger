@@ -8,7 +8,7 @@ import resetPasswordStyles from './reset-password.module.css';
 export const ResetPasswordPage = () => {
     const [form, setValue] = useState({ 
         password: '', 
-        message: ''
+        token: ''
     });
 
     const onChange = e => {
@@ -50,8 +50,8 @@ export const ResetPasswordPage = () => {
                         type={'text'}
                         placeholder={'Введите код из письма'}
                         onChange={onChange}
-                        value={form.message}
-                        name="message"
+                        value={form.token}
+                        name="token"
                         />
                     </div>
                     <Button htmlType="submit" type="primary" size="medium">
