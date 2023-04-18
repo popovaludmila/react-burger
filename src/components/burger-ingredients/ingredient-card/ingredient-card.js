@@ -1,22 +1,26 @@
 import ingredientCardStyles from './ingredient-card.module.css';
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import {ingredientPropTypes} from '../../../utils/prop-types.js';
-import { useDispatch, useSelector } from 'react-redux';
-import { showDetailIngredient } from '../../../services/actions';
+import {  useSelector } from 'react-redux';
+//import { showDetailIngredient } from '../../../services/actions';
 import { useDrag } from 'react-dnd';
+import { Link, useLocation } from 'react-router-dom';
+import { INGREDIENTS } from '../../../utils/data';
 
 const IngredientCard = ({item}) => {
+  const location = useLocation();
+
   const [, dragRef] = useDrag({
     type: 'ingredient',
     item: item
   });
 
-  const {image, price, name} = item;
-  const dispatch = useDispatch();
+  const {image, price, name, _id} = item;
+  //const dispatch = useDispatch();
 
-  const onIngredientClick = () => dispatch(showDetailIngredient(item));
+ // const onIngredientClick = () => dispatch(showDetailIngredient(item));
 
-  const cart = useSelector((state) => state.cart)
+  const cart = useSelector((state) => state.constructorBurger.cart)
 
   let count = 0;
   cart.fillings.forEach(filling =>  {
@@ -33,7 +37,8 @@ const IngredientCard = ({item}) => {
 
   return (
     <div>
-      <li ref={dragRef} className={`${ingredientCardStyles.item} mb-10`} onClick={onIngredientClick}>
+      <Link to={ `/${INGREDIENTS}/${_id}`} state={{background: location}}
+      ref={dragRef} className={`${ingredientCardStyles.item} mb-10`} >
         {count ? <Counter count={count} size="default" extraClass="m-1" /> : null}
         
         <img src={image} width="240" height="120" alt={name} />
@@ -44,13 +49,10 @@ const IngredientCard = ({item}) => {
           </span>
           <CurrencyIcon type="primary" />
         </div>
-        <a
-          className={`${ingredientCardStyles.name} text text_type_main-default`}
-          href="t"
-        >
+        <p className={`${ingredientCardStyles.name} text text_type_main-default`}>
           {name}
-        </a>
-      </li>
+        </p>
+      </Link>
     </div>
   );
 }

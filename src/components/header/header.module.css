@@ -24,13 +24,7 @@
     display: flex;
     width: 290px;
     height: auto;
-    transform: translateX(-50%);
-}
-
-.button {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+    transform: translateX(-30%);
 }
 
 .profile {
@@ -51,4 +45,12 @@
     padding-left: 0;
 }
 
+.active {
+    padding-left: 8px;
+    color: #F2F2F3;
+}
 
+.inactive {
+    padding-left: 8px;
+    color: #8585AD;
+}

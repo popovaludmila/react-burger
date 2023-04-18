@@ -1,6 +1,6 @@
+import { combineReducers } from "redux";
 import { BUN, MAIN, SAUCE } from "../../utils/data";
-import { GET_INGREDIENTS_DATA_SUCCESS, 
-    GET_INGREDIENTS_DATA_FAILED, 
+import { GET_INGREDIENTS_DATA_SUCCESS,  
     SHOW_DETAIL_INGREDIENT, 
     CLOSE_MODAL, 
     ADD_INGREDIENT_TO_CART,
@@ -8,7 +8,13 @@ import { GET_INGREDIENTS_DATA_SUCCESS,
     DELETE_INGREDIENT,
     REPLACE_INGREDIENTS,
     SWITCH_TAB,
-    CLEAN_CART} from "../actions";
+    CLEAN_CART,
+    GET_INGREDIENTS_DATA_FAILED,
+    GET_INGREDIENTS_DATA_REQUEST,
+    GET_ORDER_DATA_REQUEST,
+    GET_ORDER_DATA_FAILED} from "../actions";
+
+import { userReducer } from "./user";
 
 const initialState = {
     ingredients: [],
@@ -23,18 +29,35 @@ const initialState = {
         {tab: BUN, isActive: true},
         {tab: SAUCE, isActive: false},
         {tab: MAIN, isActive: false},
-    ]
+    ],
+
+    getIngredientsRequest: false,
+    getIngredientsFailed: false,
+
+    getOrderDataRequest: false,
+    getOrderDataFailed: false,
+
+    errorMessage: null
 }
 
-export const rootReducer = (state = initialState, action) => {
+const constructorReducer = (state = initialState, action) => {
     switch(action.type) {
+        case GET_INGREDIENTS_DATA_REQUEST:
+            return {
+                ...state,
+                getIngredientsRequest: true
+            }
         case GET_INGREDIENTS_DATA_SUCCESS:
             return {
                 ...state,
+                getIngredientsRequest: false,
                 ingredients: action.ingredients
             }
         case GET_INGREDIENTS_DATA_FAILED:
-            return state;
+            return {
+                ...state,
+                getIngredientsFailed: true,
+            } 
         case SHOW_DETAIL_INGREDIENT:
             return {
                 ...state,
@@ -66,13 +89,25 @@ export const rootReducer = (state = initialState, action) => {
                     }
                 }
             }
+
+        case GET_ORDER_DATA_REQUEST: 
+            return {
+                ...state, 
+                getOrderDataRequest: true
+            }    
         case GET_ORDER_DATA_SUCCESS:
             return {
                 ...state,
+                getOrderDataRequest: false,
                 order: {
                     id: action.order.number,
                 }
             }
+        case GET_ORDER_DATA_FAILED: 
+            return {
+                ...state, 
+                getOrderDataFailed: true
+        } 
         case DELETE_INGREDIENT:
             return {
                 ...state,
@@ -121,3 +156,9 @@ export const rootReducer = (state = initialState, action) => {
             return state;
     }
 }
+
+
+export const rootReducer = combineReducers({
+    constructorBurger: constructorReducer,
+    user: userReducer
+});

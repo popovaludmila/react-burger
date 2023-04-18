@@ -1,0 +1,6 @@
+.main {
+    display: flex;
+    font-display: row;
+    align-items: flex-start;
+    justify-content: center;
+}

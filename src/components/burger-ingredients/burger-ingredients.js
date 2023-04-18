@@ -8,17 +8,15 @@ import { useSelector } from "react-redux";
 
 
 const BurgerIngredients = () => {
-    const tabs = useSelector(state => state.tabs);
+    const tabs = useSelector(state => state.constructorBurger.tabs);
     const currentTab = tabs.find(tab => tab.isActive);
 
     const scrollTo = (tab) => {
-        console.log(tab);
-
         const activeTab = document.getElementById(tab)
         activeTab.scrollIntoView({behavior:"smooth"});
     }
 
-    const detailIngredient = useSelector(state => state.detailIngredient);
+    const detailIngredient = useSelector(state => state.constructorBurger.detailIngredient);
 
     return (
         <section className={`${burgerIngredientsStyles.wrapper}`} >

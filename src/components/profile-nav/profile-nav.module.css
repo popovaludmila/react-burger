@@ -1,0 +1,29 @@
+.wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content:flex-start;
+    align-items: flex-start;
+    word-wrap: break-word;
+}
+
+.nav {
+    display: flex;
+    flex-direction: column;
+    max-width: 320px;
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    height: 64px;
+   
+}
+
+.caption {
+    opacity: 0.4;
+}
+
+.active {
+    color: #F2F2F3;
+
+}
