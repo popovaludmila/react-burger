@@ -6,9 +6,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { useInView } from "react-intersection-observer";
 import { switchTab } from "../../../services/actions";
 
+type TBurgerIngredientsBlockProps = {
+   title: string;
+   ingredientsType: string;
+}
 
-
-const BurgerIngredientsBlock = ({title, ingredientsType}) => {
+const BurgerIngredientsBlock = ({title, ingredientsType}:TBurgerIngredientsBlockProps):JSX.Element => {
+   
    const {ref, inView} = useInView({
       threshold: 0
    });
@@ -27,7 +31,7 @@ const BurgerIngredientsBlock = ({title, ingredientsType}) => {
    );
    
    const ingredientCarts = ingredients.map((item) => (
-      <IngredientCard key={item._id} item={item}/>
+      <IngredientCard item={item}/>
    ));
 
    return (

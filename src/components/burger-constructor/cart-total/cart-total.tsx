@@ -2,13 +2,16 @@ import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-co
 import cartTotalStyles from './cart-total.module.css';
 import Modal from '../../modal/modal';
 import OrderModal from '../../modal/order-modal/order-modal';
-import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import {  cleanCart, createOrder } from '../../../services/actions';
 import { useNavigate } from 'react-router-dom';
 import { LOGIN } from '../../../utils/data';
 
-const CartTotal = ({total}) => {
+type TCartTotalProps = {
+    total: number;
+}
+
+const CartTotal = ({total}:TCartTotalProps):JSX.Element => {
     const cart = useSelector(state => state.constructorBurger.cart);
     const dispatch = useDispatch();
     const order = useSelector(state => state.constructorBurger.order);
@@ -54,10 +57,5 @@ const CartTotal = ({total}) => {
         </div>
     )
 }
-
-CartTotal.propTypes = {
-    total: PropTypes.number.isRequired,
-}
-
 
 export default CartTotal;

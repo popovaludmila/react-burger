@@ -9,7 +9,7 @@ import { useDrop } from "react-dnd";
 import { addIngredientToCart } from "../../services/actions";
 import { BUN } from "../../utils/data";
 
-const BurgerConstructor = () => {
+const BurgerConstructor = ():JSX.Element => {
     const dispatch = useDispatch()
     
     const [{isHover, monitorItem}, dropRef] = useDrop({

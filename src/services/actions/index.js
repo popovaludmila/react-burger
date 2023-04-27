@@ -1,4 +1,3 @@
-import { TIngredient, TIngredientData } from "../../types/types";
 import { BASE_URL } from "../../utils/data";
 import { fetchWithRefresh, request } from "../../utils/data-api";
 
@@ -38,17 +37,17 @@ export const replaceIngredient = (draggingKey, hoverKey) => {
     }
 }
 
-export const deleteIngredient = (key:string) => {
+export const deleteIngredient = (key) => {
     return {
         type: DELETE_INGREDIENT,
-        payload: key
+        key: key
     }
 }
 
-export const showDetailIngredient = (ingredient:TIngredientData) => {
+export const showDetailIngredient = (ingredient) => {
     return {
         type: SHOW_DETAIL_INGREDIENT,
-        payload: ingredient,
+        ingredient: ingredient,
     }
 }
 
@@ -58,7 +57,7 @@ export const closeModal = () => {
     }
 }
 
-export const addIngredientToCart = (ingredient: TIngredient, key: string) => {
+export const addIngredientToCart = (ingredient, key) => {
     return {
         type: ADD_INGREDIENT_TO_CART,
         ingredient: ingredient,
@@ -81,13 +80,13 @@ export const getIngredients = () => {
             .then((data) => {
                 dispatch({
                     type: GET_INGREDIENTS_DATA_SUCCESS,
-                    payload: data.data
+                    ingredients: data.data
                 })
             })
             .catch((err) => {
                 dispatch({
                     type: GET_INGREDIENTS_DATA_FAILED,
-                    payload: err
+                    err: err
                 })
             });
     }
@@ -108,12 +107,12 @@ export const createOrder = (orderIngredientIds) => {
         .then((data) => {
             dispatch({
                 type: GET_ORDER_DATA_SUCCESS,
-                payload: data.order
+                order: data.order
             })
         }).catch((err) => {
             dispatch({
                 type: GET_ORDER_DATA_FAILED,
-                payload: err
+                err: err
             })
         });
     }

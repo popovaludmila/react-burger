@@ -1,18 +1,22 @@
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 import constructorFillingtStyles from './constructor-filling.module.css';
-import {ingredientPropTypes} from '../../../utils/prop-types';
 import { useDispatch } from 'react-redux';
 import { deleteIngredient, replaceIngredient } from '../../../services/actions';
 import { useDrag, useDrop } from 'react-dnd';
 import { useRef } from 'react';
+import { TIngredient } from '../../../types/types';
 
-const ConstructorFilling = ({item}) => {
+type TConstructorFillingProps = {
+    item: TIngredient;
+}
+
+const ConstructorFilling = ({item}:TConstructorFillingProps):JSX.Element => {
     const dispatch = useDispatch();
-    const ref = useRef();
+    const ref = useRef<HTMLLIElement | null>(null);
 
-    const [, drop] = useDrop({
+    const [, drop] = useDrop<TIngredient>({
         accept: "item",
-        hover: (hoverItem, monitor) => {
+        hover: (hoverItem) => {
 
             const hoverKey = hoverItem.key;
             const dragIndex = item.key;
@@ -26,12 +30,12 @@ const ConstructorFilling = ({item}) => {
 
     const [{isDragging}, drag] = useDrag({
         type: "item",
-        collect: monitor => ({
-            isDragging: monitor.isDragging()
-        }),
         item: () => ({
             key: item.key
-        })
+        }),
+        collect: monitor => ({
+            isDragging: monitor.isDragging()
+        }) 
     });
 
     drag(drop(ref))
@@ -59,10 +63,6 @@ const ConstructorFilling = ({item}) => {
             />
         </li>
     )
-}
-
-ConstructorFilling.propTypes = {
-    item: ingredientPropTypes.isRequired
 }
 
 export default ConstructorFilling;

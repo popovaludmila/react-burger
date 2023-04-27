@@ -1,17 +1,38 @@
-import { TUserActionTypes, TUserRegister } from "../../types/user";
 import { BASE_URL } from "../../utils/data";
 import { fetchWithRefresh, request } from "../../utils/data-api";
 
+export const REGISTER_REQUEST = 'REGISTER_REQUES';
+export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
+export const REGISTER_FAILED = 'REGISTER_FAILED';
+
+export const LOGIN_REQUEST = 'LOGIN_REQUES';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGIN_FAILED = 'LOGIN_FAILED';
+
+export const LOGOUT_REQUEST = 'LOGOUT_REQUEST';
+export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
+export const LOGOUT_FAILED = 'LOGOUT_FAILED';
+
+export const GET_USER_REQUEST = 'GET_USER_REQUEST';
+export const GET_USER_SUCCESS = 'GET_USER_SUCCESS';
+export const GET_USER_FAILED = 'GET_USER_FAILED';
+
+export const UPDATE_USER_REQUEST = 'UPDATE_USER_REQUEST';
+export const UPDATE_USER_SUCCESS = 'UPDATE_USER_SUCCESS';
+export const UPDATE_USER_FAILED = 'UPDATE_USER_FAILED';
+
+export const ERROR_CLEAN = 'ERROR_CLEAN';
+
 export const errorClean = () => {
     return {
-        type: TUserActionTypes.ERROR_CLEAN,
+        type: ERROR_CLEAN,
     }
 }
 
-export const register = (user:TUserRegister, onSuccess, onError) => {
+export const register = (user, onSuccess, onError) => {
     return (dispatch) => {
         dispatch({
-            type: TUserActionTypes.REGISTER_REQUEST
+            type: REGISTER_REQUEST
         });
         request(`${BASE_URL}/auth/register`, {
             method: 'POST',
@@ -22,8 +43,8 @@ export const register = (user:TUserRegister, onSuccess, onError) => {
         }).then((data) =>{
             if(data.success) {
                 dispatch({
-                    type: TUserActionTypes.REGISTER_SUCCESS,
-                    payload: data
+                    type: REGISTER_SUCCESS,
+                    data: data
                 })
                 localStorage.setItem('accessToken', data.accessToken)
                 localStorage.setItem('refreshToken', data.refreshToken)
@@ -31,18 +52,18 @@ export const register = (user:TUserRegister, onSuccess, onError) => {
             }
         }).catch((err) => {
             dispatch({
-                type: TUserActionTypes.REGISTER_FAILED,
-                payload: err.message
+                type: REGISTER_FAILED,
+                err: err.message
             })
         })
     }
 }
 
 
-export const login = (email:string, password:string, onSuccess, onError) => {
+export const login = (email, password, onSuccess, onError) => {
     return (dispatch) => {
         dispatch({
-            type: TUserActionTypes.LOGIN_REQUEST
+            type: LOGIN_REQUEST
         });
         request(`${BASE_URL}/auth/login`, {
             method: 'POST',
@@ -58,8 +79,8 @@ export const login = (email:string, password:string, onSuccess, onError) => {
         }).then((data) => {
             if(data.success) {
                 dispatch({
-                    type: TUserActionTypes.LOGIN_SUCCESS,
-                    payload: data
+                    type: LOGIN_SUCCESS,
+                    data: data
                 })
                 localStorage.setItem('accessToken', data.accessToken)
                 localStorage.setItem('refreshToken', data.refreshToken)
@@ -67,17 +88,17 @@ export const login = (email:string, password:string, onSuccess, onError) => {
             }
         }).catch((err) => {
             dispatch({
-                type: TUserActionTypes.LOGIN_FAILED,
-                payload: err.message
+                type: LOGIN_FAILED,
+                err: err.message
             })
         })
     }
 }
 
-export const logout = (token:string) => {
+export const logout = (token) => {
     return (dispatch) => {
         dispatch({
-            type: TUserActionTypes.LOGOUT_REQUEST
+            type: LOGOUT_REQUEST
         });
         request(`${BASE_URL}/auth/logout`, {
             method: 'POST',
@@ -88,23 +109,23 @@ export const logout = (token:string) => {
         }).then((data) => {
             if(data.success) {
                 dispatch({
-                    type: TUserActionTypes.LOGOUT_SUCCESS
+                    type: LOGOUT_SUCCESS
                 })
                 localStorage.clear();
             }
         }).catch((err) => 
             dispatch({
-                type: TUserActionTypes.LOGOUT_FAILED,
-                payload: err
+                type: LOGOUT_FAILED,
+                err: err
             })
         )
     }
 }
 
-export const getUser = (token:string) => {
+export const getUser = (token) => {
     return (dispatch) => {
         dispatch({
-            type: TUserActionTypes.GET_USER_REQUEST
+            type: GET_USER_REQUEST
         });
         fetchWithRefresh(`${BASE_URL}/auth/user`, {
             method: 'GET',
@@ -116,14 +137,14 @@ export const getUser = (token:string) => {
         }).then((data) => {
             if (data.success) {
                 dispatch ({
-                    type: TUserActionTypes.GET_USER_SUCCESS,
-                    payload: data
+                    type: GET_USER_SUCCESS,
+                    data: data
                 })
             }         
         }).catch((err) => {
             dispatch({
-                type: TUserActionTypes.GET_USER_FAILED,
-                payload: err
+                type: GET_USER_FAILED,
+                err: err
             })
         })
     }
@@ -138,10 +159,10 @@ export const checkIsUserAuth = () => {
     }
 }
 
-export const updateUserProfile = (name:string, email:string, password:string, token:string) => {
+export const updateUserProfile = (name, email, password, token) => {
     return (dispatch) => {
         dispatch({
-            type: TUserActionTypes.UPDATE_USER_REQUEST
+            type: UPDATE_USER_REQUEST
         });
         fetchWithRefresh(`${BASE_URL}/auth/user`, {
             method: 'PATCH',
@@ -153,14 +174,14 @@ export const updateUserProfile = (name:string, email:string, password:string, to
         }).then((data) => {
             if (data.success) {
                 dispatch ({
-                    type: TUserActionTypes.UPDATE_USER_SUCCESS,
-                    payload: data
+                    type: UPDATE_USER_SUCCESS,
+                    data: data
                 })
             }         
         }).catch((err) => {
             dispatch({
-                type: TUserActionTypes.UPDATE_USER_FAILED,
-                payload: err
+                type: UPDATE_USER_FAILED,
+                err: err
             })
         })
     }

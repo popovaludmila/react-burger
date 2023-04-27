@@ -23,7 +23,8 @@ const IngredientCard = ({item}:TIngredientCardProps):JSX.Element => {
 
   const cart = useSelector((state) => state.constructorBurger.cart)
 
-  let count = 0;
+  let count:number = 0;
+
   cart.fillings.forEach(filling =>  {
     if (filling._id === item._id) {
       count++;

@@ -54,6 +54,7 @@ export type TUserState = {
     updateUserRequest: boolean;
     updateUserFailed: boolean;
 }
+
 export type TUserAction = {
     type: string;
     payload?: any;

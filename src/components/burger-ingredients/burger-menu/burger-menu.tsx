@@ -2,7 +2,12 @@ import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import burgerMenuStyles from './burger-menu.module.css';
 import { BUN, MAIN, SAUCE } from "../../../utils/data";
 
-const BurgerMenu = ({onTabClick, currentTab}) => {
+type TBurgerMenuProps = {
+    onTabClick: () => void;
+    currentTab: string;
+}
+
+const BurgerMenu = ({onTabClick, currentTab}:TBurgerMenuProps):JSX.Element => {
 
     return (
         <nav>

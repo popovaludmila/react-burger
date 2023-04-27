@@ -12,5 +12,8 @@ export type TIngredientData = {
         image_large: string;
 }
 
-export type TIngredient = Pick<TIngredientData, '_id' | 'name' | 'price' | 'image'>
+export type TIngredient = Pick<TIngredientData, '_id' | 'name' | 'price' | 'image'> & {
+        key?: string;
+}
+
     

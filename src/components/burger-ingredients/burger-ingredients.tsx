@@ -7,7 +7,7 @@ import Modal from "../modal/modal";
 import { useSelector } from "react-redux";
 
 
-const BurgerIngredients = () => {
+const BurgerIngredients = ():JSX.Element => {
     const tabs = useSelector(state => state.constructorBurger.tabs);
     const currentTab = tabs.find(tab => tab.isActive);
 
