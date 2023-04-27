@@ -1,4 +1,5 @@
 import { combineReducers } from "redux";
+import { TIngredient, TIngredientData } from "../../types/types";
 import { BUN, MAIN, SAUCE } from "../../utils/data";
 import { GET_INGREDIENTS_DATA_SUCCESS,  
     SHOW_DETAIL_INGREDIENT, 
@@ -16,7 +17,37 @@ import { GET_INGREDIENTS_DATA_SUCCESS,
 
 import { userReducer } from "./user";
 
-const initialState = {
+type TCartState = {
+    top: TIngredient | null;
+    fillings: Array<TIngredient> |  any[]
+    bottom: TIngredient | null;
+}
+
+type TOrderState = {
+    id: number;
+}
+
+type TTabState = {
+    tab: string;
+    isActive: boolean;
+}
+
+type TBurgerConstructorState = {
+    ingredients: Array<TIngredientData> | any[];
+    cart: TCartState;
+    detailIngredient: TIngredientData | null;
+    order: TOrderState | null;
+    tabs: Array<TTabState>;
+
+    getIngredientsRequest: boolean;
+    getIngredientsFailed: boolean;
+
+    getOrderDataRequest: boolean;
+    getOrderDataFailed: boolean,
+
+}
+
+const initialState:TBurgerConstructorState = {
     ingredients: [],
     cart: {
         top: null,
@@ -36,11 +67,13 @@ const initialState = {
 
     getOrderDataRequest: false,
     getOrderDataFailed: false,
-
-    errorMessage: null
+}
+export type TBurgerConstructorAction = {
+    type: string;
+    payload?: any;
 }
 
-const constructorReducer = (state = initialState, action) => {
+const constructorReducer = (state = initialState, action:TBurgerConstructorAction):TBurgerConstructorState => {
     switch(action.type) {
         case GET_INGREDIENTS_DATA_REQUEST:
             return {
@@ -51,7 +84,7 @@ const constructorReducer = (state = initialState, action) => {
             return {
                 ...state,
                 getIngredientsRequest: false,
-                ingredients: action.ingredients
+                ingredients: action.payload
             }
         case GET_INGREDIENTS_DATA_FAILED:
             return {
@@ -61,7 +94,7 @@ const constructorReducer = (state = initialState, action) => {
         case SHOW_DETAIL_INGREDIENT:
             return {
                 ...state,
-                detailIngredient: action.ingredient
+                detailIngredient: action.payload
             }
         case CLOSE_MODAL:
             return {
@@ -70,14 +103,14 @@ const constructorReducer = (state = initialState, action) => {
                 order: null
             }
         case ADD_INGREDIENT_TO_CART:
-            if (action.ingredient.type  === BUN) {
+            if (action.payload.type  === BUN) {
                 return{
                     ...state,
                 
                     cart: {
                         ...state.cart,
-                        top: action.ingredient,
-                        bottom: action.ingredient
+                        top: action.payload,
+                        bottom: action.payload
                     }
                 }
             } else {
@@ -85,7 +118,7 @@ const constructorReducer = (state = initialState, action) => {
                     ...state,
                     cart: {
                         ...state.cart,
-                        fillings: [...state.cart.fillings, {...action.ingredient, key: action.key}]
+                        fillings: [...state.cart.fillings, {...action.payload, key: action.payload}]
                     }
                 }
             }
@@ -100,7 +133,7 @@ const constructorReducer = (state = initialState, action) => {
                 ...state,
                 getOrderDataRequest: false,
                 order: {
-                    id: action.order.number,
+                    id: action.payload.number,
                 }
             }
         case GET_ORDER_DATA_FAILED: 
@@ -113,14 +146,14 @@ const constructorReducer = (state = initialState, action) => {
                 ...state,
                 cart: {
                     ...state.cart,
-                    fillings: state.cart.fillings.filter((filling) => filling.key !== action.key)
+                    fillings: state.cart.fillings.filter((filling) => filling.key !== action.payload)
                 }
             }
         case REPLACE_INGREDIENTS:
             let fillings = [...state.cart.fillings]
 
-            const hoverIndex = fillings.findIndex((filling) => filling.key === action.hoverKey);
-            const draggingIndex = fillings.findIndex((filling) => filling.key === action.draggingKey);
+            const hoverIndex = fillings.findIndex((filling) => filling.key === action.payload);
+            const draggingIndex = fillings.findIndex((filling) => filling.key === action.payload);
 
             fillings.splice(draggingIndex, 1)
             fillings.splice(hoverIndex, 0, state.cart.fillings[draggingIndex])
@@ -136,11 +169,11 @@ const constructorReducer = (state = initialState, action) => {
             return {
                 ...state,
                 tabs: state.tabs.map((tab) => {
-                    if (tab.tab !== action.tab) {
+                    if (tab.tab !== action.payload) {
                         return tab
                     }
 
-                    return {tab: action.tab, isActive: action.isActive};
+                    return {tab: action.payload, isActive: action.payload};
                 })
             }
         case CLEAN_CART: 
