@@ -1,10 +1,6 @@
-import { GET_USER_FAILED, GET_USER_REQUEST, GET_USER_SUCCESS, 
-    LOGIN_FAILED, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT_FAILED, 
-    LOGOUT_REQUEST, LOGOUT_SUCCESS, REGISTER_FAILED, 
-    REGISTER_REQUEST, REGISTER_SUCCESS, UPDATE_USER_FAILED, 
-    UPDATE_USER_REQUEST, UPDATE_USER_SUCCESS, ERROR_CLEAN } from "../actions/user"
+import { TUserAction, TUserActionTypes, TUserState } from "../../types/user"
 
-const initialState = {
+const initialState:TUserState = {
     isAuth: false,
     user: {
         email: null, 
@@ -29,60 +25,60 @@ const initialState = {
     updateUserFailed: false,
 }
 
-export const userReducer = (state = initialState, action) => {
+export const userReducer = (state = initialState, action:TUserAction):TUserState => {
     switch(action.type) {
-        case REGISTER_REQUEST: 
+        case TUserActionTypes.REGISTER_REQUEST: 
             return {
                 ...state,
                 registrationRequest: true
             }
-        case REGISTER_SUCCESS:
+        case TUserActionTypes.REGISTER_SUCCESS:
             return {
                 ...state,
                 isAuth: true,
                 user: {
                     ...state.user,
-                    email: action.data.user.email,
-                    name: action.data.user.name,
+                    email: action.payload.user.email,
+                    name: action.payload.user.name,
                 },
                 registrationRequest: false
             }
-        case REGISTER_FAILED:
+        case TUserActionTypes.REGISTER_FAILED:
                 return {
                     ...state,
                     registrationFailed: true,
-                    errorMessage: action.err
+                    errorMessage: action.payload
                 } 
 
-        case LOGIN_REQUEST: 
+        case TUserActionTypes.LOGIN_REQUEST: 
             return {
                 ...state,
                 loginRequest: true
             }
-        case LOGIN_SUCCESS:
+        case TUserActionTypes.LOGIN_SUCCESS:
             return {
                 ...state,
                 isAuth: true,
                 loginRequest: false,
                 user: {
                     ...state.user,
-                    email: action.data.user.email,
-                    name: action.data.user.name,
+                    email: action.payload.user.email,
+                    name: action.payload.user.name,
                 }
             }
-        case LOGIN_FAILED:
+        case TUserActionTypes.LOGIN_FAILED:
             return {
                 ...state,
                 loginFailed: true,
-                errorMessage: action.err
+                errorMessage: action.payload
             } 
 
-        case LOGOUT_REQUEST: 
+        case TUserActionTypes.LOGOUT_REQUEST: 
             return {
                 ...state,
                 logoutRequest: true
         }
-        case LOGOUT_SUCCESS:
+        case TUserActionTypes.LOGOUT_SUCCESS:
             return {
                 ...state,
                 isAuth: false,
@@ -92,55 +88,55 @@ export const userReducer = (state = initialState, action) => {
                     name: null
                 }
             }
-        case LOGOUT_FAILED:
+        case TUserActionTypes.LOGOUT_FAILED:
             return {
                 ...state,
                 logoutFailed: true
             }
 
-        case GET_USER_REQUEST: 
+        case TUserActionTypes.GET_USER_REQUEST: 
             return {
                 ...state,
                 getUserRequest: true
         }
-        case GET_USER_SUCCESS:
+        case TUserActionTypes.GET_USER_SUCCESS:
             return {
                 ...state,
                 isAuth: true,
                 getUserRequest: false,
                 user: {
                     ...state.user,
-                    email: action.data.user.email,
-                    name: action.data.user.name,
+                    email: action.payload.user.email,
+                    name: action.payload.user.name,
                 }
             }
-        case GET_USER_FAILED:
+        case TUserActionTypes.GET_USER_FAILED:
             return {
                 ...state,
                 getUserFailed: true
             } 
-        case UPDATE_USER_REQUEST: 
+        case TUserActionTypes.UPDATE_USER_REQUEST: 
             return {
                 ...state,
                 updateUserRequest: true
         }
-        case UPDATE_USER_SUCCESS:
+        case TUserActionTypes.UPDATE_USER_SUCCESS:
             return {
                 ...state,
                 isAuth: true,
                 updateUserRequest: false,
                 user: {
                     ...state.user,
-                    email: action.data.user.email,
-                    name: action.data.user.name,
+                    email: action.payload.user.email,
+                    name: action.payload.user.name,
                 }
             }
-        case UPDATE_USER_FAILED:
+        case TUserActionTypes.UPDATE_USER_FAILED:
             return {
                 ...state,
                 updateUserFailed: true
             } 
-        case ERROR_CLEAN:
+        case TUserActionTypes.ERROR_CLEAN:
             return {
                 ...state,
                 errorMessage: null

@@ -1,13 +1,17 @@
 import ingredientCardStyles from './ingredient-card.module.css';
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import {ingredientPropTypes} from '../../../utils/prop-types.js';
-import {  useSelector } from 'react-redux';
-//import { showDetailIngredient } from '../../../services/actions';
+import { useSelector } from 'react-redux';
 import { useDrag } from 'react-dnd';
 import { Link, useLocation } from 'react-router-dom';
 import { INGREDIENTS } from '../../../utils/data';
+import { TIngredient } from '../../../types/types';
 
-const IngredientCard = ({item}) => {
+
+type TIngredientCardProps = {
+    item: TIngredient;
+}
+
+const IngredientCard = ({item}:TIngredientCardProps):JSX.Element => {
   const location = useLocation();
 
   const [, dragRef] = useDrag({
@@ -16,9 +20,6 @@ const IngredientCard = ({item}) => {
   });
 
   const {image, price, name, _id} = item;
-  //const dispatch = useDispatch();
-
- // const onIngredientClick = () => dispatch(showDetailIngredient(item));
 
   const cart = useSelector((state) => state.constructorBurger.cart)
 
@@ -56,10 +57,5 @@ const IngredientCard = ({item}) => {
     </div>
   );
 }
-
-IngredientCard.propTypes = {
-  item: ingredientPropTypes.isRequired
-};
-
 
 export default IngredientCard;
