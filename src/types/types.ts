@@ -19,12 +19,10 @@ export type TConstructorIngredient = TIngredient & {
 }
 export interface IBaseResponse  {
         success: boolean;
-        message?: string;
 }
-export interface ITokenResponse {
-        success: boolean;
-        accessToken?: string;
-        refreshToken?: string;
+export interface ITokenResponse extends IBaseResponse {
+        accessToken: string;
+        refreshToken: string;
 }
 
     
