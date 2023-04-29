@@ -5,7 +5,8 @@ import { updateUserProfile } from '../../services/actions/user';
 
 import profileStyles from './profile.module.css';
 
-export const ProfilePage = () => {
+export const ProfilePage = ():JSX.Element => {
+
     const dispatch = useDispatch();
     const [isEdit, setIsEdit] = useState(false)
     const {name, email} = useSelector(state => state.user.user);
@@ -16,7 +17,7 @@ export const ProfilePage = () => {
         password: ''
     });
 
-   const onChange = e => {
+   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
        setValue({ ...form, [e.target.name]: e.target.value });
        setIsEdit(true);
   };
@@ -30,7 +31,7 @@ export const ProfilePage = () => {
         setIsEdit(false);
     }
 
-    const onFormUpdate = (e) => {
+    const onFormUpdate = (e: React.SyntheticEvent) => {
         e.preventDefault();
 
         const authToken = localStorage.getItem('accessToken');

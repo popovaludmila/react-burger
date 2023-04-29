@@ -2,8 +2,9 @@ import ingredientModalStyles from './ingredient-modal.module.css';
 import { useSelector } from 'react-redux';
 import { useMatch } from 'react-router-dom';
 
-const IngredientModal = () => {
+const IngredientModal = ():JSX.Element => {
     const match = useMatch("/ingredients/:id");
+
     const id = match.params.id;
 
     const ingredients = useSelector(state => state.constructorBurger.ingredients);

@@ -4,17 +4,17 @@ import { useDispatch } from 'react-redux';
 import { deleteIngredient, replaceIngredient } from '../../../services/actions';
 import { useDrag, useDrop } from 'react-dnd';
 import { useRef } from 'react';
-import { TIngredient } from '../../../types/types';
+import { TConstructorIngredient } from '../../../types/types';
 
 type TConstructorFillingProps = {
-    item: TIngredient;
+    item: TConstructorIngredient;
 }
 
-const ConstructorFilling = ({item}:TConstructorFillingProps):JSX.Element => {
+const ConstructorFilling = ({item}: TConstructorFillingProps): JSX.Element => {
     const dispatch = useDispatch();
     const ref = useRef<HTMLLIElement | null>(null);
 
-    const [, drop] = useDrop<TIngredient>({
+    const [, drop] = useDrop<TConstructorIngredient>({
         accept: "item",
         hover: (hoverItem) => {
 

@@ -29,7 +29,7 @@ export const errorClean = () => {
     }
 }
 
-export const register = (user, onSuccess, onError) => {
+export const register = (user, onSuccess) => {
     return (dispatch) => {
         dispatch({
             type: REGISTER_REQUEST
@@ -60,7 +60,7 @@ export const register = (user, onSuccess, onError) => {
 }
 
 
-export const login = (email, password, onSuccess, onError) => {
+export const login = (email, password, onSuccess) => {
     return (dispatch) => {
         dispatch({
             type: LOGIN_REQUEST

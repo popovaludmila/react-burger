@@ -5,14 +5,14 @@ import { ORDERS, PROFILE } from '../../utils/data';
 
 import profileNavStyles from './profile-nav.module.css';
 
+export const ProfileNav = (): JSX.Element => {
 
-export const ProfileNav = () => {
     const dispatch = useDispatch();
     const matchProfile = useMatch("/profile");
     const matchOrderProfile = useMatch("/profile/orders")
 
 
-    const setActive = (match) => match ? `${profileNavStyles.active}` : 'text_color_inactive';
+    const setActive = (match: any) => match ? `${profileNavStyles.active}` : 'text_color_inactive';
 
     const onLogout = () => {
         const token = localStorage.getItem('refreshToken');

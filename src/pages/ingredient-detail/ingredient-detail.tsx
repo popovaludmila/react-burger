@@ -2,9 +2,9 @@ import { useSelector } from 'react-redux';
 import { useMatch } from 'react-router-dom';
 import ingredientDetailStyles from './ingredient-detail.module.css';
 
-export const IngredientDetailPage = () => { 
+export const IngredientDetailPage = (): JSX.Element => { 
     const match = useMatch("/ingredients/:id");
-    const id = match.params.id;
+    const id = match?.params.id;
 
     const ingredients = useSelector(state => state.constructorBurger.ingredients);
     const ingredient = ingredients.find((ingredient) => ingredient._id === id);

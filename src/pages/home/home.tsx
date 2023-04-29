@@ -4,7 +4,7 @@ import BurgerConstructor from "../../components/burger-constructor/burger-constr
 import BurgerIngredients from "../../components/burger-ingredients/burger-ingredients"
 import homeStyles from './home.module.css';
 
-export const HomePage = () => {
+export const HomePage = ():JSX.Element => {
     
    return (
         <main>

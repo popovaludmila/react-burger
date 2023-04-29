@@ -1,18 +1,24 @@
 import burgerConstructorStyles from "./burger-constructor.module.css";
 import CartTotal from './cart-total/cart-total';
 import ConstructorFilling from "./constructor-filling/constructor-filling";
-import ConstructorIngredient from './constructor-ingredient/constructor-ingredient.js';
+import ConstructorIngredient from './constructor-ingredient/constructor-ingredient';
 import uuid from 'react-uuid';
 import { useDispatch, useSelector } from "react-redux";
 import { BurgerSample } from "./burger-sample/burger-sample";
 import { useDrop } from "react-dnd";
 import { addIngredientToCart } from "../../services/actions";
 import { BUN } from "../../utils/data";
+import { TConstructorIngredient } from "../../types/types";
+
+type TConstructorCollectedTypes = {
+    isHover: boolean;
+    monitorItem: TConstructorIngredient & {type: string};
+}
 
 const BurgerConstructor = ():JSX.Element => {
     const dispatch = useDispatch()
     
-    const [{isHover, monitorItem}, dropRef] = useDrop({
+    const [{isHover, monitorItem}, dropRef] = useDrop <TConstructorIngredient, unknown, TConstructorCollectedTypes>({
         accept: "ingredient",
         drop(item) {
             dispatch(addIngredientToCart(item, uuid()));
@@ -67,7 +73,7 @@ const BurgerConstructor = ():JSX.Element => {
             
         </div>
         <div className="pr-4">
-            <CartTotal total={total} cart={cart} />
+            <CartTotal total={total} />
         </div>
         </section>
     )

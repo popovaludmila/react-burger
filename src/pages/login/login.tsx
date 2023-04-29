@@ -9,7 +9,7 @@ import { FORGOT_PASSWORD, REGISTER } from '../../utils/data';
 
 import loginStyles from './login.module.css';
 
-export const LoginPage = () => {
+export const LoginPage = (): JSX.Element => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const errorMessage = useSelector(state => state.user.errorMessage);
@@ -20,13 +20,13 @@ export const LoginPage = () => {
         password: '', 
     });
 
-   const onChange = e => {
+   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue({ ...form, [e.target.name]: e.target.value });
   };
     
 
 
-  const onFormSubmit = e => {
+  const onFormSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
     dispatch(login(form.email, form.password, () => navigate('/'), 
     ));

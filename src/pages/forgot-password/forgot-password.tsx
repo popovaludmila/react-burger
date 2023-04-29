@@ -5,17 +5,18 @@ import { BASE_URL, LOGIN } from '../../utils/data';
 import { request } from '../../utils/data-api';
 import forgotPasswordStyles from './forgot-password.module.css';
 
-export const ForgotPasswordPage = () => {
+export const ForgotPasswordPage = ():JSX.Element => {
     const navigate = useNavigate();
     const [form, setValue] = useState({ 
         email: ''
     });
 
-    const onChange = e => {
+    const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+       
         setValue({ ...form, [e.target.name]: e.target.value });
     };
 
-    const onSubmit = e => {
+    const onSubmit = (e:React.SyntheticEvent) => {
         e.preventDefault();
 
         request(`${BASE_URL}/password-reset`, {

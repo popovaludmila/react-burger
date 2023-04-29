@@ -1,6 +1,6 @@
 import notFoundStyles from './not-found.module.css'
 
-export const NotFoundPage = () => {
+export const NotFoundPage = (): JSX.Element => {
     return (
         <>
         <div className={`${notFoundStyles.main} mt-10`}> 

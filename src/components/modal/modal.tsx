@@ -1,6 +1,5 @@
 import ReactDOM from 'react-dom';
 import modalStyles from './modal.module.css';
-import PropTypes from 'prop-types';
 import ModalOverlay from './modal-overlay/modal-overlay';
 import { useEffect } from 'react';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -8,9 +7,15 @@ import { useDispatch } from 'react-redux';
 import { closeModal } from '../../services/actions';
 import { useNavigate } from "react-router-dom";
 
-const modal = document.getElementById("modal");
+const modal = document.getElementById("modal") as HTMLElement;
 
-const Modal = ({children, modalTitle, onCloseClick}) => {
+type TModalProps = {
+    children: JSX.Element;
+    modalTitle: string;
+    onCloseClick?: () => void;
+}
+
+const Modal = ({children, modalTitle, onCloseClick}: TModalProps): JSX.Element => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -23,7 +28,7 @@ const Modal = ({children, modalTitle, onCloseClick}) => {
     }
 
     useEffect(() => {
-        const onEscKeydown = (evt) => {
+        const onEscKeydown = (evt: KeyboardEvent) => {
             if( evt.key === 'Escape') {
                 onClick()
             };
@@ -54,11 +59,5 @@ const Modal = ({children, modalTitle, onCloseClick}) => {
         modal
     )
  }
-
-Modal.propTypes = {
-    children: PropTypes.element.isRequired,
-    modalTitle: PropTypes.string.isRequired,
-    onCloseClick: PropTypes.func
-}
 
  export default Modal;

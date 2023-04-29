@@ -1,7 +1,10 @@
 import errorModalStyles from './error-modal.module.css';
-import PropTypes from 'prop-types';
 
-export const ErrorModal = ({errorMessage}) => {
+type TErrorModalProps = {
+    errorMessage: string;
+}
+
+export const ErrorModal = ({errorMessage}: TErrorModalProps): JSX.Element => {
     return (
         <>
             <div className={`${errorModalStyles.content} p-20 pt-30`}>
@@ -9,8 +12,4 @@ export const ErrorModal = ({errorMessage}) => {
             </div>
         </>
     )
-}
-
-ErrorModal.propTypes = {
-    errorMessage: PropTypes.string
 }

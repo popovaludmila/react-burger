@@ -1,7 +1,14 @@
 import { useSelector } from "react-redux";
 import { Navigate, useLocation } from "react-router-dom";
 
-export const ProtectedRouteElement = ({onlyAuth, onlyUnauth, element}) => {
+type TProtectedRouteElementProps ={
+    onlyAuth?: boolean;
+    onlyUnauth?: boolean;
+    element: JSX.Element;
+}
+
+export const ProtectedRouteElement = ({onlyAuth, onlyUnauth, element}:TProtectedRouteElementProps): JSX.Element => {
+    
     const isAuth = useSelector(state => state.user.isAuth);
     const location = useLocation();
 
@@ -13,5 +20,6 @@ export const ProtectedRouteElement = ({onlyAuth, onlyUnauth, element}) => {
         return <Navigate to={location.state ? location.state.from : "/"}/>
     }
 
-    return element;
+    return <>{element}</>
+    
 }

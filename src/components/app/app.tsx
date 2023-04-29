@@ -17,6 +17,7 @@ const App = () => {
 
   const background = location.state && location.state.background;
 
+
   useEffect(()=> {
       dispatch(getIngredients());
       dispatch(checkIsUserAuth());

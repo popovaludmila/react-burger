@@ -9,7 +9,7 @@ import { LOGIN } from '../../utils/data';
 
 import registerStyles from './register.module.css';
 
-export const RegisterPage = () => {
+export const RegisterPage = ():JSX.Element => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const errorMessage = useSelector(state => state.user.errorMessage);
@@ -21,11 +21,11 @@ export const RegisterPage = () => {
         password: ''
     });
 
-    const onChange = e => {
+    const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setValue({ ...form, [e.target.name]: e.target.value });
     };
 
-    const onFormSubmit = e => {
+    const onFormSubmit = (e: React.SyntheticEvent) => {
         e.preventDefault();
         const user = {
             email: form.email,

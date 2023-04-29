@@ -1,8 +1,10 @@
 import orderModalStyles from './order-modal.module.css';
 import doneIcon from '../../../images/done.png';
-import PropTypes from 'prop-types';
 
-const OrderModal = ({orderNumber}) => {
+type TOrderModalProps = {
+    orderNumber: number;
+}
+const OrderModal = ({orderNumber}: TOrderModalProps): JSX.Element => {
    return (
             <> 
                 <div className={`${orderModalStyles.content} p-25 pt-29 pb-29`}>
@@ -14,10 +16,6 @@ const OrderModal = ({orderNumber}) => {
                 </div>
             </>
         )
-}
-
-OrderModal.propTypes = {
-    orderNumber: PropTypes.number.isRequired
 }
 
 export default OrderModal;

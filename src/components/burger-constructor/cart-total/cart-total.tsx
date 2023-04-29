@@ -11,14 +11,14 @@ type TCartTotalProps = {
     total: number;
 }
 
-const CartTotal = ({total}:TCartTotalProps):JSX.Element => {
+const CartTotal = ({total}: TCartTotalProps): JSX.Element => {
     const cart = useSelector(state => state.constructorBurger.cart);
     const dispatch = useDispatch();
     const order = useSelector(state => state.constructorBurger.order);
     const isAuth = useSelector(state => state.user.isAuth);
     const navigate = useNavigate();
 
-    const onOrderButtonClick = (e) => {
+    const onOrderButtonClick = (e: React.SyntheticEvent) => {
         e.preventDefault();
         
         if(cart.top && cart.bottom ) {

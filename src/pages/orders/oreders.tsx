@@ -1,6 +1,6 @@
 import ordersStyles from './orders.module.css';
 
-export const OrdersPage = () => {
+export const OrdersPage = (): JSX.Element => {
     return (
         <>
         <div className={ordersStyles.wrapper}>

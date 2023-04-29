@@ -70,7 +70,7 @@ export const cleanCart = () => {
         type: CLEAN_CART
    }
 }
-  
+
 export const getIngredients = () => {
     return function(dispatch) {
         dispatch({
