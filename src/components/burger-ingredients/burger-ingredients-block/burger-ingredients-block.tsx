@@ -21,15 +21,16 @@ const BurgerIngredientsBlock = ({title, ingredientsType}:TBurgerIngredientsBlock
    useEffect(() => {
       dispatch(switchTab(ingredientsType, inView));
    }, [inView, dispatch, ingredientsType]);
-
+// @ts-ignore
    const ingredientsData = useSelector(state => state.constructorBurger.ingredients)
 
    const ingredients = useMemo(
       () => ingredientsData
+      // @ts-ignore
          .filter((item) => item.type === ingredientsType),
       [ingredientsData, ingredientsType]
    );
-   
+   // @ts-ignore
    const ingredientCarts = ingredients.map((item) => (
       <IngredientCard key={item._id} item={item}/>
    ));

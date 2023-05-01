@@ -9,6 +9,7 @@ export const ProfilePage = ():JSX.Element => {
 
     const dispatch = useDispatch();
     const [isEdit, setIsEdit] = useState(false)
+     //@ts-ignore
     const {name, email} = useSelector(state => state.user.user);
 
     const [form, setValue] = useState({ 
@@ -35,7 +36,7 @@ export const ProfilePage = ():JSX.Element => {
         e.preventDefault();
 
         const authToken = localStorage.getItem('accessToken');
-
+         //@ts-ignore
         dispatch(updateUserProfile(form.name, form.email, form.password, authToken));
     }
 

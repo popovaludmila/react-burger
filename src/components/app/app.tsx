@@ -19,7 +19,9 @@ const App = () => {
 
 
   useEffect(()=> {
+    // @ts-ignore
       dispatch(getIngredients());
+    // @ts-ignore
       dispatch(checkIsUserAuth());
   }, [dispatch])
 

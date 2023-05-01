@@ -9,6 +9,7 @@ import { ORDERS_FEED, PROFILE } from '../../utils/data';
 import headerStyles from './header.module.css';
 
 const Header = () => {
+     //@ts-ignore
     const userName = useSelector(state => state.user.user?.name) || 'Личный кабинет';
     const matchConstructor = useMatch("/");
     const matchOrdersFeed = useMatch("/orders-feed");

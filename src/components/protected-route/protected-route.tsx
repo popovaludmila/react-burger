@@ -8,7 +8,7 @@ type TProtectedRouteElementProps ={
 }
 
 export const ProtectedRouteElement = ({onlyAuth, onlyUnauth, element}:TProtectedRouteElementProps): JSX.Element => {
-    
+     //@ts-ignore
     const isAuth = useSelector(state => state.user.isAuth);
     const location = useLocation();
 

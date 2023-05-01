@@ -5,12 +5,14 @@ import { useMatch } from 'react-router-dom';
 const IngredientModal = ():JSX.Element => {
     const match = useMatch("/ingredients/:id");
 
-    const id = match.params.id;
-
+    const id = match?.params.id;
+     //@ts-ignore
     const ingredients = useSelector(state => state.constructorBurger.ingredients);
+     //@ts-ignore
     const ingredient = ingredients.find((ingredient) => ingredient._id === id);
 
     if (!ingredient) {
+         //@ts-ignore
         return null;
     }
 

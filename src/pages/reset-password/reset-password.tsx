@@ -1,11 +1,12 @@
 import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { BASE_URL, LOGIN } from '../../utils/data';
 import { request } from '../../utils/data-api';
 import resetPasswordStyles from './reset-password.module.css';
 
 export const ResetPasswordPage = (): JSX.Element => {
+    const navigate = useNavigate();
     const [form, setValue] = useState({ 
         password: '', 
         token: ''
@@ -24,7 +25,7 @@ export const ResetPasswordPage = (): JSX.Element => {
             body: JSON.stringify(form)
         }).then((data) =>{
             if (data.success) {
-                console.log(data);
+                navigate('/login');
             }
         }).catch((err) => {
             alert(err);

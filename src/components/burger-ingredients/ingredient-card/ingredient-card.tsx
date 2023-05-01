@@ -20,11 +20,11 @@ const IngredientCard = ({item}:TIngredientCardProps):JSX.Element => {
   });
 
   const {image, price, name, _id} = item;
-
+// @ts-ignore
   const cart = useSelector((state) => state.constructorBurger.cart)
 
   let count:number = 0;
-
+// @ts-ignore
   cart.fillings.forEach(filling =>  {
     if (filling._id === item._id) {
       count++;

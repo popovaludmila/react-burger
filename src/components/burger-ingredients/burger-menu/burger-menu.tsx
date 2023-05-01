@@ -3,7 +3,7 @@ import burgerMenuStyles from './burger-menu.module.css';
 import { BUN, MAIN, SAUCE } from "../../../utils/data";
 
 type TBurgerMenuProps = {
-    onTabClick: () => void;
+    onTabClick: (value:string) => void;
     currentTab: string;
 }
 

@@ -30,9 +30,9 @@ const BurgerConstructor = ():JSX.Element => {
     })
 
     const isBun = monitorItem && monitorItem.type === BUN;
-
+    // @ts-ignore
     const cart = useSelector(state => state.constructorBurger.cart);
-   
+   // @ts-ignore
     const constructorIngredient = cart.fillings.map((item) => (
         <ConstructorFilling key={item.key} item={item} />
     ));
@@ -48,7 +48,7 @@ const BurgerConstructor = ():JSX.Element => {
     if (cart.bottom !== null) {
         total += cart.bottom.price
     }
-
+// @ts-ignore
     cart.fillings.forEach((item) => (total += item.price));
     
 

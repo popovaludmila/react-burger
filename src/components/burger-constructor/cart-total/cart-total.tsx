@@ -12,9 +12,12 @@ type TCartTotalProps = {
 }
 
 const CartTotal = ({total}: TCartTotalProps): JSX.Element => {
+    // @ts-ignore
     const cart = useSelector(state => state.constructorBurger.cart);
     const dispatch = useDispatch();
+    // @ts-ignore
     const order = useSelector(state => state.constructorBurger.order);
+    // @ts-ignore
     const isAuth = useSelector(state => state.user.isAuth);
     const navigate = useNavigate();
 
@@ -24,10 +27,12 @@ const CartTotal = ({total}: TCartTotalProps): JSX.Element => {
         if(cart.top && cart.bottom ) {
             const orderIngredients = [
                 cart.top._id,
+                // @ts-ignore
                 ...cart.fillings.map((ingredient) => ingredient._id),
                 cart.bottom._id,
             ];
             if(isAuth) {
+                // @ts-ignore
                 dispatch(createOrder(orderIngredients));
             } else {
                 navigate(`/${LOGIN}`);

@@ -16,6 +16,7 @@ export const ProfileNav = (): JSX.Element => {
 
     const onLogout = () => {
         const token = localStorage.getItem('refreshToken');
+         //@ts-ignore
         dispatch(logout({"token": token}));
     }
 

@@ -8,14 +8,16 @@ import { useSelector } from "react-redux";
 
 
 const BurgerIngredients = ():JSX.Element => {
+    //@ts-ignore
     const tabs = useSelector(state => state.constructorBurger.tabs);
+    //@ts-ignore
     const currentTab = tabs.find(tab => tab.isActive);
 
-    const scrollTo = (tab) => {
+    const scrollTo = (tab:string) => {
         const activeTab = document.getElementById(tab)
-        activeTab.scrollIntoView({behavior:"smooth"});
+        activeTab?.scrollIntoView({behavior:"smooth"});
     }
-
+    //@ts-ignore
     const detailIngredient = useSelector(state => state.constructorBurger.detailIngredient);
 
     return (

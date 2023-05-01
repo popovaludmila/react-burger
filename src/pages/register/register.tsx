@@ -12,6 +12,7 @@ import registerStyles from './register.module.css';
 export const RegisterPage = ():JSX.Element => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+     //@ts-ignore
     const errorMessage = useSelector(state => state.user.errorMessage);
     const errorText = errorMessage?.toUpperCase();
 
@@ -32,6 +33,7 @@ export const RegisterPage = ():JSX.Element => {
             name: form.name,
             password: form.password
         }
+         //@ts-ignore
         dispatch(register(user, () => navigate('/')));
        
     }

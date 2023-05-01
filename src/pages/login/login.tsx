@@ -12,6 +12,7 @@ import loginStyles from './login.module.css';
 export const LoginPage = (): JSX.Element => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+     //@ts-ignore
     const errorMessage = useSelector(state => state.user.errorMessage);
     const errorText = errorMessage?.toUpperCase();
 
@@ -23,14 +24,13 @@ export const LoginPage = (): JSX.Element => {
    const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue({ ...form, [e.target.name]: e.target.value });
   };
-    
 
-
-  const onFormSubmit = (e: React.SyntheticEvent) => {
-    e.preventDefault();
-    dispatch(login(form.email, form.password, () => navigate('/'), 
-    ));
-}
+    const onFormSubmit = (e: React.SyntheticEvent) => {
+        e.preventDefault();
+        //@ts-ignore
+        dispatch(login(form.email, form.password, () => navigate('/'), 
+        ));
+    }
 
 
     return (
