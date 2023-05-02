@@ -7,6 +7,7 @@ import forgotPasswordStyles from './forgot-password.module.css';
 
 export const ForgotPasswordPage = ():JSX.Element => {
     const navigate = useNavigate();
+
     const [form, setValue] = useState({ 
         email: ''
     });

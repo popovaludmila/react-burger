@@ -1,6 +1,7 @@
 import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useForm } from '../../hooks/useForm';
 import { updateUserProfile } from '../../services/actions/user';
 
 import profileStyles from './profile.module.css';
@@ -12,19 +13,19 @@ export const ProfilePage = ():JSX.Element => {
      //@ts-ignore
     const {name, email} = useSelector(state => state.user.user);
 
-    const [form, setValue] = useState({ 
+    const {form, handleChange, setForm} = useForm({  
         name: name,
-        email: email,
-        password: ''
+        email: email, 
+        password: '' 
     });
-
-   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-       setValue({ ...form, [e.target.name]: e.target.value });
-       setIsEdit(true);
-  };
+  
+    const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        handleChange(e);
+        setIsEdit(true);
+    };
   
     const resetForm = () => {
-        setValue({
+        setForm({
             name: name,
             email: email, 
             password: ''
@@ -38,6 +39,8 @@ export const ProfilePage = ():JSX.Element => {
         const authToken = localStorage.getItem('accessToken');
          //@ts-ignore
         dispatch(updateUserProfile(form.name, form.email, form.password, authToken));
+
+        setIsEdit(false);
     }
 
     return (

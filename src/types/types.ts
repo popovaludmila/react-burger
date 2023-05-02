@@ -24,5 +24,4 @@ export interface ITokenResponse extends IBaseResponse {
         accessToken: string;
         refreshToken: string;
 }
-
     

@@ -1,9 +1,9 @@
 import { Button, EmailInput, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link,  useNavigate } from 'react-router-dom';
 import { ErrorModal } from '../../components/modal/error-modal/error-modal';
 import Modal from '../../components/modal/modal';
+import { useForm } from '../../hooks/useForm';
 import { errorClean, register } from '../../services/actions/user';
 import { LOGIN } from '../../utils/data';
 
@@ -16,16 +16,12 @@ export const RegisterPage = ():JSX.Element => {
     const errorMessage = useSelector(state => state.user.errorMessage);
     const errorText = errorMessage?.toUpperCase();
 
-    const [form, setValue] = useState({ 
+    const {form, handleChange} = useForm({  
         name: '',
-        email: '',
-        password: ''
+        email: '', 
+        password: '' 
     });
-
-    const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setValue({ ...form, [e.target.name]: e.target.value });
-    };
-
+   
     const onFormSubmit = (e: React.SyntheticEvent) => {
         e.preventDefault();
         const user = {
@@ -38,7 +34,6 @@ export const RegisterPage = ():JSX.Element => {
        
     }
     
-
     return (
         <>
             <div className={registerStyles.wrapper}>
@@ -48,7 +43,7 @@ export const RegisterPage = ():JSX.Element => {
                         <Input
                         type={'text'}
                         placeholder={'Имя'}
-                        onChange={onChange}
+                        onChange={handleChange}
                         value={form.name}
                         name="name"
                         />
@@ -58,12 +53,12 @@ export const RegisterPage = ():JSX.Element => {
                         name='email'
                         isIcon={false}
                         value={form.email}
-                        onChange={onChange}
+                        onChange={handleChange}
                         />  
                     </div>
                     <div className="mb-6">
                         <PasswordInput
-                        onChange={onChange}
+                        onChange={handleChange}
                         name='password'
                         icon="ShowIcon"
                         value={form.password}

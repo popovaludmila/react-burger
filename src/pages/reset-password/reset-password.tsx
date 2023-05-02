@@ -1,20 +1,18 @@
 import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useForm } from '../../hooks/useForm';
 import { BASE_URL, LOGIN } from '../../utils/data';
 import { request } from '../../utils/data-api';
 import resetPasswordStyles from './reset-password.module.css';
 
 export const ResetPasswordPage = (): JSX.Element => {
     const navigate = useNavigate();
-    const [form, setValue] = useState({ 
+    
+
+    const {form, handleChange} = useForm({  
         password: '', 
         token: ''
     });
-
-    const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setValue({ ...form, [e.target.name]: e.target.value });
-    };
 
     const onSubmit = (e: React.SyntheticEvent) => {
         e.preventDefault();
@@ -39,7 +37,7 @@ export const ResetPasswordPage = (): JSX.Element => {
                     <h2 className='text text_type_main-medium mb-6'>Восстановление пароля</h2>
                     <div className="mb-6">
                         <PasswordInput
-                        onChange={onChange}
+                        onChange={handleChange}
                         name='password'
                         icon="ShowIcon"
                         value={form.password}
@@ -50,7 +48,7 @@ export const ResetPasswordPage = (): JSX.Element => {
                         <Input
                         type={'text'}
                         placeholder={'Введите код из письма'}
-                        onChange={onChange}
+                        onChange={handleChange}
                         value={form.token}
                         name="token"
                         />
