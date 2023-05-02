@@ -14,7 +14,8 @@ const store = createStore(
   composeWithDevTools(applyMiddleware(thunk))
 );
 
-const root = ReactDOM.createRoot(document.querySelector('#root'));
+const root = ReactDOM.createRoot(document.querySelector('#root') as HTMLElement);
+
 root.render(
   <>
     <BrowserRouter>
