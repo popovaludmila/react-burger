@@ -33,7 +33,7 @@ export const ProfilePage = ():JSX.Element => {
         setIsEdit(false);
     }
 
-    const onFormUpdate = (e: React.SyntheticEvent) => {
+    const onFormUpdate = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         const authToken = localStorage.getItem('accessToken');

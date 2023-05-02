@@ -5,7 +5,6 @@ import { useEffect } from 'react';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDispatch } from 'react-redux';
 import { closeModal } from '../../services/actions';
-import { useNavigate } from "react-router-dom";
 
 const modal = document.getElementById("modal") as HTMLElement;
 
@@ -17,10 +16,8 @@ type TModalProps = {
 
 const Modal = ({children, modalTitle, onCloseClick}: TModalProps): JSX.Element => {
     const dispatch = useDispatch();
-    const navigate = useNavigate();
 
     const onClick = () => {
-        navigate(-1);
         if (onCloseClick) {
             onCloseClick();
         }

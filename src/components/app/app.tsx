@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { useEffect} from 'react';
 import { getIngredients } from '../../services/actions';
-import { Route, Routes, useLocation} from 'react-router-dom';
+import { Route, Routes, useLocation, useNavigate} from 'react-router-dom';
 import { ForgotPasswordPage, HomePage, IngredientDetailPage, LoginPage, NotFoundPage, OrderFeedPage, OrdersPage, ProfilePage, RegisterPage, ResetPasswordPage } from '../../pages';
 import Header from '../header/header';
 import { ProfileNav } from '../profile-nav/profile-nav';
@@ -14,7 +14,7 @@ import { FORGOT_PASSWORD, INGREDIENTS, LOGIN, ORDERS, ORDERS_FEED, PROFILE, REGI
 const App = () => {
   const dispatch = useDispatch();
   const location = useLocation();
-
+  const navigate = useNavigate();
   const background = location.state && location.state.background;
 
 
@@ -58,7 +58,7 @@ const App = () => {
       {background && 
         <Routes>
           <Route path={`${INGREDIENTS}/:id`} element={
-            <Modal modalTitle={'Детали ингредиента'}>
+            <Modal modalTitle={'Детали ингредиента'} onCloseClick={() => navigate(-1)}>
               <IngredientModal />
             </Modal>
           } />

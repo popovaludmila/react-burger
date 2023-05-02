@@ -14,7 +14,7 @@ export const ResetPasswordPage = (): JSX.Element => {
         token: ''
     });
 
-    const onSubmit = (e: React.SyntheticEvent) => {
+    const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         request(`${BASE_URL}/password-reset/reset`, {

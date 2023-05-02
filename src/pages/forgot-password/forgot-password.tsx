@@ -17,7 +17,7 @@ export const ForgotPasswordPage = ():JSX.Element => {
         setValue({ ...form, [e.target.name]: e.target.value });
     };
 
-    const onSubmit = (e:React.SyntheticEvent) => {
+    const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         request(`${BASE_URL}/password-reset`, {
@@ -35,8 +35,8 @@ export const ForgotPasswordPage = ():JSX.Element => {
 
     return (
         <>
-            <div className={forgotPasswordStyles.wrapper} onSubmit={onSubmit}>
-                <form className={forgotPasswordStyles.form}>
+            <div className={forgotPasswordStyles.wrapper}>
+                <form className={forgotPasswordStyles.form} onSubmit={onSubmit}>
                     <h2 className='text text_type_main-medium mb-6'>Восстановление пароля</h2>
                     <div className="mb-6">
                         <EmailInput

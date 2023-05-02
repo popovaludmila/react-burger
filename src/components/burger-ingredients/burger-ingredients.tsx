@@ -2,8 +2,6 @@ import BurgerIngredientsBlock from "./burger-ingredients-block/burger-ingredient
 import BurgerMenu from "./burger-menu/burger-menu";
 import burgerIngredientsStyles from './burger-ingredients.module.css'
 import { BUN, MAIN, SAUCE } from "../../utils/data";
-import IngredientModal from "../modal/ingredient-modal/ingredient-modal";
-import Modal from "../modal/modal";
 import { useSelector } from "react-redux";
 
 
@@ -17,8 +15,6 @@ const BurgerIngredients = ():JSX.Element => {
         const activeTab = document.getElementById(tab)
         activeTab?.scrollIntoView({behavior:"smooth"});
     }
-    //@ts-ignore
-    const detailIngredient = useSelector(state => state.constructorBurger.detailIngredient);
 
     return (
         <section className={`${burgerIngredientsStyles.wrapper}`} >
@@ -33,11 +29,6 @@ const BurgerIngredients = ():JSX.Element => {
 
                 <BurgerIngredientsBlock title="Начинки" ingredientsType={MAIN}/>
             </div>
-            {detailIngredient !== null && 
-                <Modal modalTitle={'Детали ингредиента'}>
-                    <IngredientModal />
-                </Modal>
-            }
         </section>
     )
 }

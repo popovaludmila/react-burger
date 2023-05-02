@@ -21,7 +21,7 @@ export const LoginPage = (): JSX.Element => {
         password: '' 
     });
 
-    const onFormSubmit = (e: React.SyntheticEvent) => {
+    const onFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         //@ts-ignore
         dispatch(login(form.email, form.password, () => navigate('/')));

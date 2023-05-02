@@ -22,7 +22,7 @@ export const RegisterPage = ():JSX.Element => {
         password: '' 
     });
    
-    const onFormSubmit = (e: React.SyntheticEvent) => {
+    const onFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const user = {
             email: form.email,
