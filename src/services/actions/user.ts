@@ -1,27 +1,28 @@
+import { IUserRegisterRequest } from "../../types/types";
 import { BASE_URL } from "../../utils/data";
 import { fetchWithRefresh, request } from "../../utils/data-api";
 
-export const REGISTER_REQUEST = 'REGISTER_REQUES';
-export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
-export const REGISTER_FAILED = 'REGISTER_FAILED';
+export const REGISTER_REQUEST: 'REGISTER_REQUEST' = 'REGISTER_REQUEST';
+export const REGISTER_SUCCESS: 'REGISTER_SUCCESS' = 'REGISTER_SUCCESS';
+export const REGISTER_FAILED: 'REGISTER_FAILED' = 'REGISTER_FAILED';
 
-export const LOGIN_REQUEST = 'LOGIN_REQUES';
-export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
-export const LOGIN_FAILED = 'LOGIN_FAILED';
+export const LOGIN_REQUEST: 'LOGIN_REQUES' = 'LOGIN_REQUES';
+export const LOGIN_SUCCESS: 'LOGIN_SUCCESS' = 'LOGIN_SUCCESS';
+export const LOGIN_FAILED: 'LOGIN_FAILED' = 'LOGIN_FAILED';
 
-export const LOGOUT_REQUEST = 'LOGOUT_REQUEST';
-export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
-export const LOGOUT_FAILED = 'LOGOUT_FAILED';
+export const LOGOUT_REQUEST: 'LOGOUT_REQUEST' = 'LOGOUT_REQUEST';
+export const LOGOUT_SUCCESS: 'LOGOUT_SUCCESS' = 'LOGOUT_SUCCESS';
+export const LOGOUT_FAILED: 'LOGOUT_FAILED' = 'LOGOUT_FAILED';
 
-export const GET_USER_REQUEST = 'GET_USER_REQUEST';
-export const GET_USER_SUCCESS = 'GET_USER_SUCCESS';
-export const GET_USER_FAILED = 'GET_USER_FAILED';
+export const GET_USER_REQUEST: 'GET_USER_REQUEST' = 'GET_USER_REQUEST';
+export const GET_USER_SUCCESS: 'GET_USER_SUCCESS' = 'GET_USER_SUCCESS';
+export const GET_USER_FAILED: 'GET_USER_FAILED' = 'GET_USER_FAILED';
 
-export const UPDATE_USER_REQUEST = 'UPDATE_USER_REQUEST';
-export const UPDATE_USER_SUCCESS = 'UPDATE_USER_SUCCESS';
-export const UPDATE_USER_FAILED = 'UPDATE_USER_FAILED';
+export const UPDATE_USER_REQUEST: 'UPDATE_USER_REQUEST' = 'UPDATE_USER_REQUEST';
+export const UPDATE_USER_SUCCESS: 'UPDATE_USER_SUCCESS' = 'UPDATE_USER_SUCCESS';
+export const UPDATE_USER_FAILED: 'UPDATE_USER_FAILED' = 'UPDATE_USER_FAILED';
 
-export const ERROR_CLEAN = 'ERROR_CLEAN';
+export const ERROR_CLEAN: 'ERROR_CLEAN' = 'ERROR_CLEAN';
 
 export const errorClean = () => {
     return {
@@ -29,7 +30,7 @@ export const errorClean = () => {
     }
 }
 
-export const register = (user, onSuccess) => {
+export const register = (user: IUserRegisterRequest, onSuccess: () => void) => {
     return (dispatch) => {
         dispatch({
             type: REGISTER_REQUEST
@@ -60,7 +61,7 @@ export const register = (user, onSuccess) => {
 }
 
 
-export const login = (email, password, onSuccess) => {
+export const login = (email: string, password:string, onSuccess: () => void) => {
     return (dispatch) => {
         dispatch({
             type: LOGIN_REQUEST
@@ -95,7 +96,7 @@ export const login = (email, password, onSuccess) => {
     }
 }
 
-export const logout = (token) => {
+export const logout = (token: string) => {
     return (dispatch) => {
         dispatch({
             type: LOGOUT_REQUEST
@@ -122,7 +123,7 @@ export const logout = (token) => {
     }
 }
 
-export const getUser = (token) => {
+export const getUser = (token: string) => {
     return (dispatch) => {
         dispatch({
             type: GET_USER_REQUEST
@@ -159,7 +160,7 @@ export const checkIsUserAuth = () => {
     }
 }
 
-export const updateUserProfile = (name, email, password, token) => {
+export const updateUserProfile = (name: string, email: string, password: string, token: string) => {
     return (dispatch) => {
         dispatch({
             type: UPDATE_USER_REQUEST

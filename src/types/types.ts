@@ -23,5 +23,22 @@ export interface IBaseResponse  {
 export interface ITokenResponse extends IBaseResponse {
         accessToken: string;
         refreshToken: string;
+} 
+export interface IUser {
+        email: string | null;
+        name: string | null;
 }
-    
+export interface IAuthResponse extends ITokenResponse {
+        user: IUser;
+}
+interface IErrorMessage {
+        message: string;
+}
+export interface IErrorMessageResponse {
+        err: IErrorMessage;
+}
+export interface IUserRegisterRequest {
+        email: string;
+        name: string;
+        password: string;
+}
