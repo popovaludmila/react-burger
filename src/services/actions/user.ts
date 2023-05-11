@@ -1,4 +1,5 @@
 import { IUserRegisterRequest } from "../../types/types";
+import { IErrorClean } from "../../types/userActions";
 import { BASE_URL } from "../../utils/data";
 import { fetchWithRefresh, request } from "../../utils/data-api";
 
@@ -24,7 +25,7 @@ export const UPDATE_USER_FAILED: 'UPDATE_USER_FAILED' = 'UPDATE_USER_FAILED';
 
 export const ERROR_CLEAN: 'ERROR_CLEAN' = 'ERROR_CLEAN';
 
-export const errorClean = () => {
+export const errorClean = (): IErrorClean => {
     return {
         type: ERROR_CLEAN,
     }

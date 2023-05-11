@@ -1,3 +1,4 @@
+import { IIngredientData, TDetailIngredient, TIngredient } from "../../types/types";
 import { BASE_URL } from "../../utils/data";
 import { fetchWithRefresh, request } from "../../utils/data-api";
 
@@ -7,8 +8,6 @@ export const GET_INGREDIENTS_DATA_FAILED: 'GET_INGREDIENTS_DATA_FAILED' = 'GET_I
 
 export const SHOW_DETAIL_INGREDIENT: 'SHOW_DETAIL_INGREDIENT' = 'SHOW_DETAIL_INGREDIENT';
 export const CLOSE_MODAL: 'CLOSE_MODAL' = 'CLOSE_MODAL';
-export const ADD_BUN_TO_CART: 'ADD_BUN_TO_CART' = 'ADD_BUN_TO_CART';
-export const ADD_FILLING_TO_CART: 'ADD_FILLING_TO_CART' = 'ADD_FILLING_TO_CART';
 export const ADD_INGREDIENT_TO_CART: 'ADD_INGREDIENT_TO_CART' = 'ADD_INGREDIENT_TO_CART';
 export const DELETE_INGREDIENT: 'DELETE_INGREDIENT' = 'DELETE_INGREDIENT';
 
@@ -19,9 +18,8 @@ export const GET_ORDER_DATA_FAILED: 'GET_ORDER_DATA_FAILED' = 'GET_ORDER_DATA_FA
 export const REPLACE_INGREDIENTS: 'REPLACE_INGREDIENTS' = 'REPLACE_INGREDIENTS';
 export const SWITCH_TAB: 'SWITCH_TAB' = 'SWITCH_TAB';
 export const CLEAN_CART: 'CLEAN_CART' = 'CLEAN_CART';
-export const ACTION_FAILED: 'ACTION_FAILED' = 'ACTION_FAILED';
 
-export const switchTab = (tab, isActive) => {
+export const switchTab = (tab: string, isActive: boolean) => {
     return {
         type: SWITCH_TAB,
         tab: tab,
@@ -29,7 +27,7 @@ export const switchTab = (tab, isActive) => {
     }
 }
 
-export const replaceIngredient = (draggingKey, hoverKey) => {
+export const replaceIngredient = (draggingKey: string, hoverKey: string) => {
     return {
         type: REPLACE_INGREDIENTS,
         draggingKey: draggingKey,
@@ -37,14 +35,14 @@ export const replaceIngredient = (draggingKey, hoverKey) => {
     }
 }
 
-export const deleteIngredient = (key) => {
+export const deleteIngredient = (key: string) => {
     return {
         type: DELETE_INGREDIENT,
         key: key
     }
 }
 
-export const showDetailIngredient = (ingredient) => {
+export const showDetailIngredient = (ingredient: TDetailIngredient) => {
     return {
         type: SHOW_DETAIL_INGREDIENT,
         ingredient: ingredient,
@@ -57,7 +55,7 @@ export const closeModal = () => {
     }
 }
 
-export const addIngredientToCart = (ingredient, key) => {
+export const addIngredientToCart = (ingredient: TIngredient, key: string) => {
     return {
         type: ADD_INGREDIENT_TO_CART,
         ingredient: ingredient,
@@ -92,7 +90,7 @@ export const getIngredients = () => {
     }
 }
 
-export const createOrder = (orderIngredientIds) => {
+export const createOrder = (orderIngredientIds: string) => {
     return (dispatch) => {
         dispatch({
             type: GET_ORDER_DATA_REQUEST

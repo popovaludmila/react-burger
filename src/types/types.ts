@@ -1,4 +1,4 @@
-export type TIngredientData = {
+export interface IIngredientData {
         _id: string;
         name: string;
         type: string;
@@ -12,7 +12,9 @@ export type TIngredientData = {
         image_large: string;
 }
 
-export type TIngredient = Pick<TIngredientData, '_id' | 'name' | 'price' | 'image'>;
+export type TIngredient = Pick<IIngredientData, '_id' | 'name' | 'price' | 'image'>;
+
+export type TDetailIngredient = Omit<IIngredientData, 'price' | 'type' | 'image_mobile' | 'image_large'>;
 
 export type TConstructorIngredient = TIngredient & {
         key: string;

@@ -5,7 +5,7 @@ const checkResponse = <T extends IBaseResponse>(response: Response): Promise<T> 
    return response.ok ? response.json() : Promise.reject(`Ошибка: ${response.status}`);
 }
  
-export const request = <T extends IBaseResponse>(url: string, options: RequestInit): Promise<T> => {
+export const request = <T extends IBaseResponse>(url: string, options?: RequestInit): Promise<T> => {
   return fetch(url, options).then(res => checkResponse<T>(res)).then((data) => {
     if (!data.success) {
       Promise.reject(data);
