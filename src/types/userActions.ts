@@ -64,31 +64,7 @@ export interface IUpdateUserFailed {
     err: IErrorMessageResponse;
 }
 
-export type TUserState = {
-    isAuth: boolean;
-    user: IUser;
-    errorMessage: string | null;
 
-    registrationRequest: boolean;
-    registrationFailed: boolean;
-
-    loginRequest: boolean;
-    loginFailed: boolean;
-
-    logoutRequest: boolean;
-    logoutFailed: boolean;
-
-    getUserRequest: boolean;
-    getUserFailed: boolean;
-
-    updateUserRequest: boolean;
-    updateUserFailed: boolean;
-}
-
-export type TUserAction = {
-    type: string;
-    payload?: any;
-}
 
 export type TUserActions = | IRegisterRequest | IRegisterSuccess | IRegisterFailed |
     ILoginRequest | ILoginSuccess | ILoginFailed | ILogoutRequest | ILogoutSuccess | 

@@ -12,7 +12,7 @@ export interface IIngredientData {
         image_large: string;
 }
 
-export type TIngredient = Pick<IIngredientData, '_id' | 'name' | 'price' | 'image'>;
+export type TIngredient = Pick<IIngredientData, '_id' | 'name' | 'type' | 'price' | 'image'>;
 
 export type TDetailIngredient = Omit<IIngredientData, 'price' | 'type' | 'image_mobile' | 'image_large'>;
 

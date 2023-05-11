@@ -1,10 +1,34 @@
+import { IUser } from "../../types/types";
+import { TUserActions } from "../../types/userActions";
 import { GET_USER_FAILED, GET_USER_REQUEST, GET_USER_SUCCESS, 
     LOGIN_FAILED, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT_FAILED, 
     LOGOUT_REQUEST, LOGOUT_SUCCESS, REGISTER_FAILED, 
     REGISTER_REQUEST, REGISTER_SUCCESS, UPDATE_USER_FAILED, 
     UPDATE_USER_REQUEST, UPDATE_USER_SUCCESS, ERROR_CLEAN } from "../actions/user"
 
-const initialState = {
+
+export type TUserState = {
+    isAuth: boolean;
+    user: IUser;
+    errorMessage: string | null;
+
+    registrationRequest: boolean;
+    registrationFailed: boolean;
+
+    loginRequest: boolean;
+    loginFailed: boolean;
+
+    logoutRequest: boolean;
+    logoutFailed: boolean;
+
+    getUserRequest: boolean;
+    getUserFailed: boolean;
+
+    updateUserRequest: boolean;
+    updateUserFailed: boolean;
+}
+
+const initialState: TUserState = {
     isAuth: false,
     user: {
         email: null, 
@@ -29,7 +53,7 @@ const initialState = {
     updateUserFailed: false,
 }
 
-export const userReducer = (state = initialState, action) => {
+export const userReducer = (state = initialState, action: TUserActions) => {
     switch(action.type) {
         case REGISTER_REQUEST: 
             return {
