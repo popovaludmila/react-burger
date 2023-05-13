@@ -1,4 +1,4 @@
-import { IIngredientData, TDetailIngredient, TIngredient } from "../../types/types";
+import { ICreateOrderResponse, IGetIngredientsResponse, TDetailIngredient, TIngredient } from "../../types/types";
 import { BASE_URL } from "../../utils/data";
 import { fetchWithRefresh, request } from "../../utils/data-api";
 
@@ -74,7 +74,7 @@ export const getIngredients = () => {
         dispatch({
             type: GET_INGREDIENTS_DATA_REQUEST
         });
-        request(`${BASE_URL}/ingredients`)
+        request<IGetIngredientsResponse>(`${BASE_URL}/ingredients`)
             .then((data) => {
                 dispatch({
                     type: GET_INGREDIENTS_DATA_SUCCESS,
@@ -95,7 +95,7 @@ export const createOrder = (orderIngredientIds: string) => {
         dispatch({
             type: GET_ORDER_DATA_REQUEST
         });
-        fetchWithRefresh(`${BASE_URL}/orders`, {
+        fetchWithRefresh<ICreateOrderResponse>(`${BASE_URL}/orders`, {
             method: 'POST',
             headers: {
               "Content-Type": "application/json",
@@ -105,7 +105,7 @@ export const createOrder = (orderIngredientIds: string) => {
         .then((data) => {
             dispatch({
                 type: GET_ORDER_DATA_SUCCESS,
-                order: data.order
+                order: data.order.number
             })
         }).catch((err) => {
             dispatch({

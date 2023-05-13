@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 import { TBurgerConstructorActions } from "../../types/burgerConstructorActions";
-import { IIngredientData, TDetailIngredient, TIngredient } from "../../types/types";
+import { IIngredientData, TConstructorIngredient, TDetailIngredient } from "../../types/types";
 import { BUN, MAIN, SAUCE } from "../../utils/data";
 import { GET_INGREDIENTS_DATA_SUCCESS,  
     SHOW_DETAIL_INGREDIENT, 
@@ -19,9 +19,9 @@ import { GET_INGREDIENTS_DATA_SUCCESS,
 import { userReducer } from "./user";
 
 export type TCart = {
-    top: TIngredient | null;
-    fillings: TIngredient[] | null;
-    bottom: TIngredient | null;
+    top: TConstructorIngredient | null;
+    fillings: TConstructorIngredient[];
+    bottom: TConstructorIngredient | null;
 }
 
 type TTabs = {
@@ -129,7 +129,7 @@ const constructorReducer = (state = initialState, action:TBurgerConstructorActio
                 ...state,
                 getOrderDataRequest: false,
                 order: {
-                    id: action.order.number,
+                    id: action.order,
                 }
             }
         case GET_ORDER_DATA_FAILED: 
@@ -191,3 +191,5 @@ export const rootReducer = combineReducers({
     constructorBurger: constructorReducer,
     user: userReducer
 });
+
+export type RootState = ReturnType<typeof rootReducer>;

@@ -1,4 +1,4 @@
-import { IUserRegisterRequest } from "../../types/types";
+import { IAuthResponse, IUserRegisterRequest, IUserUpdateResponse } from "../../types/types";
 import { IErrorClean } from "../../types/userActions";
 import { BASE_URL } from "../../utils/data";
 import { fetchWithRefresh, request } from "../../utils/data-api";
@@ -36,7 +36,7 @@ export const register = (user: IUserRegisterRequest, onSuccess: () => void) => {
         dispatch({
             type: REGISTER_REQUEST
         });
-        request(`${BASE_URL}/auth/register`, {
+        request<IAuthResponse>(`${BASE_URL}/auth/register`, {
             method: 'POST',
             headers: {
               "Content-Type": "application/json",
@@ -67,7 +67,7 @@ export const login = (email: string, password:string, onSuccess: () => void) => 
         dispatch({
             type: LOGIN_REQUEST
         });
-        request(`${BASE_URL}/auth/login`, {
+        request<IAuthResponse>(`${BASE_URL}/auth/login`, {
             method: 'POST',
             mode: 'cors',
             cache: 'no-cache',
@@ -129,7 +129,7 @@ export const getUser = (token: string) => {
         dispatch({
             type: GET_USER_REQUEST
         });
-        fetchWithRefresh(`${BASE_URL}/auth/user`, {
+        fetchWithRefresh<IAuthResponse>(`${BASE_URL}/auth/user`, {
             method: 'GET',
             headers: {
                 "Content-Type": "application/json",
@@ -166,7 +166,7 @@ export const updateUserProfile = (name: string, email: string, password: string,
         dispatch({
             type: UPDATE_USER_REQUEST
         });
-        fetchWithRefresh(`${BASE_URL}/auth/user`, {
+        fetchWithRefresh<IUserUpdateResponse>(`${BASE_URL}/auth/user`, {
             method: 'PATCH',
             headers: {
                 "Content-Type": "application/json",

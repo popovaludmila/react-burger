@@ -9,10 +9,12 @@ import "./index.css";
 import { BrowserRouter } from 'react-router-dom';
 
 
+
 const store = createStore(
   rootReducer,
   composeWithDevTools(applyMiddleware(thunk))
 );
+
 
 const root = ReactDOM.createRoot(document.querySelector('#root') as HTMLElement);
 

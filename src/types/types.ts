@@ -22,6 +22,16 @@ export type TConstructorIngredient = TIngredient & {
 export interface IBaseResponse  {
         success: boolean;
 }
+
+export interface IGetIngredientsResponse extends IBaseResponse {
+        data: IIngredientData;
+}
+interface IOrderNumber {
+        number: number;
+}
+export interface ICreateOrderResponse extends IBaseResponse {
+        order: IOrderNumber;
+}
 export interface ITokenResponse extends IBaseResponse {
         accessToken: string;
         refreshToken: string;
@@ -31,6 +41,10 @@ export interface IUser {
         name: string | null;
 }
 export interface IAuthResponse extends ITokenResponse {
+        user: IUser;
+}
+
+export interface IUserUpdateResponse extends IBaseResponse {
         user: IUser;
 }
 interface IErrorMessage {
