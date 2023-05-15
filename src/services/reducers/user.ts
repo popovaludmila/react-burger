@@ -1,4 +1,4 @@
-import { IUser } from "../../types/types";
+import { IErrorMessageResponse, IUser } from "../../types/types";
 import { TUserActions } from "../../types/userActions";
 import { GET_USER_FAILED, GET_USER_REQUEST, GET_USER_SUCCESS, 
     LOGIN_FAILED, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT_FAILED, 
@@ -6,11 +6,10 @@ import { GET_USER_FAILED, GET_USER_REQUEST, GET_USER_SUCCESS,
     REGISTER_REQUEST, REGISTER_SUCCESS, UPDATE_USER_FAILED, 
     UPDATE_USER_REQUEST, UPDATE_USER_SUCCESS, ERROR_CLEAN } from "../actions/user"
 
-
 export type TUserState = {
     isAuth: boolean;
     user: IUser;
-    errorMessage: string | null;
+    errorMessage: IErrorMessageResponse| null;
 
     registrationRequest: boolean;
     registrationFailed: boolean;
@@ -53,7 +52,7 @@ const initialState: TUserState = {
     updateUserFailed: false,
 }
 
-export const userReducer = (state = initialState, action: TUserActions) => {
+export const userReducer = (state = initialState, action: TUserActions): TUserState => {
     switch(action.type) {
         case REGISTER_REQUEST: 
             return {

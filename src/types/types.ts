@@ -17,14 +17,14 @@ export type TIngredient = Pick<IIngredientData, '_id' | 'name' | 'type' | 'price
 export type TDetailIngredient = Omit<IIngredientData, 'price' | 'type' | 'image_mobile' | 'image_large'>;
 
 export type TConstructorIngredient = TIngredient & {
-        key: string;
+        key?: string;
 }
 export interface IBaseResponse  {
         success: boolean;
 }
 
 export interface IGetIngredientsResponse extends IBaseResponse {
-        data: IIngredientData;
+        data: IIngredientData[];
 }
 interface IOrderNumber {
         number: number;

@@ -29,11 +29,14 @@ type TTabs = {
     isActive: boolean;
 }
 
+type TOrderId = {
+    id: number;
+}
 type TBurgerConstructorState = {
         ingredients: IIngredientData[],
         cart: TCart;
         detailIngredient: TDetailIngredient | null;
-        order: number | null;
+        order: TOrderId | null;
         tabs: TTabs[];
     
         getIngredientsRequest: boolean;
@@ -69,7 +72,7 @@ const initialState: TBurgerConstructorState = {
     errorMessage: null
 }
 
-const constructorReducer = (state = initialState, action:TBurgerConstructorActions) => {
+const constructorReducer = (state = initialState, action:TBurgerConstructorActions): TBurgerConstructorState => {
     switch(action.type) {
         case GET_INGREDIENTS_DATA_REQUEST:
             return {

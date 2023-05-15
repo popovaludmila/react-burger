@@ -1,3 +1,4 @@
+import { AppThunk } from "../../types";
 import { ICreateOrderResponse, IGetIngredientsResponse, TDetailIngredient, TIngredient } from "../../types/types";
 import { BASE_URL } from "../../utils/data";
 import { fetchWithRefresh, request } from "../../utils/data-api";
@@ -69,7 +70,7 @@ export const cleanCart = () => {
    }
 }
 
-export const getIngredients = () => {
+export const getIngredients = (): AppThunk => {
     return function(dispatch) {
         dispatch({
             type: GET_INGREDIENTS_DATA_REQUEST
@@ -90,7 +91,7 @@ export const getIngredients = () => {
     }
 }
 
-export const createOrder = (orderIngredientIds: string) => {
+export const createOrder = (orderIngredientIds: string): AppThunk => {
     return (dispatch) => {
         dispatch({
             type: GET_ORDER_DATA_REQUEST

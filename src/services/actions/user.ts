@@ -98,7 +98,7 @@ export const login = (email: string, password:string, onSuccess: () => void): Ap
     }
 }
 
-export const logout = (token: string) => {
+export const logout = (token: string): AppThunk => {
     return (dispatch) => {
         dispatch({
             type: LOGOUT_REQUEST
@@ -125,7 +125,7 @@ export const logout = (token: string) => {
     }
 }
 
-export const getUser = (token: string) => {
+export const getUser = (token: string): AppThunk => {
     return (dispatch) => {
         dispatch({
             type: GET_USER_REQUEST
@@ -162,7 +162,7 @@ export const checkIsUserAuth = (): AppThunk => {
     }
 }
 
-export const updateUserProfile = (name: string, email: string, password: string, token: string) => {
+export const updateUserProfile = (name: string, email: string, password: string, token: string): AppThunk => {
     return (dispatch) => {
         dispatch({
             type: UPDATE_USER_REQUEST

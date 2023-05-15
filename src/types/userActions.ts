@@ -1,5 +1,5 @@
 import { ERROR_CLEAN, GET_USER_FAILED, GET_USER_REQUEST, GET_USER_SUCCESS, LOGIN_FAILED, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT_FAILED, LOGOUT_REQUEST, LOGOUT_SUCCESS, REGISTER_FAILED, REGISTER_REQUEST, REGISTER_SUCCESS, UPDATE_USER_FAILED, UPDATE_USER_REQUEST, UPDATE_USER_SUCCESS } from "../services/actions/user";
-import { IAuthResponse, IErrorMessageResponse} from "./types";
+import { IAuthResponse, IErrorMessageResponse, IUserUpdateResponse} from "./types";
 
 export interface IRegisterRequest {
     type: typeof REGISTER_REQUEST;
@@ -33,7 +33,6 @@ export interface ILogoutRequest {
 }
 export interface ILogoutSuccess {
     type: typeof LOGOUT_SUCCESS;
-    data: IAuthResponse;
 }
 export interface ILogoutFailed {
     type: typeof LOGOUT_FAILED;
@@ -57,7 +56,7 @@ export interface IUpdateUserRequest {
 }
 export interface IUpdateUserSuccess {
     type: typeof UPDATE_USER_SUCCESS;
-    data: IAuthResponse;
+    data: IUserUpdateResponse;
 }
 export interface IUpdateUserFailed {
     type: typeof UPDATE_USER_FAILED;
