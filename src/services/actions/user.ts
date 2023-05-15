@@ -1,3 +1,4 @@
+import { AppThunk } from "../../types";
 import { IAuthResponse, IUserRegisterRequest, IUserUpdateResponse } from "../../types/types";
 import { IErrorClean } from "../../types/userActions";
 import { BASE_URL } from "../../utils/data";
@@ -31,7 +32,7 @@ export const errorClean = (): IErrorClean => {
     }
 }
 
-export const register = (user: IUserRegisterRequest, onSuccess: () => void) => {
+export const register = (user: IUserRegisterRequest, onSuccess: () => void): AppThunk => {
     return (dispatch) => {
         dispatch({
             type: REGISTER_REQUEST
@@ -62,7 +63,7 @@ export const register = (user: IUserRegisterRequest, onSuccess: () => void) => {
 }
 
 
-export const login = (email: string, password:string, onSuccess: () => void) => {
+export const login = (email: string, password:string, onSuccess: () => void): AppThunk => {
     return (dispatch) => {
         dispatch({
             type: LOGIN_REQUEST
@@ -152,7 +153,7 @@ export const getUser = (token: string) => {
     }
 }
 
-export const checkIsUserAuth = () => {
+export const checkIsUserAuth = (): AppThunk => {
     return (dispatch) => {
         const authToken = localStorage.getItem('accessToken');
         if (authToken) {

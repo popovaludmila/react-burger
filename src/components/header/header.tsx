@@ -2,14 +2,13 @@ import { BurgerIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import {ListIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import {ProfileIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import {Logo} from '@ya.praktikum/react-developer-burger-ui-components';
-import { useSelector } from 'react-redux';
 import { Link, NavLink, Outlet, useMatch } from 'react-router-dom';
+import { useSelector } from '../../hooks/hooks';
 import { ORDERS_FEED, PROFILE } from '../../utils/data';
 
 import headerStyles from './header.module.css';
 
 const Header = () => {
-     //@ts-ignore
     const userName = useSelector(state => state.user.user?.name) || 'Личный кабинет';
     const matchConstructor = useMatch("/");
     const matchOrdersFeed = useMatch("/orders-feed");
