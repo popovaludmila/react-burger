@@ -2,13 +2,12 @@ import BurgerIngredientsBlock from "./burger-ingredients-block/burger-ingredient
 import BurgerMenu from "./burger-menu/burger-menu";
 import burgerIngredientsStyles from './burger-ingredients.module.css'
 import { BUN, MAIN, SAUCE } from "../../utils/data";
-import { useSelector } from "react-redux";
-
+import { useSelector } from "../../hooks/hooks";
 
 const BurgerIngredients = ():JSX.Element => {
-    //@ts-ignore
+
     const tabs = useSelector(state => state.constructorBurger.tabs);
-    //@ts-ignore
+
     const currentTab = tabs.find(tab => tab.isActive);
 
     const scrollTo = (tab:string) => {

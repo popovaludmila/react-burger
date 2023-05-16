@@ -1,49 +1,35 @@
 import { Button, EmailInput } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { BASE_URL, LOGIN } from '../../utils/data';
-import { request } from '../../utils/data-api';
+import { useDispatch } from '../../hooks/hooks';
+import { useForm } from '../../hooks/useForm';
+import { forgotPassword } from '../../services/actions/user';
+import { LOGIN } from '../../utils/data';
 import forgotPasswordStyles from './forgot-password.module.css';
 
 export const ForgotPasswordPage = ():JSX.Element => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
-    const [form, setValue] = useState({ 
+    const {form, handleChange} = useForm({  
         email: ''
     });
 
-    const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-       
-        setValue({ ...form, [e.target.name]: e.target.value });
-    };
-
-    const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const onFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-
-        request(`${BASE_URL}/password-reset`, {
-            method: 'POST',
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify(form)
-        }).then((data) =>{
-            if (data.success) {
-               navigate('/reset-password');
-            }
-        }).catch((err) => {
-            alert(err);
-        });
+        dispatch(forgotPassword(form.email, () => navigate('/reset-password')));
     }
 
     return (
         <>
             <div className={forgotPasswordStyles.wrapper}>
-                <form className={forgotPasswordStyles.form} onSubmit={onSubmit}>
+                <form className={forgotPasswordStyles.form} onSubmit={onFormSubmit}>
                     <h2 className='text text_type_main-medium mb-6'>Восстановление пароля</h2>
                     <div className="mb-6">
                         <EmailInput
                         name='email'
                         isIcon={false}
                         value={form.email}
-                        onChange={onChange}
+                        onChange={handleChange}
                         placeholder={'Укажите e-mail'}
                         />  
                     </div>

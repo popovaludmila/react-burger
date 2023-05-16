@@ -1,5 +1,5 @@
-import { useDispatch } from 'react-redux';
 import { NavLink, Outlet, useMatch } from 'react-router-dom';
+import { useDispatch } from '../../hooks/hooks';
 import { logout } from '../../services/actions/user';
 import { ORDERS, PROFILE } from '../../utils/data';
 
@@ -16,8 +16,9 @@ export const ProfileNav = (): JSX.Element => {
 
     const onLogout = () => {
         const token = localStorage.getItem('refreshToken');
-         //@ts-ignore
-        dispatch(logout({"token": token}));
+        if(token) {
+           dispatch(logout(token)); 
+        }
     }
 
     return (

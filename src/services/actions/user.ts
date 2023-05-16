@@ -12,6 +12,14 @@ export const LOGIN_REQUEST: 'LOGIN_REQUES' = 'LOGIN_REQUES';
 export const LOGIN_SUCCESS: 'LOGIN_SUCCESS' = 'LOGIN_SUCCESS';
 export const LOGIN_FAILED: 'LOGIN_FAILED' = 'LOGIN_FAILED';
 
+export const FORGOT_PASSWORD_REQUEST: 'FORGOT_PASSWORD_REQUEST' = 'FORGOT_PASSWORD_REQUEST';
+export const FORGOT_PASSWORD_SUCCESS: 'FORGOT_PASSWORD_SUCCESS' = 'FORGOT_PASSWORD_SUCCESS';
+export const FORGOT_PASSWORD_FAILED: 'FORGOT_PASSWORD_FAILED' = 'FORGOT_PASSWORD_FAILED';
+
+export const RESET_PASSWORD_REQUEST: 'RESET_PASSWORD_REQUEST' = 'RESET_PASSWORD_REQUEST';
+export const RESET_PASSWORD_SUCCESS: 'RESET_PASSWORD_SUCCESS' = 'RESET_PASSWORD_SUCCESS';
+export const RESET_PASSWORD_FAILED: 'RESET_PASSWORD_FAILED' = 'RESET_PASSWORD_FAILED';
+
 export const LOGOUT_REQUEST: 'LOGOUT_REQUEST' = 'LOGOUT_REQUEST';
 export const LOGOUT_SUCCESS: 'LOGOUT_SUCCESS' = 'LOGOUT_SUCCESS';
 export const LOGOUT_FAILED: 'LOGOUT_FAILED' = 'LOGOUT_FAILED';
@@ -63,7 +71,57 @@ export const register = (user: IUserRegisterRequest, onSuccess: () => void): App
 }
 
 
-export const login = (email: string, password:string, onSuccess: () => void): AppThunk => {
+export const forgotPassword = (email: string, onSuccess: () => void): AppThunk => {
+    return (dispatch) => {
+        dispatch({
+            type: FORGOT_PASSWORD_REQUEST
+        });
+            request(`${BASE_URL}/password-reset`, {
+            method: 'POST',
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({email})
+        }).then((data) =>{
+            if (data.success) {
+                dispatch({
+                    type: FORGOT_PASSWORD_SUCCESS
+                })
+                onSuccess();
+            }
+        }).catch((err) => {
+            dispatch({
+                type: FORGOT_PASSWORD_FAILED,
+                err: err.message
+            })
+        });
+    }
+}
+
+export const resetPassword = (password: string, token: string, onSuccess: () => void): AppThunk => {
+    return (dispatch) => {
+        dispatch({
+            type: RESET_PASSWORD_REQUEST
+        });
+            request(`${BASE_URL}/password-reset/reset`, {
+            method: 'POST',
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({password, token})
+        }).then((data) =>{
+            if (data.success) {
+                dispatch({
+                    type: RESET_PASSWORD_SUCCESS
+                })
+                onSuccess();
+            }
+        }).catch((err) => {
+            dispatch({
+                type: RESET_PASSWORD_FAILED,
+                err: err.message
+            })
+        });
+    }
+}
+
+export const login = (email: string, password: string, onSuccess: () => void): AppThunk => {
     return (dispatch) => {
         dispatch({
             type: LOGIN_REQUEST
@@ -101,7 +159,8 @@ export const login = (email: string, password:string, onSuccess: () => void): Ap
 export const logout = (token: string): AppThunk => {
     return (dispatch) => {
         dispatch({
-            type: LOGOUT_REQUEST
+            type: LOGOUT_REQUEST, 
+            token: token
         });
         request(`${BASE_URL}/auth/logout`, {
             method: 'POST',

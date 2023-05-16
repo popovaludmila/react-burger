@@ -1,10 +1,10 @@
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 import constructorFillingtStyles from './constructor-filling.module.css';
-import { useDispatch } from 'react-redux';
 import { deleteIngredient, replaceIngredient } from '../../../services/actions';
 import { useDrag, useDrop } from 'react-dnd';
 import { useRef } from 'react';
 import { TConstructorIngredient} from '../../../types/types';
+import { useDispatch } from '../../../hooks/hooks';
 
 type TConstructorFillingProps = {
     item: TConstructorIngredient;

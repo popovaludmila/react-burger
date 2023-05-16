@@ -1,5 +1,5 @@
-import { useSelector } from "react-redux";
 import { Navigate, useLocation } from "react-router-dom";
+import { useSelector } from "../../hooks/hooks";
 
 type TProtectedRouteElementProps ={
     onlyAuth?: boolean;
@@ -8,7 +8,6 @@ type TProtectedRouteElementProps ={
 }
 
 export const ProtectedRouteElement = ({onlyAuth, onlyUnauth, element}:TProtectedRouteElementProps): JSX.Element => {
-     //@ts-ignore
     const isAuth = useSelector(state => state.user.isAuth);
     const location = useLocation();
 

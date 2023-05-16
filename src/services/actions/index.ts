@@ -91,7 +91,7 @@ export const getIngredients = (): AppThunk => {
     }
 }
 
-export const createOrder = (orderIngredientIds: string): AppThunk => {
+export const createOrder = (orderIngredientIds: string[]): AppThunk => {
     return (dispatch) => {
         dispatch({
             type: GET_ORDER_DATA_REQUEST

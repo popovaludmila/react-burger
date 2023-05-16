@@ -1,0 +1,9 @@
+.image {
+  
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background-color: #131316;
+    border: 2px solid  #4C4CFF;
+    border-image: linear-gradient(to right top, #801AB2 #4C4CFF);
+}

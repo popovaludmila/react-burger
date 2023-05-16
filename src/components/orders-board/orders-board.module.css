@@ -1,0 +1,36 @@
+.main {
+    width: 50%;
+    max-width: 600px;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.orders_list {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.board {
+    width: 272px;
+
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    max-height: 277px;
+}
+
+.list li:nth-child(10n) {
+    padding-bottom: 0;
+}
+
+.done {
+    color: #00CCCC;
+}

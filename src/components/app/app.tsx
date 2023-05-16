@@ -1,4 +1,3 @@
-import { useDispatch } from 'react-redux';
 import { useEffect} from 'react';
 import { getIngredients } from '../../services/actions';
 import { Route, Routes, useLocation, useNavigate} from 'react-router-dom';
@@ -10,6 +9,7 @@ import { ProtectedRouteElement } from '../protected-route/protected-route';
 import Modal from '../modal/modal';
 import IngredientModal from '../modal/ingredient-modal/ingredient-modal';
 import { FORGOT_PASSWORD, INGREDIENTS, LOGIN, ORDERS, ORDERS_FEED, PROFILE, REGISTER, RESET_PASSWORD } from '../../utils/data';
+import { useDispatch } from '../../hooks/hooks';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -19,9 +19,7 @@ const App = () => {
 
 
   useEffect(()=> {
-    // @ts-ignore
       dispatch(getIngredients());
-    // @ts-ignore
       dispatch(checkIsUserAuth());
   }, [dispatch])
 

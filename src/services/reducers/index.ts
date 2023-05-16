@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 import { TBurgerConstructorActions } from "../../types/burgerConstructorActions";
-import { IIngredientData, TConstructorIngredient, TDetailIngredient } from "../../types/types";
+import { TIngredientData, TConstructorIngredient, TDetailIngredient, TIngredient } from "../../types/types";
 import { BUN, MAIN, SAUCE } from "../../utils/data";
 import { GET_INGREDIENTS_DATA_SUCCESS,  
     SHOW_DETAIL_INGREDIENT, 
@@ -19,9 +19,9 @@ import { GET_INGREDIENTS_DATA_SUCCESS,
 import { userReducer } from "./user";
 
 export type TCart = {
-    top: TConstructorIngredient | null;
+    top: TIngredient | null;
     fillings: TConstructorIngredient[];
-    bottom: TConstructorIngredient | null;
+    bottom: TIngredient | null;
 }
 
 type TTabs = {
@@ -33,7 +33,7 @@ type TOrderId = {
     id: number;
 }
 type TBurgerConstructorState = {
-        ingredients: IIngredientData[],
+        ingredients: TIngredientData[],
         cart: TCart;
         detailIngredient: TDetailIngredient | null;
         order: TOrderId | null;

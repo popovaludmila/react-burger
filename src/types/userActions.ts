@@ -1,5 +1,5 @@
-import { ERROR_CLEAN, GET_USER_FAILED, GET_USER_REQUEST, GET_USER_SUCCESS, LOGIN_FAILED, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT_FAILED, LOGOUT_REQUEST, LOGOUT_SUCCESS, REGISTER_FAILED, REGISTER_REQUEST, REGISTER_SUCCESS, UPDATE_USER_FAILED, UPDATE_USER_REQUEST, UPDATE_USER_SUCCESS } from "../services/actions/user";
-import { IAuthResponse, IErrorMessageResponse, IUserUpdateResponse} from "./types";
+import { ERROR_CLEAN, FORGOT_PASSWORD_FAILED, FORGOT_PASSWORD_REQUEST, FORGOT_PASSWORD_SUCCESS, GET_USER_FAILED, GET_USER_REQUEST, GET_USER_SUCCESS, LOGIN_FAILED, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT_FAILED, LOGOUT_REQUEST, LOGOUT_SUCCESS, REGISTER_FAILED, REGISTER_REQUEST, REGISTER_SUCCESS, RESET_PASSWORD_FAILED, RESET_PASSWORD_REQUEST, RESET_PASSWORD_SUCCESS, UPDATE_USER_FAILED, UPDATE_USER_REQUEST, UPDATE_USER_SUCCESS } from "../services/actions/user";
+import { IAuthResponse, IUserUpdateResponse} from "./types";
 
 export interface IRegisterRequest {
     type: typeof REGISTER_REQUEST;
@@ -13,7 +13,28 @@ export interface IErrorClean {
 }
 export interface IRegisterFailed {
     type: typeof REGISTER_FAILED;
-    err: IErrorMessageResponse;
+    err: string;
+}
+
+export interface IForgotPasswordRequest {
+    type: typeof FORGOT_PASSWORD_REQUEST;
+}
+export interface IForgotPasswordSuccess {
+    type: typeof FORGOT_PASSWORD_SUCCESS;
+}
+export interface IForgotPasswordFailed {
+    type: typeof FORGOT_PASSWORD_FAILED;
+    err: string;
+}
+export interface IResetPasswordRequest {
+    type: typeof RESET_PASSWORD_REQUEST;
+}
+export interface IResetPasswordSuccess {
+    type: typeof RESET_PASSWORD_SUCCESS;
+}
+export interface IResetPasswordFailed {
+    type: typeof RESET_PASSWORD_FAILED;
+    err: string;
 }
 
 export interface ILoginRequest {
@@ -25,18 +46,18 @@ export interface ILoginSuccess {
 }
 export interface ILoginFailed {
     type: typeof LOGIN_FAILED;
-    err: IErrorMessageResponse;
+    err: string;
 }
-
 export interface ILogoutRequest {
     type: typeof LOGOUT_REQUEST;
+    token: string;
 }
 export interface ILogoutSuccess {
     type: typeof LOGOUT_SUCCESS;
 }
 export interface ILogoutFailed {
     type: typeof LOGOUT_FAILED;
-    err: IErrorMessageResponse;
+    err: string;
 }
 
 export interface IGetUserRequest {
@@ -48,7 +69,7 @@ export interface IGetUserSuccess {
 }
 export interface IGetUserFailed {
     type: typeof GET_USER_FAILED;
-    err: IErrorMessageResponse;
+    err: string;
 }
 
 export interface IUpdateUserRequest {
@@ -60,12 +81,11 @@ export interface IUpdateUserSuccess {
 }
 export interface IUpdateUserFailed {
     type: typeof UPDATE_USER_FAILED;
-    err: IErrorMessageResponse;
+    err: string;
 }
-
-
 
 export type TUserActions = | IRegisterRequest | IRegisterSuccess | IRegisterFailed |
     ILoginRequest | ILoginSuccess | ILoginFailed | ILogoutRequest | ILogoutSuccess | 
     ILogoutFailed | IGetUserRequest | IGetUserSuccess | IGetUserFailed | IUpdateUserRequest |
-    IUpdateUserSuccess | IUpdateUserFailed | IErrorClean;
+    IUpdateUserSuccess | IUpdateUserFailed | IErrorClean | IForgotPasswordRequest | IForgotPasswordSuccess | 
+    IForgotPasswordFailed | IResetPasswordRequest | IResetPasswordSuccess | IResetPasswordFailed;

@@ -1,4 +1,4 @@
-export interface IIngredientData {
+export type TIngredientData = {
         _id: string;
         name: string;
         type: string;
@@ -12,19 +12,20 @@ export interface IIngredientData {
         image_large: string;
 }
 
-export type TIngredient = Pick<IIngredientData, '_id' | 'name' | 'type' | 'price' | 'image'>;
+export type TIngredient = Pick<TIngredientData, '_id' | 'name' | 'type' | 'price' | 'image'>;
 
-export type TDetailIngredient = Omit<IIngredientData, 'price' | 'type' | 'image_mobile' | 'image_large'>;
+export type TDetailIngredient = Omit<TIngredientData, 'price' | 'type' | 'image_mobile' | 'image_large'>;
 
 export type TConstructorIngredient = TIngredient & {
-        key?: string;
+        key: string;
 }
 export interface IBaseResponse  {
         success: boolean;
+        message: string | null;
 }
 
 export interface IGetIngredientsResponse extends IBaseResponse {
-        data: IIngredientData[];
+        data: TIngredientData[];
 }
 interface IOrderNumber {
         number: number;
@@ -43,18 +44,14 @@ export interface IUser {
 export interface IAuthResponse extends ITokenResponse {
         user: IUser;
 }
-
 export interface IUserUpdateResponse extends IBaseResponse {
         user: IUser;
-}
-interface IErrorMessage {
-        message: string;
-}
-export interface IErrorMessageResponse {
-        err: IErrorMessage;
 }
 export interface IUserRegisterRequest {
         email: string;
         name: string;
         password: string;
+}
+export interface IErrorMessage {
+        message: string;
 }

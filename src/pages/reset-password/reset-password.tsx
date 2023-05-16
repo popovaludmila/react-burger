@@ -1,13 +1,14 @@
 import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from '../../hooks/hooks';
 import { useForm } from '../../hooks/useForm';
-import { BASE_URL, LOGIN } from '../../utils/data';
-import { request } from '../../utils/data-api';
+import { resetPassword } from '../../services/actions/user';
+import { LOGIN } from '../../utils/data';
 import resetPasswordStyles from './reset-password.module.css';
 
 export const ResetPasswordPage = (): JSX.Element => {
     const navigate = useNavigate();
-    
+    const dispatch = useDispatch();
 
     const {form, handleChange} = useForm({  
         password: '', 
@@ -16,18 +17,7 @@ export const ResetPasswordPage = (): JSX.Element => {
 
     const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-
-        request(`${BASE_URL}/password-reset/reset`, {
-            method: 'POST',
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify(form)
-        }).then((data) =>{
-            if (data.success) {
-                navigate('/login');
-            }
-        }).catch((err) => {
-            alert(err);
-        });
+        dispatch(resetPassword(form.password, form.token, () => navigate('/login')));
     }
 
     return (

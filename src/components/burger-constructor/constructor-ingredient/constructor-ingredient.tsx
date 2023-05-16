@@ -1,9 +1,9 @@
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 import constructorIngredientStyles from './constructor-ingredient.module.css';
-import { TIngredientData } from '../../../types/types';
+import { TIngredient } from '../../../types/types';
 
 type TConstructorIngredientProps = {
-    item: TIngredientData;
+    item: TIngredient;
     type: "top" | "bottom" | undefined;
     typeBun: string;
 }

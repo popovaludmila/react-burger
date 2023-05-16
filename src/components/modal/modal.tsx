@@ -3,8 +3,8 @@ import modalStyles from './modal.module.css';
 import ModalOverlay from './modal-overlay/modal-overlay';
 import { useEffect } from 'react';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useDispatch } from 'react-redux';
 import { closeModal } from '../../services/actions';
+import { useDispatch } from '../../hooks/hooks';
 
 const modal = document.getElementById("modal") as HTMLElement;
 

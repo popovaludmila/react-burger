@@ -1,5 +1,5 @@
 import { ADD_INGREDIENT_TO_CART, CLEAN_CART, CLOSE_MODAL, DELETE_INGREDIENT, GET_INGREDIENTS_DATA_FAILED, GET_INGREDIENTS_DATA_REQUEST, GET_INGREDIENTS_DATA_SUCCESS, GET_ORDER_DATA_FAILED, GET_ORDER_DATA_REQUEST, GET_ORDER_DATA_SUCCESS, REPLACE_INGREDIENTS, SHOW_DETAIL_INGREDIENT, SWITCH_TAB } from "../services/actions";
-import { IErrorMessageResponse, TDetailIngredient, TIngredient, IIngredientData } from "./types";
+import {  TDetailIngredient, TIngredientData, TIngredient } from "./types";
 
 export interface IGetIngredientsRequest {
     type: typeof GET_INGREDIENTS_DATA_REQUEST;
@@ -7,12 +7,12 @@ export interface IGetIngredientsRequest {
 
 export interface IGetIngredientsSuccess {
     type: typeof GET_INGREDIENTS_DATA_SUCCESS;
-    ingredients: IIngredientData[];
+    ingredients: TIngredientData[];
 }
 
 export interface IGetIngredientsFailed {
     type: typeof GET_INGREDIENTS_DATA_FAILED;
-    err: IErrorMessageResponse;
+    err: string;
 }
 
 export interface IShowDetailIngredientAction {
@@ -46,7 +46,7 @@ export interface IGetOrderDataSuccess {
 
 export interface IGetOrderDataFailed {
     type: typeof GET_ORDER_DATA_FAILED;
-    err: IErrorMessageResponse;
+    err: string;
 }
 
 export interface IReplaceIngredientsAction {

@@ -2,7 +2,7 @@ import { IBaseResponse, ITokenResponse } from "../types/types";
 import { BASE_URL } from "./data";
 
 const checkResponse = <T extends IBaseResponse>(response: Response): Promise<T> => {
-   return response.ok ? response.json() : Promise.reject(`Ошибка: ${response.status}`);
+   return response.ok ? response.json() : Promise.reject();
 }
  
 export const request = <T extends IBaseResponse>(url: string, options?: RequestInit): Promise<T> => {

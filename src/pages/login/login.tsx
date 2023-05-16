@@ -1,8 +1,8 @@
 import { Button, EmailInput, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { ErrorModal } from '../../components/modal/error-modal/error-modal';
 import Modal from '../../components/modal/modal';
+import { useDispatch, useSelector } from '../../hooks/hooks';
 import { useForm } from '../../hooks/useForm';
 import { errorClean, login } from '../../services/actions/user';
 import { FORGOT_PASSWORD, REGISTER } from '../../utils/data';
@@ -12,8 +12,9 @@ import loginStyles from './login.module.css';
 export const LoginPage = (): JSX.Element => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-     //@ts-ignore
+    
     const errorMessage = useSelector(state => state.user.errorMessage);
+   
     const errorText = errorMessage?.toUpperCase();
 
     const {form, handleChange} = useForm({  
@@ -23,7 +24,6 @@ export const LoginPage = (): JSX.Element => {
 
     const onFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        //@ts-ignore
         dispatch(login(form.email, form.password, () => navigate('/')));
     }
 
@@ -52,7 +52,7 @@ export const LoginPage = (): JSX.Element => {
                     <Button htmlType="submit" type="primary" size="medium">
                         Войти
                     </Button>
-                    {errorMessage !== null &&
+                    {errorText !== undefined &&
                         <Modal modalTitle={''} onCloseClick={() => dispatch(errorClean())}>
                             <ErrorModal errorMessage={errorText} />
                         </Modal>
