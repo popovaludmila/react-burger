@@ -13,6 +13,9 @@ export const OrderList = () => {
                         <CardOrder />
 
                         <CardOrder />
+                        <CardOrder />
+                        <CardOrder />
+                        <CardOrder />
                     </ul>
                 </div>
             </section>

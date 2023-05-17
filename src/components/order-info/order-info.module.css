@@ -1,0 +1,51 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 640px;
+    height: auto;
+}
+
+.number {
+    align-self: center;
+}
+
+.status {
+    color: #00CCCC;
+}
+
+.details {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.content {
+    overflow-y: scroll;
+    max-height: 312px;
+    scrollbar-width: 8px;
+    scrollbar-color: #8585AD #2F2F37;
+}
+
+.content::-webkit-scrollbar {
+    width: 8px;
+    background-color: #2F2F37;
+}
+
+.content::-webkit-scrollbar-thumb {
+    background-color: #8585AD;        
+    height: 194px; 
+}
+
+.total {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.total_price {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
