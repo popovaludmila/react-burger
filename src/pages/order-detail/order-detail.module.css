@@ -29,6 +29,12 @@
     color: #00CCCC;
 }
 
+.details {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
 .content {
     max-height: 312px;
     overflow-y: scroll;
@@ -44,4 +50,30 @@
 .content::-webkit-scrollbar-thumb {
     background-color: #8585AD;        
     height: 812px; 
+}
+
+.item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.price {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: auto;
+}
+
+.total {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.total_price {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }

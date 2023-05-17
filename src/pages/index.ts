@@ -8,8 +8,9 @@ import { OrdersPage } from "./orders/orders";
 import { IngredientDetailPage } from "./ingredient-detail/ingredient-detail";
 import { NotFoundPage } from "./not-found/not-found";
 import { OrderFeedPage } from "./order-feed/order-feed";
+import { OrderDetailPage } from "./order-detail/order-detail";
 
 export {HomePage, LoginPage, RegisterPage, 
     ForgotPasswordPage, ResetPasswordPage, 
     ProfilePage, OrdersPage, IngredientDetailPage, 
-    NotFoundPage, OrderFeedPage};
+    NotFoundPage, OrderFeedPage, OrderDetailPage};
