@@ -1,12 +1,21 @@
+import { CardOrder } from '../../components/card-order/card-order';
 import ordersStyles from './orders.module.css';
 
 export const OrdersPage = (): JSX.Element => {
     return (
         <>
         <div className={ordersStyles.wrapper}>
-            <ul>
-                
-            </ul>
+            <div className={`${ordersStyles.main} pr-2`}>
+                <ul>
+                    <CardOrder />
+                    <CardOrder />
+                    <CardOrder />
+                    <CardOrder />
+                    <CardOrder />
+                    <CardOrder />
+                </ul>
+            </div>
+           
         </div>
         </>
     )

@@ -15,6 +15,7 @@ import { GET_INGREDIENTS_DATA_SUCCESS,
     GET_INGREDIENTS_DATA_REQUEST,
     GET_ORDER_DATA_REQUEST,
     GET_ORDER_DATA_FAILED} from "../actions";
+import { orderFeedReducer } from "./order-feed";
 
 import { userReducer } from "./user";
 
@@ -192,7 +193,8 @@ const constructorReducer = (state = initialState, action:TBurgerConstructorActio
 
 export const rootReducer = combineReducers({
     constructorBurger: constructorReducer,
-    user: userReducer
+    user: userReducer,
+    orderFeed: orderFeedReducer
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

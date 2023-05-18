@@ -55,3 +55,12 @@ export interface IUserRegisterRequest {
 export interface IErrorMessage {
         message: string;
 }
+
+export type TOrderFeed = {
+        ingredients: Array<string>;
+        id: string;
+        status: string;
+        number: number;
+        createdAt: string;
+        updatedAt: string;
+}

@@ -10,6 +10,8 @@ const FEED = 'feed';
 const PROFILE = 'profile';
 const ORDERS = 'orders';
 const INGREDIENTS = 'ingredients';
+const WS_URL = 'wss://norma.nomoreparties.space/orders';
+const ALL = 'all';
 
 export {BASE_URL, BUN, MAIN, SAUCE, LOGIN, REGISTER, FORGOT_PASSWORD, RESET_PASSWORD,
- FEED, PROFILE, ORDERS, INGREDIENTS};
+ FEED, PROFILE, ORDERS, INGREDIENTS, WS_URL, ALL};
