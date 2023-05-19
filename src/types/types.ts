@@ -55,12 +55,27 @@ export interface IUserRegisterRequest {
 export interface IErrorMessage {
         message: string;
 }
-
-export type TOrderFeed = {
+export interface IWebSocket {
+        wsStart: string;
+        onOpen: string;
+        onError: string;
+        onClose: string;
+        onMessage: string;
+        wsSend: string;
+    }
+export interface IOrderFeed  {
         ingredients: Array<string>;
-        id: string;
+        _id: string;
         status: string;
         number: number;
-        createdAt: string;
+        createdAt: string | number | Date;
         updatedAt: string;
+        name: string;
+}
+
+export interface IOrderFeedMessageResponse {
+        orders: IOrderFeed[];
+        total: number;
+        totalToday: number;
+        success: boolean;
 }

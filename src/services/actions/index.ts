@@ -1,4 +1,5 @@
 import { AppThunk } from "../../types";
+import { ISwitchTabAction, IReplaceIngredientsAction, IDeleteIngredientAction, IShowDetailIngredientAction, ICloseModalAction, IAddIngredientToCartAction, IClearCartAction } from "../../types/burgerConstructorActions";
 import { ICreateOrderResponse, IGetIngredientsResponse, TDetailIngredient, TIngredient } from "../../types/types";
 import { BASE_URL } from "../../utils/data";
 import { fetchWithRefresh, request } from "../../utils/data-api";
@@ -20,7 +21,7 @@ export const REPLACE_INGREDIENTS: 'REPLACE_INGREDIENTS' = 'REPLACE_INGREDIENTS';
 export const SWITCH_TAB: 'SWITCH_TAB' = 'SWITCH_TAB';
 export const CLEAN_CART: 'CLEAN_CART' = 'CLEAN_CART';
 
-export const switchTab = (tab: string, isActive: boolean) => {
+export const switchTab = (tab: string, isActive: boolean): ISwitchTabAction => {
     return {
         type: SWITCH_TAB,
         tab: tab,
@@ -28,7 +29,7 @@ export const switchTab = (tab: string, isActive: boolean) => {
     }
 }
 
-export const replaceIngredient = (draggingKey: string, hoverKey: string) => {
+export const replaceIngredient = (draggingKey: string, hoverKey: string): IReplaceIngredientsAction => {
     return {
         type: REPLACE_INGREDIENTS,
         draggingKey: draggingKey,
@@ -36,27 +37,27 @@ export const replaceIngredient = (draggingKey: string, hoverKey: string) => {
     }
 }
 
-export const deleteIngredient = (key: string) => {
+export const deleteIngredient = (key: string): IDeleteIngredientAction => {
     return {
         type: DELETE_INGREDIENT,
         key: key
     }
 }
 
-export const showDetailIngredient = (ingredient: TDetailIngredient) => {
+export const showDetailIngredient = (ingredient: TDetailIngredient): IShowDetailIngredientAction => {
     return {
         type: SHOW_DETAIL_INGREDIENT,
         ingredient: ingredient,
     }
 }
 
-export const closeModal = () => {
+export const closeModal = (): ICloseModalAction => {
     return {
         type: CLOSE_MODAL
     }
 }
 
-export const addIngredientToCart = (ingredient: TIngredient, key: string) => {
+export const addIngredientToCart = (ingredient: TIngredient, key: string): IAddIngredientToCartAction => {
     return {
         type: ADD_INGREDIENT_TO_CART,
         ingredient: ingredient,
@@ -64,7 +65,7 @@ export const addIngredientToCart = (ingredient: TIngredient, key: string) => {
     }
 }
 
-export const cleanCart = () => {
+export const cleanCart = (): IClearCartAction => {
    return {
         type: CLEAN_CART
    }

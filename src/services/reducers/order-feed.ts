@@ -1,17 +1,15 @@
 import { TOrderFeedActions } from "../../types/orderFeedActions";
-import { TOrderFeed } from "../../types/types";
-import { ORDER_FEED_CONNECT, ORDER_FEED_WS_CLOSE, ORDER_FEED_WS_CONNECTING,
-     ORDER_FEED_WS_ERROR, ORDER_FEED_WS_GET_MESSAGE, ORDER_FEED_WS_OPEN } from "../actions/order-feed";
+import { IOrderFeed } from "../../types/types";
+import { ORDER_FEED_WS_CLOSE, ORDER_FEED_WS_CONNECTING,
+     ORDER_FEED_WS_ERROR, ORDER_FEED_WS_GET_MESSAGE } from "../actions/order-feed";
 
 type TOrderFeedState = {
-    orders: TOrderFeed[];
+    orders: IOrderFeed[];
     total: number | null;
     totalToday: number | null;
-
-    isConnecting: boolean;
-    isOnline: boolean;
-    isOffline: boolean;
-    connectingError: string;
+    wsConnected: boolean;
+    error: boolean;
+    connectingError: string | null;
 }
 
 const initalState: TOrderFeedState = {
@@ -19,11 +17,9 @@ const initalState: TOrderFeedState = {
     total: null,
     totalToday: null,
 
-    isConnecting: false,
-    isOnline: false,
-    isOffline: true,
-
-    connectingError: ''
+    wsConnected: false,
+    error: false,
+    connectingError: null
 }
 
 export const orderFeedReducer = (state = initalState, action: TOrderFeedActions): TOrderFeedState => {
@@ -31,37 +27,29 @@ export const orderFeedReducer = (state = initalState, action: TOrderFeedActions)
         case ORDER_FEED_WS_CONNECTING: 
             return {
                 ...state,
-                isConnecting: true
-            }
-        case ORDER_FEED_CONNECT: 
-            return {
-                ...state
-              
-            }
-        case ORDER_FEED_WS_OPEN: 
-            return {
-                ...state,
-                isConnecting: false,
-                isOnline: true,
-                isOffline: false
-            }  
+                wsConnected: true,
+                error: false
+            } 
         case ORDER_FEED_WS_GET_MESSAGE: 
             return {
                 ...state,
-                orders: action.orders,
-                total: action.total,
-                totalToday: action.totalToday,
+                error: false,
+                orders: action.payload.orders,
+                total: action.payload.total,
+                totalToday: action.payload.totalToday
             }
         case ORDER_FEED_WS_ERROR:
             return {
                 ...state,
-                connectingError: action.err
+                wsConnected: false,
+                error: true,
+                connectingError: action.payload
             }
         case ORDER_FEED_WS_CLOSE:
             return {
                 ...state,
-                isOnline: false,
-                isOffline: true
+                error: false,
+                wsConnected: false
             }  
         default: 
             return state
