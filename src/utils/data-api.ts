@@ -14,7 +14,7 @@ export const request = <T extends IBaseResponse>(url: string, options?: RequestI
   })
 }
 
-const refreshToken = (): Promise<ITokenResponse> => {
+export const refreshToken = (): Promise<ITokenResponse> => {
   return request<ITokenResponse>(`${BASE_URL}/auth/token`, {
     method: "POST",
     headers: {
@@ -36,7 +36,7 @@ export const fetchWithRefresh = async <T extends IBaseResponse> (url: string, op
 
     const refreshData = await refreshToken();
     localStorage.setItem("refreshToken", refreshData.refreshToken);
-    localStorage.setItem("accessToken", refreshData.accessToken);
+    localStorage.setItem("accessToken", refreshData.accessToken.split('Bearer ')[1]);
       if (options.headers) {
         (options.headers as {[key: string]: string}).Authorization = refreshData.accessToken;
       }
@@ -45,5 +45,3 @@ export const fetchWithRefresh = async <T extends IBaseResponse> (url: string, op
    
   }
 };
-
-

@@ -1,44 +1,50 @@
-export const ORDERS_PROFILE_CONNECT: 'ORDERS_PROFILE_CONNECT' = 'ORDERS_PROFILE_CONNECT';
+import { IOrdersProfileConnectStart, IOrdersProfileWSClose, IOrdersProfileWSConnecting, IOrdersProfileWSError, IOrdersProfileWSGetMessage, IOrdersProfileWSStop } from "../../types/ordersProfileActions";
+import { IOrderMessageResponse } from "../../types/types";
+
+export const ORDERS_PROFILE_CONNECT_START: 'ORDERS_PROFILE_CONNECT_START' = 'ORDERS_PROFILE_CONNECT_START';
 export const ORDERS_PROFILE_WS_CONNECTING: 'ORDERS_PROFILE_WS_CONNECTING' = 'ORDERS_PROFILE_WS_CONNECTING';
 export const ORDERS_PROFILE_WS_ERROR: 'ORDERS_PROFILE_WS_ERROR' = 'ORDERS_PROFILE_WS_ERROR'; 
 export const ORDERS_PROFILE_WS_GET_MESSAGE: 'ORDERS_PROFILE_WS_GET_MESSAGE' = 'ORDERS_PROFILE_WS_GET_MESSAGE'; 
 export const ORDERS_PROFILE_WS_CLOSE: 'ORDERS_PROFILE_WS_CLOSE' = 'ORDERS_PROFILE_WS_CLOSE'; 
-export const ORDERS_PROFILE_WS_OPEN: 'ORDERS_PROFILE_WS_OPEN' = 'ORDERS_PROFILE_WS_OPEN'; 
+export const ORDERS_PROFILE_WS_STOP: 'ORDERS_PROFILE_WS_STOP' = 'ORDERS_PROFILE_WS_STOP'; 
 
 
-export const feedConnect = (wsUrl: string) => {
+export const orderProfilesConnectStart = (url: string): IOrdersProfileConnectStart => {
     return {
-        type: ORDERS_PROFILE_CONNECT,
-        url: wsUrl
+        type: ORDERS_PROFILE_CONNECT_START,
+        payload: url
     }
 }
 
-export const feedWsConnecting = () => {
+export const ordersProfileWsConnecting = (event: Event): IOrdersProfileWSConnecting => {
     return {
-        type: ORDERS_PROFILE_WS_CONNECTING
+        type: ORDERS_PROFILE_WS_CONNECTING,
+        payload: event
     }
 }
 
-export const feedWsOpen = () => {
-    return {
-        type: ORDERS_PROFILE_WS_OPEN
-    }
-}
-
-export const feedWsClose= () => {
+export const ordersProfileWsClose = (): IOrdersProfileWSClose => {
     return {
         type: ORDERS_PROFILE_WS_CLOSE
     }
 }
 
-export const feedWsError = () => {
+export const ordersProfileWsError = ( event: Event ): IOrdersProfileWSError => {
     return {
-        type: ORDERS_PROFILE_WS_ERROR
+        type: ORDERS_PROFILE_WS_ERROR,
+        payload: event
     }
 }
 
-export const feedWsGetMessage = () => {
+export const ordersProfileWsGetMessage = (message: IOrderMessageResponse): IOrdersProfileWSGetMessage => {
     return {
-        type: ORDERS_PROFILE_WS_GET_MESSAGE
+        type: ORDERS_PROFILE_WS_GET_MESSAGE,
+        payload: message
+    }
+}
+
+export const ordersProfileWsStop = (): IOrdersProfileWSStop=> {
+    return {
+        type: ORDERS_PROFILE_WS_STOP
     }
 }

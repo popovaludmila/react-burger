@@ -1,4 +1,4 @@
-import { RootState } from "../services/reducers";
+import { RootState } from "../services/reducers/burder-constructor";
 import { AppDispatch } from "../types";
 import {
     TypedUseSelectorHook,

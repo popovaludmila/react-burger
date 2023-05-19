@@ -1,23 +1,24 @@
-import { IOrderFeedConnect, IOrderFeedWSClose, IOrderFeedWSConnecting, IOrderFeedWSError, IOrderFeedWSGetMessage } from "../../types/orderFeedActions";
-import { IOrderFeedMessageResponse } from "../../types/types";
+import { IOrderFeedConnectStart, IOrderFeedWSClose, IOrderFeedWSConnecting, IOrderFeedWSError, IOrderFeedWSGetMessage, IOrderFeedWSStop } from "../../types/orderFeedActions";
+import { IOrderMessageResponse } from "../../types/types";
 
-export const ORDER_FEED_CONNECT: 'ORDER_FEED_CONNECT' = 'ORDER_FEED_CONNECT';
+export const ORDER_FEED_WS_CONNECT_START: 'ORDER_FEED_WS_CONNECT_START' = 'ORDER_FEED_WS_CONNECT_START';
 export const ORDER_FEED_WS_CONNECTING: 'ORDER_FEED_WS_CONNECTING' = 'ORDER_FEED_WS_CONNECTING';
 export const ORDER_FEED_WS_ERROR: 'ORDER_FEED_WS_ERROR' = 'ORDER_FEED_WS_ERROR'; 
 export const ORDER_FEED_WS_GET_MESSAGE: 'ORDER_FEED_WS_GET_MESSAGE' = 'ORDER_FEED_WS_GET_MESSAGE'; 
 export const ORDER_FEED_WS_CLOSE: 'ORDER_FEED_WS_CLOSE' = 'ORDER_FEED_WS_CLOSE'; 
-export const ORDER_FEED_WS_SEND_MESSAGE: 'ORDER_FEED_WS_SEND_MESSAGE' ='ORDER_FEED_WS_SEND_MESSAGE'
+export const ORDER_FEED_WS_STOP: 'ORDER_FEED_WS_STOP' ='ORDER_FEED_WS_STOP'
 
-export const orderFeedConnect = (url: string): IOrderFeedConnect => {
+export const orderFeedConnect = (url: string): IOrderFeedConnectStart => {
     return {
-        type: ORDER_FEED_CONNECT,
+        type: ORDER_FEED_WS_CONNECT_START,
         payload: url
     }
 }
 
-export const orderFeedWsConnecting = (): IOrderFeedWSConnecting => {
+export const orderFeedWsConnecting = (event: Event): IOrderFeedWSConnecting => {
     return {
-        type: ORDER_FEED_WS_CONNECTING
+        type: ORDER_FEED_WS_CONNECTING,
+        payload: event
     }
 }
 
@@ -27,16 +28,22 @@ export const orderFeedWsClose = (): IOrderFeedWSClose => {
     }
 }
 
-export const orderFeedWsError = ( err: string ): IOrderFeedWSError => {
+export const orderFeedWsError = ( event: Event ): IOrderFeedWSError => {
     return {
         type: ORDER_FEED_WS_ERROR,
-        payload: err
+        payload: event
     }
 }
 
-export const orderFeedWsGetMessage = (message: IOrderFeedMessageResponse): IOrderFeedWSGetMessage => {
+export const orderFeedWsGetMessage = (message: IOrderMessageResponse): IOrderFeedWSGetMessage => {
     return {
         type: ORDER_FEED_WS_GET_MESSAGE,
         payload: message
+    }
+}
+
+export const orderFeedWsStop = ():IOrderFeedWSStop => {
+    return {
+        type: ORDER_FEED_WS_STOP
     }
 }
