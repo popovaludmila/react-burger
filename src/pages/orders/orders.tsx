@@ -7,12 +7,8 @@ export const OrdersPage = (): JSX.Element => {
         <div className={ordersStyles.wrapper}>
             <div className={`${ordersStyles.main} pr-2`}>
                 <ul>
-                    <CardOrder />
-                    <CardOrder />
-                    <CardOrder />
-                    <CardOrder />
-                    <CardOrder />
-                    <CardOrder />
+                    
+                   
                 </ul>
             </div>
            

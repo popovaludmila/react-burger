@@ -1,5 +1,6 @@
 import { ThunkAction } from "redux-thunk";
-import { RootState } from "../services/reducers/burder-constructor";
+import { RootState } from "../services/reducers";
+
 import { TBurgerConstructorActions } from "./burgerConstructorActions";
 import { TOrderFeedActions } from "./orderFeedActions";
 import { TUserActions } from "./userActions";

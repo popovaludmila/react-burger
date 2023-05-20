@@ -1,4 +1,3 @@
-import { RootState } from "../services/reducers/burder-constructor";
 import { AppDispatch } from "../types";
 import {
     TypedUseSelectorHook,
@@ -6,6 +5,7 @@ import {
     useSelector as selectorHook,
   } from "react-redux";
 import type {} from "redux-thunk/extend-redux";
+import { RootState } from "../services/reducers";
 
 export const useDispatch: () => AppDispatch = dispatchHook;
 export const useSelector: TypedUseSelectorHook<RootState> = selectorHook;

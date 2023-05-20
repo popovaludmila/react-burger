@@ -1,0 +1,51 @@
+.info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 64px;
+}
+
+.ingredients {
+    position: relative;
+    min-height: 64px;
+    width: auto;
+}
+
+.ingredients div{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+}
+
+.ingredients div:nth-child(2) {
+    left: 48px;
+    z-index: 9;
+}
+.ingredients div:nth-child(3) {
+    left: 96px;
+    z-index: 8;
+}
+.ingredients div:nth-child(4) {
+    left: 144px;
+    z-index: 7;
+}
+.ingredients div:nth-child(5) {
+    left: 192px;
+    z-index: 6;
+}
+.ingredients div:nth-child(6) {
+    left: 202px;
+    z-index: 5;
+}
+
+.ingredients div:nth-child(n+6) {
+    display: none;
+}
+
+.price {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}

@@ -8,7 +8,7 @@ export const ORDER_FEED_WS_GET_MESSAGE: 'ORDER_FEED_WS_GET_MESSAGE' = 'ORDER_FEE
 export const ORDER_FEED_WS_CLOSE: 'ORDER_FEED_WS_CLOSE' = 'ORDER_FEED_WS_CLOSE'; 
 export const ORDER_FEED_WS_STOP: 'ORDER_FEED_WS_STOP' ='ORDER_FEED_WS_STOP'
 
-export const orderFeedConnect = (url: string): IOrderFeedConnectStart => {
+export const orderFeedConnectStart = (url: string): IOrderFeedConnectStart => {
     return {
         type: ORDER_FEED_WS_CONNECT_START,
         payload: url

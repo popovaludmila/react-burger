@@ -1,4 +1,3 @@
-
 import { TBurgerConstructorActions } from "../../types/burgerConstructorActions";
 import { TIngredientData, TConstructorIngredient, TDetailIngredient, TIngredient } from "../../types/types";
 import { BUN, MAIN, SAUCE } from "../../utils/data";
