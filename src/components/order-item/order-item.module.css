@@ -1,10 +1,23 @@
 .image {
+    position: relative;
+    display: flex;
+    border-radius: 50%;
+    border: 2px solid #801AB2;
     width: 64px;
     height: 64px;
-    border-radius: 50%;
     background-color: #131316;
-    border: 2px solid  #4C4CFF;
     border-image: linear-gradient(to right top, #801AB2 #4C4CFF);
+}
+
+.img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    object-fit: contain;
+    z-index: 2;
+    width: 112px;
+    height: 56px;
 }
 
 .item {

@@ -10,6 +10,7 @@ import Modal from '../modal/modal';
 import IngredientModal from '../modal/ingredient-modal/ingredient-modal';
 import { FORGOT_PASSWORD, INGREDIENTS, LOGIN, ORDERS, FEED, PROFILE, REGISTER, RESET_PASSWORD } from '../../utils/data';
 import { useDispatch } from '../../hooks/hooks';
+import { OrderInfo } from '../order-info/order-info';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -40,9 +41,9 @@ const App = () => {
           <Route path={RESET_PASSWORD} element={
             <ProtectedRouteElement onlyUnauth element={<ResetPasswordPage />}/> }
           />
-          <Route path={FEED} element={
-            <ProtectedRouteElement onlyAuth element={<OrderFeedPage />}/> }
-          />
+          <Route path={FEED} element={<OrderFeedPage />}/> 
+          <Route path={`${FEED}/:id`} element={<OrderDetailPage />} />
+          
           <Route path={`${PROFILE}/`} element={
             <ProtectedRouteElement onlyAuth element={<ProfileNav />} />}>
               <Route index element={<ProfilePage />} />
@@ -50,7 +51,6 @@ const App = () => {
           </Route>
           <Route path={`${INGREDIENTS}/:id`} element={<IngredientDetailPage />} />
 
-          <Route path={`${FEED}/:id`} element={<OrderDetailPage />} />
 
           <Route path='*' element={<NotFoundPage />} />
         </Route>
@@ -61,6 +61,11 @@ const App = () => {
           <Route path={`${INGREDIENTS}/:id`} element={
             <Modal modalTitle={'Детали ингредиента'} onCloseClick={() => navigate(-1)}>
               <IngredientModal />
+            </Modal>
+          } />
+          <Route path={`${FEED}/:id`} element={
+            <Modal modalTitle={''} onCloseClick={() => navigate(-1)}>
+               <OrderInfo isLogin={false}/>
             </Modal>
           } />
         </Routes>

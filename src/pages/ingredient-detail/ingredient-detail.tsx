@@ -12,7 +12,7 @@ export const IngredientDetailPage = (): JSX.Element | null => {
 
     if (!ingredient) {
         return null;
-    }
+    } 
 
     const {image, name, calories, proteins, fat, carbohydrates} = ingredient;
     
