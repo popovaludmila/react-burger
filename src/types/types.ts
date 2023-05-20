@@ -65,9 +65,9 @@ export interface IOrderType {
         name: string;
     }
     
-    export interface IOrderMessageResponse {
-        orders: IOrderType[];
+export interface IOrderMessageResponse {
+        orders: Array<IOrderType>;
         total: number;
         totalToday: number;
         success: boolean;
-    }
+}

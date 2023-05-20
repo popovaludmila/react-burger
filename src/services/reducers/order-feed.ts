@@ -4,7 +4,7 @@ import { ORDER_FEED_WS_CLOSE, ORDER_FEED_WS_CONNECTING,
      ORDER_FEED_WS_ERROR, ORDER_FEED_WS_GET_MESSAGE } from "../actions/order-feed";
 
 type TOrderFeedState = {
-    orders: IOrderType[];
+    orders: Array<IOrderType>;
     total: number | null;
     totalToday: number | null;
     wsConnected: boolean;

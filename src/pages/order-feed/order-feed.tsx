@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { OrderList } from '../../components/order-list/order-list';
 import { OrdersBoard } from '../../components/orders-board/orders-board';
-import { useDispatch } from '../../hooks/hooks';
+import { useDispatch, useSelector } from '../../hooks/hooks';
 import { orderFeedConnectStart, orderFeedWsClose } from '../../services/actions/order-feed';
 import orderFeedStyles from './order-feed.module.css';
 import { WS_URL, ALL } from '../../utils/data';
@@ -17,13 +17,21 @@ export const OrderFeedPage = (): JSX.Element => {
         }
       }, [dispatch]);
 
+    const orders = useSelector(state => state.orderFeed.orders);
+    const doneOrderNumbers = orders.filter((order) => order.status === 'done')
+      .map((order) => order.number)
+
+    const pendingOrderNumbers = orders.filter((order) => order.status === 'pending')
+        .map((order) => order.number)
+
+
     return (
         <main>
             <div className="container">
                 <h1 className="text text_type_main-large mt-10 mb-5">Лента заказов</h1>
                 <div className={orderFeedStyles.main}>
-                    <OrderList />
-                    <OrdersBoard />
+                    <OrderList orders={orders} />
+                    <OrdersBoard doneOrderNumbers={doneOrderNumbers} pendingOrderNumbers={pendingOrderNumbers} />
                 </div>
             </div> 
         </main>

@@ -12,11 +12,37 @@ export const CardOrderIngredients = ({orderIngredients}: TCardOrderIngredientsPr
 
     orderIngredients.map((item) => total+= item.price);
 
-    const cardIngredients = orderIngredients.map((item) => {
-            return (
+    const showMore = () => {
+        if(orderIngredients.length - 6 === 0) {
+            return false;
+        }
+        return true;
+    }
+
+    const cardIngredients = orderIngredients.map((item, index) => {
+           if (index === 5) {
+                return (
+                    <OrderIngredient 
+                        showMore={showMore()} 
+                        key={index} 
+                        img={item.image_mobile} 
+                        name={item.name}
+                        length={orderIngredients.length}
+                        index={index} />
+                )
+            } else if (index < 5) {
+                return (
+                    <OrderIngredient 
+                        showMore={false} 
+                        key={index} 
+                        img={item.image_mobile} 
+                        name={item.name}
+                        length={orderIngredients.length}
+                        index={index} />
+                )
+            } else return null
                 
-                <OrderIngredient img={item.image} name={item.name} />
-            )
+            
         }
     )
     

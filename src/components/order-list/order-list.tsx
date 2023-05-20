@@ -1,10 +1,13 @@
-import { useSelector } from "../../hooks/hooks";
+import { IOrderType } from "../../types/types";
 import { CardOrder } from "../card-order/card-order"
 import orderListStyles from './order-list.module.css';
 
-export const OrderList = (): JSX.Element => {
-    const orders = useSelector(state => state.orderFeed.orders);
-    console.log(orders)
+type TOrderListProps = {
+    orders: IOrderType[];
+}
+
+export const OrderList = ({orders}: TOrderListProps): JSX.Element => {
+    
     const cardOrders =  orders.map((order) => (
         <CardOrder key={order._id} order = {order} />
     ))
