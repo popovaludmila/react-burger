@@ -10,7 +10,7 @@ const modal = document.getElementById("modal") as HTMLElement;
 
 type TModalProps = {
     children: JSX.Element;
-    modalTitle: string;
+    modalTitle: string | null;
     onCloseClick?: () => void;
 }
 
@@ -41,13 +41,29 @@ const Modal = ({children, modalTitle, onCloseClick}: TModalProps): JSX.Element =
         <>
             <div className={`${modalStyles.container}`}>
                 <div className={`${modalStyles.content}`}>
-                    <div className={`${modalStyles.title}`}>
-                        <h3 className="text text_type_main-large">{modalTitle}</h3>
-                        <button className={`${modalStyles.close}`} onClick={onClick}>
-                            <CloseIcon type="primary" />
-                        </button>
-                    </div>
+
+                    {modalTitle !== null &&
+                        <div className={`${modalStyles.title}`}>
+                                <h3 className="text text_type_main-large">
+                                    {modalTitle}
+                                </h3>
+                                <button className={`${modalStyles.close}`} onClick={onClick}>
+                                <CloseIcon type="primary" />
+                            </button>
+                        </div>
+                    }
                 
+
+                {modalTitle === null &&
+                        <div className={`${modalStyles.title_null}`}>
+                                <h3 className="text text_type_main-large">
+                                    {modalTitle}
+                                </h3>
+                                <button className={`${modalStyles.close}`} onClick={onClick}>
+                                <CloseIcon type="primary" />
+                            </button>
+                        </div>
+                    }
                     {children}
                 </div>
             </div>

@@ -1,11 +1,16 @@
 import { CurrencyIcon, FormattedDate } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useMatch } from "react-router-dom";
 import { useSelector } from "../../hooks/hooks";
+import { TIngredientData } from "../../types/types";
 import { fillOrderIngredients } from "../../utils/order-ingredients";
 import { OrderItem } from "../order-item/order-item";
 import orderInfoStyles from "./order-info.module.css";
 
-export const OrderInfo = ({isLogin}) => {
+type TOrderInfoProps = {
+    isLogin: boolean;
+}
+
+export const OrderInfo = ({isLogin}: TOrderInfoProps): JSX.Element | null => {
     const match = useMatch("/feed/:id");
     const id = match?.params.id;
 
@@ -13,18 +18,35 @@ export const OrderInfo = ({isLogin}) => {
     const burgerIngredientsData = useSelector(state => state.constructorBurger.ingredients);
 
     const order = orders.find(order => order._id === id);
-
+    
     if (!order) {
         return null;
     } 
 
     const {number, name, ingredients, createdAt} = order;
-
+    
     const orderNumber = `#0${number}`;
     const orderIngredients = fillOrderIngredients(ingredients, burgerIngredientsData);
+
+    const totalPrice = orderIngredients.reduce((count, item) => {
+        return count + item.price;
+    }, 0);
     
+    const counter = (ingredient: TIngredientData) => {
+        let counter = 0;
+        orderIngredients.forEach((el) => {
+          if (el._id === ingredient._id) {
+            counter += 1;
+          }
+        })
+        return counter;
+      }
+    
+      const orderIngredientsList = Array.from(new Set(orderIngredients));
+    
+
     return (
-        <div className={`${orderInfoStyles.main} p-10 pb-15 pt-25`}>
+        <div className={`${orderInfoStyles.main} p-10 pb-15`}>
             <p className={`${orderInfoStyles.number} text text_type_digits-default`}>{orderNumber}</p>
             <h3 className="text text_type_main-medium mt-10 mb-3">{name}</h3>
             {isLogin && 
@@ -34,9 +56,9 @@ export const OrderInfo = ({isLogin}) => {
                 <p className="text text_type_main-medium mb-6" >Состав:</p>
                 <div className={`${orderInfoStyles.content} mb-10`}> 
                     <ul className="pr-6">
-                        {orderIngredients?.map(ingredient => {
+                        {orderIngredientsList.map((ingredient, index) => {
                             return (
-                                <OrderItem orderIngredient={ingredient} count={1111} /> 
+                                <OrderItem key={index} orderIngredient={ingredient} count={counter(ingredient)} /> 
                             )
                         })}
                     </ul>
@@ -46,7 +68,7 @@ export const OrderInfo = ({isLogin}) => {
                         <FormattedDate date={new Date(createdAt)} /> 
                     </span>
                     <div className={orderInfoStyles.total_price}>
-                        <span className="text text_type_digits-default pr-2">20</span>
+                        <span className="text text_type_digits-default pr-2">{totalPrice}</span>
                         <CurrencyIcon type="primary" />
                     </div>
                 </div>

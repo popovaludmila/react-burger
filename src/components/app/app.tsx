@@ -64,7 +64,7 @@ const App = () => {
             </Modal>
           } />
           <Route path={`${FEED}/:id`} element={
-            <Modal modalTitle={''} onCloseClick={() => navigate(-1)}>
+            <Modal modalTitle={null} onCloseClick={() => navigate(-1)}>
                <OrderInfo isLogin={false}/>
             </Modal>
           } />
