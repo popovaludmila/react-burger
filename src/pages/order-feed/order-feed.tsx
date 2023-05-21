@@ -4,7 +4,7 @@ import { OrdersBoard } from '../../components/orders-board/orders-board';
 import { useDispatch, useSelector } from '../../hooks/hooks';
 import { orderFeedConnectStart, orderFeedWsClose } from '../../services/actions/order-feed';
 import orderFeedStyles from './order-feed.module.css';
-import { WS_URL, ALL } from '../../utils/data';
+import { WS_URL, ALL, FEED } from '../../utils/data';
 
 export const OrderFeedPage = (): JSX.Element => {
 
@@ -24,13 +24,14 @@ export const OrderFeedPage = (): JSX.Element => {
     const pendingOrderNumbers = orders.filter((order) => order.status === 'pending')
         .map((order) => order.number)
 
-
+    const page = FEED;
+    
     return (
         <main>
             <div className="container">
                 <h1 className="text text_type_main-large mt-10 mb-5">Лента заказов</h1>
                 <div className={orderFeedStyles.main}>
-                    <OrderList orders={orders} />
+                    <OrderList page={page} orders={orders} />
                     <OrdersBoard doneOrderNumbers={doneOrderNumbers} pendingOrderNumbers={pendingOrderNumbers} />
                 </div>
             </div> 

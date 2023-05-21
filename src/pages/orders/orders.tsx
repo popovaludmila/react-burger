@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
-import { CardOrder } from '../../components/card-order/card-order';
+import { OrderList } from '../../components/order-list/order-list';
 import { useDispatch, useSelector } from '../../hooks/hooks';
 import { userOrdersConnectStart, userOrdersWsClose } from '../../services/actions/user-orders';
-import { WS_URL } from '../../utils/data';
-import ordersStyles from './orders.module.css';
+import { ORDERS, PROFILE, WS_URL } from '../../utils/data';
+//import ordersStyles from './orders.module.css';
 
 export const OrdersPage = (): JSX.Element => {
 
@@ -18,20 +18,15 @@ export const OrdersPage = (): JSX.Element => {
       }, [dispatch]);
 
     const orders = useSelector(state => state.userOrders.orders);
-    
-    const cardOrders =  orders.map((order) => (
-        <CardOrder key={order._id} order = {order} />
-    ))
+    const page = `${PROFILE}/${ORDERS}`;
+
     return (
         <>
-        <div className={ordersStyles.wrapper}>
-            <div className={`${ordersStyles.main} pr-2`}>
-                <ul>
-                    {cardOrders}
-                </ul>
-            </div>
-           
-        </div>
+            {orders ? 
+                 <OrderList page={page} orders={orders} />
+                 :
+                <h1 className="text text_type_main-medium">Здесь будут ваши заказы</h1>
+            }
         </>
     )
 }

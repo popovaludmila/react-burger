@@ -4,12 +4,13 @@ import orderListStyles from './order-list.module.css';
 
 type TOrderListProps = {
     orders: IOrderType[];
+    page: string;
 }
 
-export const OrderList = ({orders}: TOrderListProps): JSX.Element => {
+export const OrderList = ({orders, page}: TOrderListProps): JSX.Element => {
     
     const cardOrders =  orders.map((order) => (
-        <CardOrder key={order._id} order = {order} />
+        <CardOrder navPage={page} key={order._id} order = {order} />
     ))
     return (
         <>
