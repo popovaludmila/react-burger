@@ -9,7 +9,7 @@ export const USER_ORDERS_WS_CLOSE: 'USER_ORDERS_WS_CLOSE' = 'USER_ORDERS_WS_CLOS
 export const USER_ORDERS_WS_STOP: 'USER_ORDERS_WS_STOP' = 'USER_ORDERS_WS_STOP'; 
 
 
-export const orderProfilesConnectStart = (url: string): IUserOrdersConnectStart => {
+export const userOrdersConnectStart = (url: string): IUserOrdersConnectStart => {
     return {
         type: USER_ORDERS_CONNECT_START,
         payload: url

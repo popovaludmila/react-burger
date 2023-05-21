@@ -42,7 +42,6 @@ const App = () => {
             <ProtectedRouteElement onlyUnauth element={<ResetPasswordPage />}/> }
           />
           <Route path={FEED} element={<OrderFeedPage />}/> 
-          <Route path={`${FEED}/:id`} element={<OrderDetailPage />} />
           
           <Route path={`${PROFILE}/`} element={
             <ProtectedRouteElement onlyAuth element={<ProfileNav />} />}>
@@ -50,6 +49,7 @@ const App = () => {
               <Route path={ORDERS} element={<OrdersPage />} />
           </Route>
           <Route path={`${INGREDIENTS}/:id`} element={<IngredientDetailPage />} />
+          <Route path={`${FEED}/:id`} element={<OrderDetailPage />} />
 
 
           <Route path='*' element={<NotFoundPage />} />

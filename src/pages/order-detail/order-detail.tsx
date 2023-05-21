@@ -2,6 +2,7 @@ import { CurrencyIcon, FormattedDate } from '@ya.praktikum/react-developer-burge
 import { useMatch } from 'react-router-dom';
 import { OrderItem } from '../../components/order-item/order-item';
 import { useSelector } from '../../hooks/hooks';
+import { TIngredientData } from '../../types/types';
 import { fillOrderIngredients } from '../../utils/order-ingredients';
 import orderDetailStyles from './order-detail.module.css';
 
@@ -22,8 +23,23 @@ export const OrderDetailPage = (): JSX.Element | null => {
 
     const orderNumber = `#0${number}`;
     const orderIngredients = fillOrderIngredients(ingredients, burgerIngredientsData);
-    
 
+    const totalPrice = orderIngredients.reduce((count, item) => {
+        return count + item.price;
+    }, 0);
+    
+    const counter = (ingredient: TIngredientData) => {
+        let counter = 0;
+        orderIngredients.forEach((el) => {
+          if (el._id === ingredient._id) {
+            counter += 1;
+          }
+        })
+        return counter;
+      }
+    
+    const orderIngredientsList = Array.from(new Set(orderIngredients));
+    
     return (
         <>
             <div className="container">
@@ -37,9 +53,12 @@ export const OrderDetailPage = (): JSX.Element | null => {
                             <p className="text text_type_main-medium mb-6" >Состав:</p>
                             <div className={`${orderDetailStyles.content} mb-10`}> 
                                 <ul className="pr-6">
-                                    {orderIngredients?.map(ingredient => {
+                                    {orderIngredientsList.map((ingredient) => {
                                         return (
-                                            <OrderItem orderIngredient={ingredient} count={1111} /> 
+                                            <OrderItem 
+                                                key={ingredient._id} 
+                                                orderIngredient={ingredient} 
+                                                count={counter(ingredient)} /> 
                                         )
                                     })}
                                 </ul>
@@ -50,7 +69,7 @@ export const OrderDetailPage = (): JSX.Element | null => {
                             <FormattedDate date={new Date(createdAt)} /> 
                         </span>
                         <div className={orderDetailStyles.total_price}>
-                            <span className="text text_type_digits-default pr-2">20</span>
+                            <span className="text text_type_digits-default pr-2">{totalPrice}</span>
                             <CurrencyIcon type="primary" />
                         </div>
                     </div>
