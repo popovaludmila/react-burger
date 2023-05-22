@@ -1,28 +1,42 @@
 import { useEffect } from 'react';
-import { useMatch } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { OrderInfo } from '../../components/order-info/order-info';
 import { useDispatch, useSelector } from '../../hooks/hooks';
 import { orderFeedConnectStart, orderFeedWsClose } from '../../services/actions/order-feed';
+import { userOrdersConnectStart, userOrdersWsClose } from '../../services/actions/user-orders';
 import { ALL, WS_URL } from '../../utils/data';
 import orderDetailStyles from './order-detail.module.css';
 
-export const OrderDetailPage = (): JSX.Element | null => {
+type TOrderDetailPageProps = {
+    isAuth: boolean;
+}
+
+export const OrderDetailPage = ({isAuth}: TOrderDetailPageProps): JSX.Element | null => {
     const dispatch = useDispatch();
 
     useEffect(() => {
+        isAuth ? 
+        dispatch(userOrdersConnectStart(`${WS_URL}`)) :
         dispatch(orderFeedConnectStart(`${WS_URL}/${ALL}`))
         return () => {
-          dispatch(orderFeedWsClose())
+            isAuth ? 
+            dispatch(userOrdersWsClose()) :
+            dispatch(orderFeedWsClose())
         }
-    }, [dispatch]);
+    }, [dispatch, isAuth]);
 
-    const match = useMatch("/feed/:id");
-    const id = match?.params.id;
-
-    const orders = useSelector(state => state.orderFeed.orders);
-   
-    const order = orders.find((item) => item._id === id);
     
+    const {id} = useParams();
+
+    const feedOrders = useSelector(state => state.orderFeed.orders);
+    const userOrders = useSelector(state => state.userOrders.orders);
+
+    const orders = isAuth ? userOrders : feedOrders;
+
+    const order = orders.find((item) => item._id === id);
+
+   
+
     if (!order) {
         return null;
     } 
@@ -31,7 +45,7 @@ export const OrderDetailPage = (): JSX.Element | null => {
         <>
             <div className="container">
                 <div className={`${orderDetailStyles.wrapper} mt-30`}>
-                    <OrderInfo isModal={false} />
+                    <OrderInfo isAuth={null} isModal={false} />
                 </div>
             </div>
         </>

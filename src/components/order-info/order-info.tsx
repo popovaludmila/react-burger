@@ -1,5 +1,5 @@
 import { CurrencyIcon, FormattedDate } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useMatch } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useSelector } from "../../hooks/hooks";
 import { TIngredientData } from "../../types/types";
 import { fillOrderIngredients } from "../../utils/order-ingredients";
@@ -8,12 +8,17 @@ import orderInfoStyles from "./order-info.module.css";
 
 type TOrderInfoProps = {
     isModal: boolean;
+    isAuth: boolean | null;
 }
-export const OrderInfo = ({isModal}: TOrderInfoProps): JSX.Element | null => {
-    const match = useMatch("/feed/:id");
-    const id = match?.params.id;
 
-    const orders = useSelector(state => state.orderFeed.orders);
+export const OrderInfo = ({isModal, isAuth}: TOrderInfoProps): JSX.Element | null => {
+
+    const {id} = useParams();
+
+    const feedOrders = useSelector(state => state.orderFeed.orders);
+    const userOrders = useSelector(state => state.userOrders.orders);
+
+    const orders = isAuth ? userOrders : feedOrders;
    
     const burgerIngredientsData = useSelector(state => state.constructorBurger.ingredients);
 
@@ -24,7 +29,7 @@ export const OrderInfo = ({isModal}: TOrderInfoProps): JSX.Element | null => {
     } 
     const modal = isModal ? {backgroundColor: "#1C1C21", borderRadius: "40px"} : 
         {backgroundColor: "#131316", borderRadius: "0"};
-        
+
     const {number, name, ingredients, createdAt} = order;
     
     const orderNumber = `#0${number}`;

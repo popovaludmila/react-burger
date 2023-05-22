@@ -47,9 +47,10 @@ const App = () => {
             <ProtectedRouteElement onlyAuth element={<ProfileNav />} />}>
               <Route index element={<ProfilePage />} />
               <Route path={ORDERS} element={<OrdersPage />} />
+              <Route path={`${ORDERS}/:id`} element={<OrderDetailPage isAuth={true} />} />
           </Route>
           <Route path={`${INGREDIENTS}/:id`} element={<IngredientDetailPage />} />
-          <Route path={`${FEED}/:id`} element={<OrderDetailPage />} />
+          <Route path={`${FEED}/:id`} element={<OrderDetailPage isAuth={false} />} />
 
 
           <Route path='*' element={<NotFoundPage />} />
@@ -65,7 +66,7 @@ const App = () => {
           } />
           <Route path={`${FEED}/:id`} element={
             <Modal modalTitle={null} onCloseClick={() => navigate(-1)}>
-               <OrderInfo isModal={true} />
+               <OrderInfo isModal={true}  isAuth={false} />
             </Modal>
           } />
         </Routes>
