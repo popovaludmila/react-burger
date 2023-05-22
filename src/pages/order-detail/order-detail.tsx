@@ -15,8 +15,10 @@ export const OrderDetailPage = ({isAuth}: TOrderDetailPageProps): JSX.Element | 
     const dispatch = useDispatch();
 
     useEffect(() => {
+        const accessToken = localStorage.getItem("accessToken")?.split("Bearer ")[1];
+       
         isAuth ? 
-        dispatch(userOrdersConnectStart(`${WS_URL}`)) :
+        dispatch(userOrdersConnectStart(`${WS_URL}?token=${accessToken}`)):
         dispatch(orderFeedConnectStart(`${WS_URL}/${ALL}`))
         return () => {
             isAuth ? 
