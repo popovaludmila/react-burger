@@ -7,22 +7,24 @@ import { OrderItem } from "../order-item/order-item";
 import orderInfoStyles from "./order-info.module.css";
 
 type TOrderInfoProps = {
-    isLogin: boolean;
+    isModal: boolean;
 }
-
-export const OrderInfo = ({isLogin}: TOrderInfoProps): JSX.Element | null => {
+export const OrderInfo = ({isModal}: TOrderInfoProps): JSX.Element | null => {
     const match = useMatch("/feed/:id");
     const id = match?.params.id;
 
     const orders = useSelector(state => state.orderFeed.orders);
+   
     const burgerIngredientsData = useSelector(state => state.constructorBurger.ingredients);
 
-    const order = orders.find(order => order._id === id);
+    const order = orders.find((item) => item._id === id);
     
     if (!order) {
         return null;
     } 
-
+    const modal = isModal ? {backgroundColor: "#1C1C21", borderRadius: "40px"} : 
+        {backgroundColor: "#131316", borderRadius: "0"};
+        
     const {number, name, ingredients, createdAt} = order;
     
     const orderNumber = `#0${number}`;
@@ -46,33 +48,36 @@ export const OrderInfo = ({isLogin}: TOrderInfoProps): JSX.Element | null => {
     
 
     return (
-        <div className={`${orderInfoStyles.main} p-10 pb-15`}>
-            <p className={`${orderInfoStyles.number} text text_type_digits-default`}>{orderNumber}</p>
-            <h3 className="text text_type_main-medium mt-10 mb-3">{name}</h3>
-            {isLogin && 
-                <span className={`${orderInfoStyles.status} text text_type_main-default`}>Выполнен</span>
-            }
-            <div className={`${orderInfoStyles.details} mt-15`}>
-                <p className="text text_type_main-medium mb-6" >Состав:</p>
-                <div className={`${orderInfoStyles.content} mb-10`}> 
-                    <ul className="pr-6">
-                        {orderIngredientsList.map((ingredient, index) => {
-                            return (
-                                <OrderItem key={index} orderIngredient={ingredient} count={counter(ingredient)} /> 
-                            )
-                        })}
-                    </ul>
-                </div>
-                <div className={orderInfoStyles.total}>
-                    <span className="text text_type_main-default text_color_inactive">
-                        <FormattedDate date={new Date(createdAt)} /> 
-                    </span>
-                    <div className={orderInfoStyles.total_price}>
-                        <span className="text text_type_digits-default pr-2">{totalPrice}</span>
-                        <CurrencyIcon type="primary" />
+        <>
+            <div className={`${orderInfoStyles.main} p-10 pb-15`} 
+            style={modal}>
+                <p className={`${orderInfoStyles.number} text text_type_digits-default`}>{orderNumber}</p>
+                <h3 className="text text_type_main-medium mt-10 mb-3">{name}</h3>
+            
+                    <span className={`${orderInfoStyles.status} text text_type_main-default`}>Выполнен</span>
+                
+                <div className={`${orderInfoStyles.details} mt-15`}>
+                    <p className="text text_type_main-medium mb-6" >Состав:</p>
+                    <div className={`${orderInfoStyles.content} mb-10`}> 
+                        <ul className="pr-6">
+                            {orderIngredientsList.map((ingredient, index) => {
+                                return (
+                                    <OrderItem key={index} orderIngredient={ingredient} count={counter(ingredient)} /> 
+                                )
+                            })}
+                        </ul>
+                    </div>
+                    <div className={orderInfoStyles.total}>
+                        <span className="text text_type_main-default text_color_inactive">
+                            <FormattedDate date={new Date(createdAt)} /> 
+                        </span>
+                        <div className={orderInfoStyles.total_price}>
+                            <span className="text text_type_digits-default pr-2">{totalPrice}</span>
+                            <CurrencyIcon type="primary" />
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </>
     )
 }
