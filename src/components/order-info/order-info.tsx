@@ -30,7 +30,7 @@ export const OrderInfo = ({isModal, isAuth}: TOrderInfoProps): JSX.Element | nul
     const modal = isModal ? {backgroundColor: "#1C1C21", borderRadius: "40px"} : 
         {backgroundColor: "#131316", borderRadius: "0"};
 
-    const {number, name, ingredients, createdAt} = order;
+    const { number, name, ingredients, createdAt} = order;
     
     const orderNumber = `#0${number}`;
     const orderIngredients = fillOrderIngredients(ingredients, burgerIngredientsData);

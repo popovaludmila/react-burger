@@ -27,7 +27,7 @@ const CartTotal = ({total}: TCartTotalProps): JSX.Element => {
                 ...cart.fillings.map((ingredient) => ingredient._id),
                 cart.bottom._id,
             ];
-            const accessToken = localStorage.getItem("accessToken")?.split("Bearer ")[1];
+            const accessToken = localStorage.getItem("accessToken");
             if(isAuth && accessToken) {
                 dispatch(createOrder(orderIngredients, accessToken ));
             } else {
