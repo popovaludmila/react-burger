@@ -68,8 +68,15 @@ const App = () => {
             <Modal modalTitle={null} onCloseClick={() => navigate(-1)}>
                <OrderInfo isModal={true} isAuth={false} />
             </Modal>
+          } /> 
+          <Route path={`${PROFILE}/${ORDERS}/:id`} element={
+            <Modal modalTitle={null} onCloseClick={() => navigate(-1)}>
+               <OrderInfo isModal={true} isAuth={true} />
+            </Modal>
           } />
+
         </Routes>
+        
       }
     </>
   )

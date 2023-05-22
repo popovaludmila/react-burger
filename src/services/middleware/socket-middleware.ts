@@ -1,4 +1,5 @@
 import { Middleware } from "redux";
+
 import { RootState } from "../reducers";
 interface IWebSocket {
     wsStart: string;
@@ -32,12 +33,14 @@ export const socketMiddleware = (wsActions: IWebSocket): Middleware<{}, RootStat
                 };
                 socket.onerror = event => {
                     dispatch({ type: onError, payload: event });
+                    console.log('socket error')
                 };
                 socket.onmessage = event => {
                     const { data } = event;
                     const parsedData = JSON.parse(data);
-
-                    dispatch({ type: onMessage, payload: parsedData });
+                    
+                        dispatch({ type: onMessage, payload: parsedData });
+                    
                 };
                 socket.onclose = event => {
                     dispatch({ type: onClose, payload: event });

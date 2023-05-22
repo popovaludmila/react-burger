@@ -14,13 +14,13 @@ type TOrderInfoProps = {
 export const OrderInfo = ({isModal, isAuth}: TOrderInfoProps): JSX.Element | null => {
 
     const {id} = useParams();
+    
+    const burgerIngredientsData = useSelector(state => state.constructorBurger.ingredients);
 
     const feedOrders = useSelector(state => state.orderFeed.orders);
     const userOrders = useSelector(state => state.userOrders.orders);
 
     const orders = isAuth ? userOrders : feedOrders;
-   
-    const burgerIngredientsData = useSelector(state => state.constructorBurger.ingredients);
 
     const order = orders.find((item) => item._id === id);
     

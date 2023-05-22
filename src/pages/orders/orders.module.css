@@ -1,20 +1,6 @@
-.wrapper {
-    width: 844px;
-}
-
-.main {
-    overflow-y: scroll;
-    max-height: 870px;
-    scrollbar-width: 8px;
-    scrollbar-color: #8585AD #2F2F37;
-}
-
-.main::-webkit-scrollbar {
-    width: 8px;
-    background-color: #2F2F37;
-}
-
-.main::-webkit-scrollbar-thumb {
-    background-color: #8585AD;        
-    height: 696px; 
+.title {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
 }

@@ -15,7 +15,6 @@ const initalState: TUserOrdersState = {
     orders: [],
     total: null,
     totalToday: null,
-
     wsConnected: false
 }
 

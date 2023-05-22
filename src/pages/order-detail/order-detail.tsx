@@ -13,7 +13,7 @@ type TOrderDetailPageProps = {
 
 export const OrderDetailPage = ({isAuth}: TOrderDetailPageProps): JSX.Element | null => {
     const dispatch = useDispatch();
-
+    
     useEffect(() => {
         const accessToken = localStorage.getItem("accessToken")?.split("Bearer ")[1];
        
