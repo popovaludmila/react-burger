@@ -92,7 +92,7 @@ export const getIngredients = (): AppThunk => {
     }
 }
 
-export const createOrder = (orderIngredientIds: string[]): AppThunk => {
+export const createOrder = (orderIngredientIds: string[], token: string): AppThunk => {
     return (dispatch) => {
         dispatch({
             type: GET_ORDER_DATA_REQUEST
@@ -101,6 +101,7 @@ export const createOrder = (orderIngredientIds: string[]): AppThunk => {
             method: 'POST',
             headers: {
               "Content-Type": "application/json",
+              "Authorization": token,
               },
               body: JSON.stringify({"ingredients": orderIngredientIds})
           })
