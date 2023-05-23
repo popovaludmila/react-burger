@@ -1,9 +1,8 @@
 import { FormattedDate } from "@ya.praktikum/react-developer-burger-ui-components";
-
-import { Link, useLocation} from "react-router-dom";
+import { Link, useLocation, useMatch} from "react-router-dom";
 import { useSelector } from "../../hooks/hooks";
 import { IOrderType} from "../../types/types";
-import { fillOrderIngredients } from "../../utils/order-ingredients";
+import { fillOrderIngredients, getOrderStatus, getStatusTextColor } from "../../utils/orders-api";
 import { CardOrderIngredients } from "../card-order-ingredients/card-order-ingredients";
 import cardOrderStyles from './card-order.module.css';
 
@@ -15,12 +14,14 @@ type TCardOrderProps = {
 export const CardOrder = ({order, navPage}: TCardOrderProps): JSX.Element => {
 
     const location = useLocation();
-
+    const matchProfile = useMatch("/profile/*");
     const burgerIngredientsData = useSelector(state => state.constructorBurger.ingredients);
 
     const {number, name, ingredients, createdAt, _id} = order;
     const orderNumber = `#0${number}`;
 
+    const orderStatus = getOrderStatus(order);
+    const statusTextColor = getStatusTextColor(orderStatus);
     const orderIngredients = fillOrderIngredients(ingredients, burgerIngredientsData);
 
     return (
@@ -31,7 +32,9 @@ export const CardOrder = ({order, navPage}: TCardOrderProps): JSX.Element => {
                     <FormattedDate date={new Date(createdAt)} /> 
                 </p>
             </div>
-            <p className="text text_type_main-medium pb-6">{name}</p>
+            <p className="text text_type_main-medium">{name}</p>
+            {matchProfile ?
+                <span style={statusTextColor} className="text text_type_main-default pt-2">{orderStatus}</span> : null }
             <CardOrderIngredients orderIngredients = {orderIngredients} />
         </Link>
     )

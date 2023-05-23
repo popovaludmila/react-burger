@@ -47,7 +47,7 @@ export const CardOrderIngredients = ({orderIngredients}: TCardOrderIngredientsPr
     )
     
     return (
-        <div className={cardOrderIngredientsStyles.info}>
+        <div className={`${cardOrderIngredientsStyles.info} pt-6`}>
                 <ul className={cardOrderIngredientsStyles.ingredients}>
                         {cardIngredients}
                 </ul>

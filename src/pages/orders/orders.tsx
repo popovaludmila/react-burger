@@ -25,7 +25,7 @@ export const OrdersPage = (): JSX.Element => {
         <>
             {!orders ? 
                  <h1 className={`${ordersStyles.title} text text_type_main-medium`}>Здесь будут ваши заказы</h1> :
-                 <OrderList page={page} orders={orders} />
+                 <OrderList isProfile={true} page={page} orders={orders} />
                  
             }
         </>

@@ -2,16 +2,16 @@ import { CurrencyIcon, FormattedDate } from "@ya.praktikum/react-developer-burge
 import { useParams } from "react-router-dom";
 import { useSelector } from "../../hooks/hooks";
 import { TIngredientData } from "../../types/types";
-import { fillOrderIngredients } from "../../utils/order-ingredients";
+import { fillOrderIngredients } from "../../utils/orders-api";
 import { OrderItem } from "../order-item/order-item";
 import orderInfoStyles from "./order-info.module.css";
 
 type TOrderInfoProps = {
     isModal: boolean;
-    isAuth: boolean | null;
+    isLogin: boolean;
 }
 
-export const OrderInfo = ({isModal, isAuth}: TOrderInfoProps): JSX.Element | null => {
+export const OrderInfo = ({isModal, isLogin}: TOrderInfoProps): JSX.Element | null => {
 
     const {id} = useParams();
     
@@ -20,7 +20,7 @@ export const OrderInfo = ({isModal, isAuth}: TOrderInfoProps): JSX.Element | nul
     const feedOrders = useSelector(state => state.orderFeed.orders);
     const userOrders = useSelector(state => state.userOrders.orders);
 
-    const orders = isAuth ? userOrders : feedOrders;
+    const orders = isLogin ? userOrders : feedOrders;
 
     const order = orders.find((item) => item._id === id);
     

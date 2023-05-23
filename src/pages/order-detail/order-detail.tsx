@@ -47,7 +47,7 @@ export const OrderDetailPage = ({isAuth}: TOrderDetailPageProps): JSX.Element | 
         <>
             <div className="container">
                 <div className={`${orderDetailStyles.wrapper} mt-30`}>
-                    <OrderInfo isAuth={null} isModal={false} />
+                    <OrderInfo isLogin={isAuth} isModal={false} />
                 </div>
             </div>
         </>

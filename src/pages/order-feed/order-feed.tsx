@@ -31,7 +31,7 @@ export const OrderFeedPage = (): JSX.Element => {
             <div className="container">
                 <h1 className="text text_type_main-large mt-10 mb-5">Лента заказов</h1>
                 <div className={orderFeedStyles.main}>
-                    <OrderList page={page} orders={orders} />
+                    <OrderList isProfile={false} page={page} orders={orders} />
                     <OrdersBoard doneOrderNumbers={doneOrderNumbers} pendingOrderNumbers={pendingOrderNumbers} />
                 </div>
             </div> 

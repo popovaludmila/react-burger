@@ -25,7 +25,7 @@ export const ProfileNav = (): JSX.Element => {
         <>
             <div className='container'>
                 <div className={`${profileNavStyles.wrapper} mt-30`}>
-                    <div className={`${profileNavStyles.nav} mr-10`}>
+                    <div className={`${profileNavStyles.nav} mr-15`}>
                         <ul className='pb-20 text text_type_main-medium'>
                             <li className={`${profileNavStyles.item} `}>
                                 <NavLink to={`/${PROFILE}`} className={setActive(matchProfile)}>Профиль</NavLink>

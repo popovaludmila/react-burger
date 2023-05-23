@@ -11,8 +11,8 @@ import headerStyles from './header.module.css';
 const Header = () => {
     const userName = useSelector(state => state.user.user?.name) || 'Личный кабинет';
     const matchConstructor = useMatch("/");
-    const matchOrdersFeed = useMatch("/orders-feed");
-    const matchProfile = useMatch("/profile/*")
+    const matchOrdersFeed = useMatch("/feed");
+    const matchProfile = useMatch("/profile/*");
 
     return (
         <>
