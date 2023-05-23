@@ -20,7 +20,7 @@ export const OrderList = ({orders, page, isProfile}: TOrderListProps): JSX.Eleme
             <section className={orderListStyles.wrapper} style={wrapper}>
                 <div className={orderListStyles.main}>
                     <ul className="mr-2">
-                        {cardOrders}
+                        {isProfile ? cardOrders.reverse() : cardOrders}
                     </ul>
                 </div>
             </section>

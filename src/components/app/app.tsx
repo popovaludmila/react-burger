@@ -48,7 +48,9 @@ const App = () => {
               <Route index element={<ProfilePage />} />
               <Route path={ORDERS} element={<OrdersPage />} />
           </Route>
-          <Route path={`${PROFILE}/${ORDERS}/:id`} element={<OrderDetailPage isAuth={true} />} />
+          <Route path={`${PROFILE}/${ORDERS}/:id`} element={
+            <ProtectedRouteElement onlyAuth element={<OrderDetailPage isAuth={true} />} />} 
+          />
           <Route path={`${INGREDIENTS}/:id`} element={<IngredientDetailPage />} />
           <Route path={`${FEED}/:id`} element={<OrderDetailPage isAuth={false} />} />
 

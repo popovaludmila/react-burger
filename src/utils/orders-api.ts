@@ -34,8 +34,8 @@ export const getStatusTextColor = (orderStatus: string) => {
             return {color: "#00CCCC"};
         case "Готовится":
             return {color: "#F2F2F3"};
-        case "Создан":
-            return {color: "#F2F2F3"};
+        case "Отменён":
+            return {color: "#960E05"};
         default:
             return {color: "#F2F2F3"};
     }
