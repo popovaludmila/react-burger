@@ -2,10 +2,10 @@ import { IBaseResponse, ITokenResponse } from "../types/types";
 import { BASE_URL } from "./data";
 
 const checkResponse = <T extends IBaseResponse>(response: Response): Promise<T> => {
-   return response.ok ? response.json() : Promise.reject(`Ошибка: ${response.status}`);
+   return response.ok ? response.json() : Promise.reject();
 }
  
-export const request = <T extends IBaseResponse>(url: string, options: RequestInit): Promise<T> => {
+export const request = <T extends IBaseResponse>(url: string, options?: RequestInit): Promise<T> => {
   return fetch(url, options).then(res => checkResponse<T>(res)).then((data) => {
     if (!data.success) {
       Promise.reject(data);
@@ -14,7 +14,7 @@ export const request = <T extends IBaseResponse>(url: string, options: RequestIn
   })
 }
 
-const refreshToken = (): Promise<ITokenResponse> => {
+export const refreshToken = (): Promise<ITokenResponse> => {
   return request<ITokenResponse>(`${BASE_URL}/auth/token`, {
     method: "POST",
     headers: {
@@ -36,7 +36,7 @@ export const fetchWithRefresh = async <T extends IBaseResponse> (url: string, op
 
     const refreshData = await refreshToken();
     localStorage.setItem("refreshToken", refreshData.refreshToken);
-    localStorage.setItem("accessToken", refreshData.accessToken);
+    localStorage.setItem("accessToken", refreshData.accessToken.split('Bearer ')[1]);
       if (options.headers) {
         (options.headers as {[key: string]: string}).Authorization = refreshData.accessToken;
       }
@@ -45,5 +45,3 @@ export const fetchWithRefresh = async <T extends IBaseResponse> (url: string, op
    
   }
 };
-
-

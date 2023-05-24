@@ -1,11 +1,10 @@
 import ingredientCardStyles from './ingredient-card.module.css';
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useSelector } from 'react-redux';
 import { useDrag } from 'react-dnd';
 import { Link, useLocation } from 'react-router-dom';
 import { INGREDIENTS } from '../../../utils/data';
 import { TIngredient } from '../../../types/types';
-
+import { useSelector } from '../../../hooks/hooks';
 
 type TIngredientCardProps = {
     item: TIngredient;
@@ -20,11 +19,11 @@ const IngredientCard = ({item}:TIngredientCardProps):JSX.Element => {
   });
 
   const {image, price, name, _id} = item;
-// @ts-ignore
+
   const cart = useSelector((state) => state.constructorBurger.cart)
 
   let count:number = 0;
-// @ts-ignore
+
   cart.fillings.forEach(filling =>  {
     if (filling._id === item._id) {
       count++;

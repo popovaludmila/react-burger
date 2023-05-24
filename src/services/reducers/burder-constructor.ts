@@ -1,4 +1,5 @@
-import { combineReducers } from "redux";
+import { TBurgerConstructorActions } from "../../types/burgerConstructorActions";
+import { TIngredientData, TConstructorIngredient, TDetailIngredient, TIngredient } from "../../types/types";
 import { BUN, MAIN, SAUCE } from "../../utils/data";
 import { GET_INGREDIENTS_DATA_SUCCESS,  
     SHOW_DETAIL_INGREDIENT, 
@@ -14,9 +15,37 @@ import { GET_INGREDIENTS_DATA_SUCCESS,
     GET_ORDER_DATA_REQUEST,
     GET_ORDER_DATA_FAILED} from "../actions";
 
-import { userReducer } from "./user";
+export type TCart = {
+    top: TIngredient | null;
+    fillings: TConstructorIngredient[];
+    bottom: TIngredient | null;
+}
 
-const initialState = {
+type TTabs = {
+    tab: string;
+    isActive: boolean;
+}
+
+type TOrderId = {
+    id: number;
+}
+type TBurgerConstructorState = {
+        ingredients: TIngredientData[],
+        cart: TCart;
+        detailIngredient: TDetailIngredient | null;
+        order: TOrderId | null;
+        tabs: TTabs[];
+    
+        getIngredientsRequest: boolean;
+        getIngredientsFailed: boolean;
+    
+        getOrderDataRequest: boolean;
+        getOrderDataFailed: boolean;
+    
+        errorMessage: string | null;
+}
+
+const initialState: TBurgerConstructorState = {
     ingredients: [],
     cart: {
         top: null,
@@ -40,7 +69,7 @@ const initialState = {
     errorMessage: null
 }
 
-const constructorReducer = (state = initialState, action) => {
+export const constructorReducer = (state = initialState, action:TBurgerConstructorActions): TBurgerConstructorState => {
     switch(action.type) {
         case GET_INGREDIENTS_DATA_REQUEST:
             return {
@@ -100,7 +129,7 @@ const constructorReducer = (state = initialState, action) => {
                 ...state,
                 getOrderDataRequest: false,
                 order: {
-                    id: action.order.number,
+                    id: action.order,
                 }
             }
         case GET_ORDER_DATA_FAILED: 
@@ -113,7 +142,7 @@ const constructorReducer = (state = initialState, action) => {
                 ...state,
                 cart: {
                     ...state.cart,
-                    fillings: state.cart.fillings.filter((filling) => filling.key !== action.key)
+                    fillings: state.cart.fillings?.filter((filling) => filling.key !== action.key)
                 }
             }
         case REPLACE_INGREDIENTS:
@@ -158,7 +187,4 @@ const constructorReducer = (state = initialState, action) => {
 }
 
 
-export const rootReducer = combineReducers({
-    constructorBurger: constructorReducer,
-    user: userReducer
-});
+

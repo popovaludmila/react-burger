@@ -1,10 +1,39 @@
+import { IUser } from "../../types/types";
+import { TUserActions } from "../../types/userActions";
 import { GET_USER_FAILED, GET_USER_REQUEST, GET_USER_SUCCESS, 
     LOGIN_FAILED, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT_FAILED, 
     LOGOUT_REQUEST, LOGOUT_SUCCESS, REGISTER_FAILED, 
     REGISTER_REQUEST, REGISTER_SUCCESS, UPDATE_USER_FAILED, 
-    UPDATE_USER_REQUEST, UPDATE_USER_SUCCESS, ERROR_CLEAN } from "../actions/user"
+    UPDATE_USER_REQUEST, UPDATE_USER_SUCCESS, ERROR_CLEAN, FORGOT_PASSWORD_REQUEST, FORGOT_PASSWORD_FAILED, FORGOT_PASSWORD_SUCCESS, RESET_PASSWORD_REQUEST, RESET_PASSWORD_SUCCESS, RESET_PASSWORD_FAILED } from "../actions/user"
 
-const initialState = {
+export type TUserState = {
+    isAuth: boolean;
+    user: IUser;
+    errorMessage: string| null;
+
+    registrationRequest: boolean;
+    registrationFailed: boolean;
+
+    forgotPasswordRequest: boolean;
+    forgotPasswordFailed: boolean;
+
+    resetPasswordRequest: boolean;
+    resetPasswordFailed: boolean;
+
+    loginRequest: boolean;
+    loginFailed: boolean;
+
+    logoutRequest: boolean;
+    logoutFailed: boolean;
+
+    getUserRequest: boolean;
+    getUserFailed: boolean;
+
+    updateUserRequest: boolean;
+    updateUserFailed: boolean;
+}
+
+const initialState: TUserState = {
     isAuth: false,
     user: {
         email: null, 
@@ -15,6 +44,12 @@ const initialState = {
 
     registrationRequest: false,
     registrationFailed: false,
+
+    forgotPasswordRequest: false,
+    forgotPasswordFailed: false,
+
+    resetPasswordRequest: false,
+    resetPasswordFailed: false,
 
     loginRequest: false,
     loginFailed: false,
@@ -29,7 +64,7 @@ const initialState = {
     updateUserFailed: false,
 }
 
-export const userReducer = (state = initialState, action) => {
+export const userReducer = (state = initialState, action: TUserActions): TUserState => {
     switch(action.type) {
         case REGISTER_REQUEST: 
             return {
@@ -53,7 +88,36 @@ export const userReducer = (state = initialState, action) => {
                     registrationFailed: true,
                     errorMessage: action.err
                 } 
-
+        case FORGOT_PASSWORD_REQUEST: 
+            return {
+                ...state,
+                forgotPasswordRequest: true
+            }
+        case FORGOT_PASSWORD_SUCCESS: 
+            return {
+                ...state
+            }
+        case FORGOT_PASSWORD_FAILED:
+            return {
+                    ...state,
+                    forgotPasswordFailed: true,
+                    errorMessage: action.err
+            }
+        case RESET_PASSWORD_REQUEST: 
+            return {
+                    ...state,
+                    resetPasswordRequest: true
+                }
+            case RESET_PASSWORD_SUCCESS: 
+                return {
+                    ...state
+                }
+            case RESET_PASSWORD_FAILED:
+                    return {
+                        ...state,
+                        resetPasswordFailed: true,
+                        errorMessage: action.err
+                    } 
         case LOGIN_REQUEST: 
             return {
                 ...state,

@@ -1,15 +1,16 @@
-import { useDispatch } from 'react-redux';
 import { useEffect} from 'react';
 import { getIngredients } from '../../services/actions';
 import { Route, Routes, useLocation, useNavigate} from 'react-router-dom';
-import { ForgotPasswordPage, HomePage, IngredientDetailPage, LoginPage, NotFoundPage, OrderFeedPage, OrdersPage, ProfilePage, RegisterPage, ResetPasswordPage } from '../../pages';
+import { ForgotPasswordPage, HomePage, IngredientDetailPage, LoginPage, NotFoundPage, OrderDetailPage, OrderFeedPage, OrdersPage, ProfilePage, RegisterPage, ResetPasswordPage } from '../../pages';
 import Header from '../header/header';
 import { ProfileNav } from '../profile-nav/profile-nav';
 import { checkIsUserAuth } from '../../services/actions/user';
 import { ProtectedRouteElement } from '../protected-route/protected-route';
 import Modal from '../modal/modal';
 import IngredientModal from '../modal/ingredient-modal/ingredient-modal';
-import { FORGOT_PASSWORD, INGREDIENTS, LOGIN, ORDERS, ORDERS_FEED, PROFILE, REGISTER, RESET_PASSWORD } from '../../utils/data';
+import { FORGOT_PASSWORD, INGREDIENTS, LOGIN, ORDERS, FEED, PROFILE, REGISTER, RESET_PASSWORD } from '../../utils/data';
+import { useDispatch } from '../../hooks/hooks';
+import { OrderInfo } from '../order-info/order-info';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -19,9 +20,7 @@ const App = () => {
 
 
   useEffect(()=> {
-    // @ts-ignore
       dispatch(getIngredients());
-    // @ts-ignore
       dispatch(checkIsUserAuth());
   }, [dispatch])
 
@@ -42,15 +41,20 @@ const App = () => {
           <Route path={RESET_PASSWORD} element={
             <ProtectedRouteElement onlyUnauth element={<ResetPasswordPage />}/> }
           />
-          <Route path={ORDERS_FEED} element={
-            <ProtectedRouteElement onlyAuth element={<OrderFeedPage />}/> }
-          />
+          <Route path={FEED} element={<OrderFeedPage />}/> 
+          
           <Route path={`${PROFILE}/`} element={
             <ProtectedRouteElement onlyAuth element={<ProfileNav />} />}>
               <Route index element={<ProfilePage />} />
               <Route path={ORDERS} element={<OrdersPage />} />
           </Route>
+          <Route path={`${PROFILE}/${ORDERS}/:id`} element={
+            <ProtectedRouteElement onlyAuth element={<OrderDetailPage isAuth={true} />} />} 
+          />
           <Route path={`${INGREDIENTS}/:id`} element={<IngredientDetailPage />} />
+          <Route path={`${FEED}/:id`} element={<OrderDetailPage isAuth={false} />} />
+
+
           <Route path='*' element={<NotFoundPage />} />
         </Route>
       </Routes>
@@ -62,7 +66,19 @@ const App = () => {
               <IngredientModal />
             </Modal>
           } />
+          <Route path={`${FEED}/:id`} element={
+            <Modal modalTitle={null} onCloseClick={() => navigate(-1)}>
+               <OrderInfo isModal={true} isLogin={false} />
+            </Modal>
+          } /> 
+          <Route path={`${PROFILE}/${ORDERS}/:id`} element={
+            <Modal modalTitle={null} onCloseClick={() => navigate(-1)}>
+               <OrderInfo isModal={true} isLogin={true} />
+            </Modal>
+          } />
+
         </Routes>
+        
       }
     </>
   )

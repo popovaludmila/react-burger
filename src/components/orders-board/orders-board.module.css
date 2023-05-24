@@ -1,0 +1,48 @@
+.main {
+    width: 50%;
+    max-width: 600px;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.orders_list {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.board {
+   width: 100%;
+}
+
+
+.list {
+    display: flex;
+    flex-wrap: wrap;
+    max-height: 277px;
+    overflow-y: scroll;
+    width: 100%;
+    max-width: 272px;
+    scrollbar-width: 8px;
+    scrollbar-color: #8585AD #2F2F37;
+}
+.list::-webkit-scrollbar {
+    width: 8px;
+    background-color: #2F2F37;
+}
+
+.list::-webkit-scrollbar-thumb {
+    background-color: #8585AD;        
+    height: 50px; 
+}
+.list li:nth-child(10n) {
+    padding-bottom: 0;
+}
+
+.done {
+    color: #00CCCC;
+}

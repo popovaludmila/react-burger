@@ -2,18 +2,17 @@ import { BurgerIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import {ListIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import {ProfileIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import {Logo} from '@ya.praktikum/react-developer-burger-ui-components';
-import { useSelector } from 'react-redux';
 import { Link, NavLink, Outlet, useMatch } from 'react-router-dom';
-import { ORDERS_FEED, PROFILE } from '../../utils/data';
+import { useSelector } from '../../hooks/hooks';
+import { FEED, PROFILE } from '../../utils/data';
 
 import headerStyles from './header.module.css';
 
 const Header = () => {
-     //@ts-ignore
     const userName = useSelector(state => state.user.user?.name) || 'Личный кабинет';
     const matchConstructor = useMatch("/");
-    const matchOrdersFeed = useMatch("/orders-feed");
-    const matchProfile = useMatch("/profile/*")
+    const matchOrdersFeed = useMatch("/feed");
+    const matchProfile = useMatch("/profile/*");
 
     return (
         <>
@@ -32,7 +31,7 @@ const Header = () => {
                                 </li>
 
                                 <li className={`${headerStyles.item} ml-10`} >
-                                    <NavLink to={`/${ORDERS_FEED}`} className={`${headerStyles.link} text text_type_main-default p-4`} >
+                                    <NavLink to={`/${FEED}`} className={`${headerStyles.link} text text_type_main-default p-4`} >
                                         <ListIcon type={matchOrdersFeed ? "primary" : "secondary"} />
                                         <span className={matchOrdersFeed ? `${headerStyles.active}` : `${headerStyles.inactive}` }>Лента заказов</span>
                                     </NavLink>

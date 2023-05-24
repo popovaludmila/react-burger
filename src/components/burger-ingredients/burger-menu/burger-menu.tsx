@@ -4,7 +4,7 @@ import { BUN, MAIN, SAUCE } from "../../../utils/data";
 
 type TBurgerMenuProps = {
     onTabClick: (value:string) => void;
-    currentTab: string;
+    currentTab: string | null;
 }
 
 const BurgerMenu = ({onTabClick, currentTab}:TBurgerMenuProps):JSX.Element => {

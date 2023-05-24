@@ -12,16 +12,62 @@ export type TIngredientData = {
         image_large: string;
 }
 
-export type TIngredient = Pick<TIngredientData, '_id' | 'name' | 'price' | 'image'>;
+export type TIngredient = Pick<TIngredientData, '_id' | 'name' | 'type' | 'price' | 'image'>;
+
+export type TDetailIngredient = Omit<TIngredientData, 'price' | 'type' | 'image_mobile' | 'image_large'>;
 
 export type TConstructorIngredient = TIngredient & {
         key: string;
 }
 export interface IBaseResponse  {
         success: boolean;
+        message: string | null;
+}
+
+export interface IGetIngredientsResponse extends IBaseResponse {
+        data: TIngredientData[];
+}
+interface IOrderNumber {
+        number: number;
+}
+export interface ICreateOrderResponse extends IBaseResponse {
+        order: IOrderNumber;
 }
 export interface ITokenResponse extends IBaseResponse {
         accessToken: string;
         refreshToken: string;
+} 
+export interface IUser {
+        email: string | null;
+        name: string | null;
 }
+export interface IAuthResponse extends ITokenResponse {
+        user: IUser;
+}
+export interface IUserUpdateResponse extends IBaseResponse {
+        user: IUser;
+}
+export interface IUserRegisterRequest {
+        email: string;
+        name: string;
+        password: string;
+}
+export interface IErrorMessage {
+        message: string;
+}
+export interface IOrderType {
+        ingredients: Array<string>;
+        _id: string;
+        status: string;
+        number: number;
+        createdAt: string | number | Date;
+        updatedAt: string;
+        name: string;
+    }
     
+export interface IOrderMessageResponse {
+        orders: Array<IOrderType>;
+        total: number;
+        totalToday: number;
+        success: boolean;
+}

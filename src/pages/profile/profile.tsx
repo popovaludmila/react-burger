@@ -1,6 +1,6 @@
 import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../../hooks/hooks';
 import { useForm } from '../../hooks/useForm';
 import { updateUserProfile } from '../../services/actions/user';
 
@@ -10,7 +10,6 @@ export const ProfilePage = ():JSX.Element => {
 
     const dispatch = useDispatch();
     const [isEdit, setIsEdit] = useState(false)
-     //@ts-ignore
     const {name, email} = useSelector(state => state.user.user);
 
     const {form, handleChange, setForm} = useForm({  
@@ -37,9 +36,9 @@ export const ProfilePage = ():JSX.Element => {
         e.preventDefault();
 
         const authToken = localStorage.getItem('accessToken');
-         //@ts-ignore
-        dispatch(updateUserProfile(form.name, form.email, form.password, authToken));
-
+        if(authToken && form.name && form.email) {
+            dispatch(updateUserProfile(form.name, form.email, form.password, authToken));
+        }
         setIsEdit(false);
     }
 
@@ -51,7 +50,7 @@ export const ProfilePage = ():JSX.Element => {
                     type={'text'}
                     placeholder={'Имя'}
                     onChange={onChange}
-                    value={form.name}
+                    value={form.name ?? ""}
                     icon="EditIcon"
                     name='name'
                     />
@@ -61,7 +60,7 @@ export const ProfilePage = ():JSX.Element => {
                     type={'text'}
                     placeholder={'Логин'}
                     onChange={onChange}
-                    value={form.email}
+                    value={form.email ?? ""}
                     name='email'
                     icon="EditIcon"
                     />

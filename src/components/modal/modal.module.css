@@ -25,6 +25,12 @@
     width: 100%;
 }
 
+.title_null {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+}
+
 .close {
     display: flex;
     justify-content: center;

@@ -3,14 +3,14 @@ import modalStyles from './modal.module.css';
 import ModalOverlay from './modal-overlay/modal-overlay';
 import { useEffect } from 'react';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useDispatch } from 'react-redux';
 import { closeModal } from '../../services/actions';
+import { useDispatch } from '../../hooks/hooks';
 
 const modal = document.getElementById("modal") as HTMLElement;
 
 type TModalProps = {
     children: JSX.Element;
-    modalTitle: string;
+    modalTitle: string | null;
     onCloseClick?: () => void;
 }
 
@@ -41,13 +41,29 @@ const Modal = ({children, modalTitle, onCloseClick}: TModalProps): JSX.Element =
         <>
             <div className={`${modalStyles.container}`}>
                 <div className={`${modalStyles.content}`}>
-                    <div className={`${modalStyles.title}`}>
-                        <h3 className="text text_type_main-large">{modalTitle}</h3>
-                        <button className={`${modalStyles.close}`} onClick={onClick}>
-                            <CloseIcon type="primary" />
-                        </button>
-                    </div>
+
+                    {modalTitle !== null &&
+                        <div className={`${modalStyles.title}`}>
+                                <h3 className="text text_type_main-large">
+                                    {modalTitle}
+                                </h3>
+                                <button className={`${modalStyles.close}`} onClick={onClick}>
+                                <CloseIcon type="primary" />
+                            </button>
+                        </div>
+                    }
                 
+
+                {modalTitle === null &&
+                        <div className={`${modalStyles.title_null}`}>
+                                <h3 className="text text_type_main-large">
+                                    {modalTitle}
+                                </h3>
+                                <button className={`${modalStyles.close}`} onClick={onClick}>
+                                <CloseIcon type="primary" />
+                            </button>
+                        </div>
+                    }
                     {children}
                 </div>
             </div>

@@ -1,0 +1,37 @@
+.image {
+    position: relative;
+    display: flex;
+    border-radius: 50%;
+    border: 2px solid #801AB2;
+    width: 64px;
+    height: 64px;
+    background-color: #131316;
+    border-image: linear-gradient(to right top, #801AB2 #4C4CFF);
+}
+
+.img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    object-fit: contain;
+    z-index: 2;
+    width: 112px;
+    height: 56px;
+}
+
+.item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.item:last-child {
+    padding-bottom: 0;
+}
+.price {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: auto;
+}

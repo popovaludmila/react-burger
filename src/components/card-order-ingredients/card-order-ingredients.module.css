@@ -1,0 +1,21 @@
+.info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 64px;
+}
+
+.ingredients {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    min-height: 64px;
+    width: auto;
+}
+
+.price {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}

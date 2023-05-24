@@ -1,19 +1,18 @@
-import { useSelector } from 'react-redux';
 import { useMatch } from 'react-router-dom';
+import { useSelector } from '../../hooks/hooks';
 import ingredientDetailStyles from './ingredient-detail.module.css';
 
-export const IngredientDetailPage = (): JSX.Element => { 
+export const IngredientDetailPage = (): JSX.Element | null => { 
     const match = useMatch("/ingredients/:id");
     const id = match?.params.id;
-    //@ts-ignore
+  
     const ingredients = useSelector(state => state.constructorBurger.ingredients);
-     //@ts-ignore
+ 
     const ingredient = ingredients.find((ingredient) => ingredient._id === id);
 
     if (!ingredient) {
-         //@ts-ignore
         return null;
-    }
+    } 
 
     const {image, name, calories, proteins, fat, carbohydrates} = ingredient;
     

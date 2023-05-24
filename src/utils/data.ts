@@ -6,10 +6,12 @@ const LOGIN = 'login';
 const REGISTER = "register";
 const FORGOT_PASSWORD = 'forgot-password';
 const RESET_PASSWORD = 'reset-password';
-const ORDERS_FEED = 'orders-feed';
+const FEED = 'feed';
 const PROFILE = 'profile';
 const ORDERS = 'orders';
 const INGREDIENTS = 'ingredients';
+const WS_URL = 'wss://norma.nomoreparties.space/orders';
+const ALL = 'all';
 
 export {BASE_URL, BUN, MAIN, SAUCE, LOGIN, REGISTER, FORGOT_PASSWORD, RESET_PASSWORD,
- ORDERS_FEED, PROFILE, ORDERS, INGREDIENTS};
+ FEED, PROFILE, ORDERS, INGREDIENTS, WS_URL, ALL};

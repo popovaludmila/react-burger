@@ -1,8 +1,8 @@
 import { Button, EmailInput, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useDispatch, useSelector } from 'react-redux';
 import { Link,  useNavigate } from 'react-router-dom';
 import { ErrorModal } from '../../components/modal/error-modal/error-modal';
 import Modal from '../../components/modal/modal';
+import { useDispatch, useSelector } from '../../hooks/hooks';
 import { useForm } from '../../hooks/useForm';
 import { errorClean, register } from '../../services/actions/user';
 import { LOGIN } from '../../utils/data';
@@ -12,7 +12,6 @@ import registerStyles from './register.module.css';
 export const RegisterPage = ():JSX.Element => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-     //@ts-ignore
     const errorMessage = useSelector(state => state.user.errorMessage);
     const errorText = errorMessage?.toUpperCase();
 
@@ -29,9 +28,7 @@ export const RegisterPage = ():JSX.Element => {
             name: form.name,
             password: form.password
         }
-         //@ts-ignore
         dispatch(register(user, () => navigate('/')));
-       
     }
     
     return (
@@ -67,7 +64,7 @@ export const RegisterPage = ():JSX.Element => {
                     <Button htmlType="submit" type="primary" size="medium">
                         Зарегистрироваться
                     </Button>
-                    {errorMessage !== null &&
+                    {errorText !== undefined &&
                         <Modal modalTitle={''} onCloseClick={() => dispatch(errorClean())}>
                             <ErrorModal errorMessage={errorText} />
                         </Modal>
