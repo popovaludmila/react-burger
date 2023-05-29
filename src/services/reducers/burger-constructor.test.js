@@ -2,7 +2,6 @@ import { addIngredientToCart, cleanCart, closeModal, deleteIngredient, GET_INGRE
 import {constructorReducer, initialState} from "./burger-constructor";
 
 describe('burgerConstructor reducer', () => {
-
     const testIngredients = [
         {
             _id: '111111',
@@ -69,6 +68,7 @@ describe('burgerConstructor reducer', () => {
             name: 'sweet sauce',
             type: 'sauce',
             price: 130,
+            key: '2',
             image: 'https://url/image1.jpg'
         },
         {
@@ -76,14 +76,13 @@ describe('burgerConstructor reducer', () => {
             name: 'chicken cutlet',
             type: 'main',
             price: 130,
+            key: '3',
             image: 'https://url/image2.jpg'
         }
     ]
 
     it('test inital state', () => {
-        expect(constructorReducer(undefined, {})).toEqual({
-            ...initialState
-        })
+        expect(constructorReducer(undefined, {})).toEqual(initialState)
     })
 
     it('test get ingredients data request', () => {
@@ -223,9 +222,7 @@ describe('burgerConstructor reducer', () => {
     it('get order data success', () => {
         expect(constructorReducer(initialState, {
             type: GET_ORDER_DATA_SUCCESS,
-            order: {
-                id: 1234
-            }
+            order: 1234
         })).toEqual({
             ...initialState,
             getOrderDataRequest: false,
@@ -307,7 +304,7 @@ describe('burgerConstructor reducer', () => {
                 bottom: null,
                 fillings: [testCartIngredients[1]]
             },
-        }, deleteIngredient('3'))
+        }, deleteIngredient('2'))
         ).toEqual({
             ...initialState,
             cart: {
@@ -343,8 +340,8 @@ describe('burgerConstructor reducer', () => {
         .toEqual({
             ...initialState,
             cart: {
-                top: null,
-                bottom: null,
+                top: testCartIngredients[0],
+                bottom: testCartIngredients[0],
                 fillings: [testCartIngredients[2], testCartIngredients[1]]
             }
         })

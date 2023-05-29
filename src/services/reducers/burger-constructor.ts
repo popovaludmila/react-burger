@@ -29,6 +29,7 @@ type TTabs = {
 type TOrderId = {
     id: number;
 }
+
 type TBurgerConstructorState = {
         ingredients: TIngredientData[],
         cart: TCart;
@@ -45,7 +46,7 @@ type TBurgerConstructorState = {
         errorMessage: string | null;
 }
 
-const initialState: TBurgerConstructorState = {
+export const initialState: TBurgerConstructorState = {
     ingredients: [],
     cart: {
         top: null,
@@ -166,7 +167,7 @@ export const constructorReducer = (state = initialState, action:TBurgerConstruct
                 ...state,
                 tabs: state.tabs.map((tab) => {
                     if (tab.tab !== action.tab) {
-                        return tab
+                        return {tab: tab.tab, isActive: false};
                     }
 
                     return {tab: action.tab, isActive: action.isActive};
