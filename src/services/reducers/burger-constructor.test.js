@@ -1,4 +1,4 @@
-import { addIngredientToCart, cleanCart, closeModal, deleteIngredient, GET_INGREDIENTS_DATA_FAILED, GET_INGREDIENTS_DATA_REQUEST, GET_INGREDIENTS_DATA_SUCCESS, GET_ORDER_DATA_FAILED, GET_ORDER_DATA_REQUEST, GET_ORDER_DATA_SUCCESS, showDetailIngredient,  } from "../actions";
+import { addIngredientToCart, cleanCart, closeModal, deleteIngredient, GET_INGREDIENTS_DATA_FAILED, GET_INGREDIENTS_DATA_REQUEST, GET_INGREDIENTS_DATA_SUCCESS, GET_ORDER_DATA_FAILED, GET_ORDER_DATA_REQUEST, GET_ORDER_DATA_SUCCESS, replaceIngredient, showDetailIngredient, switchTab,  } from "../actions";
 import {constructorReducer, initialState} from "./burger-constructor";
 
 describe('burgerConstructor reducer', () => {
@@ -330,5 +330,151 @@ describe('burgerConstructor reducer', () => {
         })
     })
 
-    
+    it('test replace ingredients', () => {
+        //В корзине булки и две начинки
+        expect(constructorReducer({
+            ...initialState,
+            cart: {
+                top: testCartIngredients[0],
+                bottom: testCartIngredients[0],
+                fillings: [testCartIngredients[1], testCartIngredients[2]]
+            },
+        }, replaceIngredient('2', '3')))
+        .toEqual({
+            ...initialState,
+            cart: {
+                top: null,
+                bottom: null,
+                fillings: [testCartIngredients[2], testCartIngredients[1]]
+            }
+        })
+
+        // В корзине нет булок, есть две начинки
+        expect(constructorReducer({
+            ...initialState,
+            cart: {
+                top: null,
+                bottom: null,
+                fillings: [testCartIngredients[1], testCartIngredients[2]]
+            },
+        }, replaceIngredient('2', '3')))
+        .toEqual({
+            ...initialState,
+            cart: {
+                top: null,
+                bottom: null,
+                fillings: [testCartIngredients[2], testCartIngredients[1]]
+            }
+        })
+    })
+
+    it('test switch tab', () => {
+        // Выбрана категория булок, tab на соусы
+        expect(constructorReducer({
+            ...initialState,
+            tabs:[ 
+                {
+                    tab: 'bun',
+                    isActive: true
+                },
+                {
+                    tab: 'sauce',
+                    isActive: false
+                },
+                {
+                    tab: 'main',
+                    isActive: false
+                }
+            ]
+        }, switchTab('sauce', true))
+        ).toEqual({
+            ...initialState,
+            tabs:[ 
+                {
+                    tab: 'bun',
+                    isActive: false
+                },
+                {
+                    tab: 'sauce',
+                    isActive: true
+                },
+                {
+                    tab: 'main',
+                    isActive: false
+                }
+            ]
+        })
+
+        // Выбрана категория соусов, tab на начинки 
+        expect(constructorReducer({
+            ...initialState,
+            tabs:[ 
+                {
+                    tab: 'bun',
+                    isActive: false
+                },
+                {
+                    tab: 'sauce',
+                    isActive: true
+                },
+                {
+                    tab: 'main',
+                    isActive: false
+                }
+            ]
+        }, switchTab('main', true))
+        ).toEqual({
+            ...initialState,
+            tabs:[ 
+                {
+                    tab: 'bun',
+                    isActive: false
+                },
+                {
+                    tab: 'sauce',
+                    isActive: false
+                },
+                {
+                    tab: 'main',
+                    isActive: true
+                }
+            ]
+        })
+
+        // Выбрана категория начинок, tab на булки
+        expect(constructorReducer({
+            ...initialState,
+            tabs:[ 
+                {
+                    tab: 'bun',
+                    isActive: false
+                },
+                {
+                    tab: 'sauce',
+                    isActive: false
+                },
+                {
+                    tab: 'main',
+                    isActive: true
+                }
+            ]
+        }, switchTab('bun', true))
+        ).toEqual({
+            ...initialState,
+            tabs:[ 
+                {
+                    tab: 'bun',
+                    isActive: true
+                },
+                {
+                    tab: 'sauce',
+                    isActive: false
+                },
+                {
+                    tab: 'main',
+                    isActive: false
+                }
+            ]
+        })
+    })
 })
