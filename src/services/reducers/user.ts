@@ -33,7 +33,7 @@ export type TUserState = {
     updateUserFailed: boolean;
 }
 
-const initialState: TUserState = {
+export const initialState: TUserState = {
     isAuth: false,
     user: {
         email: null, 
@@ -85,6 +85,7 @@ export const userReducer = (state = initialState, action: TUserActions): TUserSt
         case REGISTER_FAILED:
                 return {
                     ...state,
+                    isAuth: false,
                     registrationFailed: true,
                     errorMessage: action.err
                 } 
@@ -95,7 +96,8 @@ export const userReducer = (state = initialState, action: TUserActions): TUserSt
             }
         case FORGOT_PASSWORD_SUCCESS: 
             return {
-                ...state
+                ...state,
+                forgotPasswordRequest: false
             }
         case FORGOT_PASSWORD_FAILED:
             return {
@@ -110,7 +112,8 @@ export const userReducer = (state = initialState, action: TUserActions): TUserSt
                 }
             case RESET_PASSWORD_SUCCESS: 
                 return {
-                    ...state
+                    ...state,
+                    resetPasswordRequest: false
                 }
             case RESET_PASSWORD_FAILED:
                     return {
