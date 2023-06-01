@@ -11,14 +11,14 @@ type TUserOrdersState = {
     wsConnected: boolean;
 }
 
-const initalState: TUserOrdersState = {
+export const initialState: TUserOrdersState = {
     orders: [],
     total: null,
     totalToday: null,
     wsConnected: false
 }
 
-export const userOrdersReducer = (state = initalState, action: TUserOrdersActions): TUserOrdersState => {
+export const userOrdersReducer = (state = initialState, action: TUserOrdersActions): TUserOrdersState => {
     switch(action.type) {
         case USER_ORDERS_WS_CONNECTING: 
             return {

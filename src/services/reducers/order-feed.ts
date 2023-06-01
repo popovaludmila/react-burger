@@ -10,7 +10,7 @@ type TOrderFeedState = {
     wsConnected: boolean;
 }
 
-const initalState: TOrderFeedState = {
+export const initialState: TOrderFeedState = {
     orders: [],
     total: null,
     totalToday: null,
@@ -18,7 +18,7 @@ const initalState: TOrderFeedState = {
     wsConnected: false
 }
 
-export const orderFeedReducer = (state = initalState, action: TOrderFeedActions): TOrderFeedState => {
+export const orderFeedReducer = (state = initialState, action: TOrderFeedActions): TOrderFeedState => {
     switch(action.type) {
         case ORDER_FEED_WS_CONNECTING: 
             return {

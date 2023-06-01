@@ -11,7 +11,7 @@ type TConstructorIngredientProps = {
 const ConstructorIngredient = ({item, type, typeBun}:TConstructorIngredientProps):JSX.Element => {
     const {name, price, image} = item;
     return (
-    <li className={`${constructorIngredientStyles.ingredient} mb-4 mr-4 mt-4`}> 
+    <li data-test="bun" className={`${constructorIngredientStyles.ingredient} mb-4 mr-4 mt-4`}> 
         <ConstructorElement
             text={`${name} (${typeBun})`}
             type={type}

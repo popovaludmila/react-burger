@@ -55,7 +55,7 @@ const CartTotal = ({total}: TCartTotalProps): JSX.Element => {
                 <CurrencyIcon type="primary" />
             </div>
             
-            <Button htmlType="submit" type="primary" size="medium" onClick={onOrderButtonClick}>Оформить заказ </Button>
+            <Button data-test="create-order" htmlType="submit" type="primary" size="medium" onClick={onOrderButtonClick}>Оформить заказ </Button>
          
             {order !== null && 
                 <Modal onCloseClick={onOrderCloseClick} modalTitle={''}>

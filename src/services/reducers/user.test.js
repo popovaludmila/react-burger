@@ -2,7 +2,7 @@ import { ERROR_CLEAN, FORGOT_PASSWORD_FAILED, FORGOT_PASSWORD_REQUEST, FORGOT_PA
 import { initialState, userReducer } from "./user"
 
 describe('user reducer', () => {
-
+   
     const testUser = {
         email: 'Lili@yandex.ru',
         name: 'Lili'
