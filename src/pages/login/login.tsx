@@ -39,6 +39,7 @@ export const LoginPage = (): JSX.Element => {
                         isIcon={false}
                         value={form.email}
                         onChange={handleChange}
+                        data-test="email_login"
                         />  
                     </div>
                     <div className="mb-6">
@@ -47,9 +48,10 @@ export const LoginPage = (): JSX.Element => {
                         name='password'
                         icon="ShowIcon"
                         value={form.password}
+                        data-test="password_login"
                         />   
                     </div>
-                    <Button htmlType="submit" type="primary" size="medium">
+                    <Button data-test="login_button" htmlType="submit" type="primary" size="medium">
                         Войти
                     </Button>
                     {errorText !== undefined &&

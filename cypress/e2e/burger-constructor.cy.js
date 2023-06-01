@@ -1,3 +1,5 @@
+import {ingredients} from "../fixtures/orderRequest.json";
+
 describe('Test burger constructor', () => {
 
     beforeEach(() => {
@@ -38,20 +40,6 @@ describe('Test burger constructor', () => {
         cy.contains('Детали ингредиента').should('not.exist');
         cy.visit('/');
     });
-})
-
-describe("order modal works correctly", () => {
-    beforeEach(() => {
-        cy.intercept("GET", "https://norma.nomoreparties.space/api/orders", {
-            fixture: "order"
-        }).as("postOrder")
-        cy.setCookie('accessToken', 'Bearer mock')
-        cy.seedAndVisit();
-    })
-
-    afterEach(() => {
-        cy.clearCookie('accessToken')
-    })
 
     it("should order modal work", () => {
         cy.get('[data-test="product"]').contains('Краторная булка N-200i').trigger('dragstart');
@@ -67,7 +55,28 @@ describe("order modal works correctly", () => {
         cy.get('[data-test="filling"]').contains('Соус Spicy-X').should('exist');  
 
         cy.get('[data-test="create-order"]').click();
+        
+        cy.intercept('POST', 'api/auth/login', {
+            fixture: 'user.json',
+        }).as('loginRequest')
+        cy.intercept('GET', 'api/auth/user', { fixture: 'login.json' })
+        
+        cy.get('[data-test="email_login"]').type("test@mail.com");
+        cy.get('[data-test="password_login"]').type("12345");
+        cy.get('[data-test="login_button"]').click();
+        cy.get('[data-test="create-order"]').click();
 
+        cy.intercept('POST', 'api/orders', {
+            fixture: 'order.json',
+          }).as('orderRequest')
+  
+        cy.wait('@orderRequest')
+            .its('request.body')
+            .should('deep.equal',  { ingredients })
+      
+
+        cy.get('[data-test="order_number"]').contains("7788")
+      
         
     })
 })

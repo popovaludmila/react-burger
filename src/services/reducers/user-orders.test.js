@@ -42,7 +42,13 @@ describe('user orders reducer', () => {
 
     it('test user orders wsGet message', () => {
         expect(userOrdersReducer(initialState, {
-            type: USER_ORDERS_WS_GET_MESSAGE
+            type: USER_ORDERS_WS_GET_MESSAGE, 
+            payload: {
+                orders: testOrders,
+                total: testTotal,
+                totalToday: testTotalToday, 
+                success: true
+            }
         })).toEqual({
             ...initialState,
             orders: testOrders,

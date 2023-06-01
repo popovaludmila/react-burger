@@ -43,7 +43,13 @@ describe('order feed reducer', () => {
 
     it('test user orders wsGet message', () => {
         expect(orderFeedReducer(initialState, {
-            type: ORDER_FEED_WS_GET_MESSAGE
+            type: ORDER_FEED_WS_GET_MESSAGE,
+            payload: {
+                orders: testOrders,
+                total: testTotal,
+                totalToday: testTotalToday, 
+                success: true
+            }
         })).toEqual({
             ...initialState,
             orders: testOrders,

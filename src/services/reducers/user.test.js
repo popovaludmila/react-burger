@@ -23,7 +23,10 @@ describe('user reducer', () => {
 
     it('test register user success', () => {
         expect(userReducer(initialState, {
-            type: REGISTER_SUCCESS
+            type: REGISTER_SUCCESS,
+            data: {
+                user: testUser
+            }
         })).toEqual({
             ...initialState,
             registrationRequest: false,
@@ -34,7 +37,8 @@ describe('user reducer', () => {
 
     it('test register user failed', () => {
         expect(userReducer(initialState, {
-            type: REGISTER_FAILED
+            type: REGISTER_FAILED,
+            err: 'Произошла ошибка при регистрации'
         })).toEqual({
             ...initialState,
             registrationFailed: true,
@@ -62,7 +66,8 @@ describe('user reducer', () => {
 
     it('test forgot password failed', () => {
         expect(userReducer(initialState, {
-            type: FORGOT_PASSWORD_FAILED
+            type: FORGOT_PASSWORD_FAILED,
+            err: 'Ошибка!' 
         })).toEqual({
             ...initialState,
             forgotPasswordFailed: true,
@@ -90,7 +95,8 @@ describe('user reducer', () => {
 
     it('test reset password failed', () => {
         expect(userReducer(initialState, {
-            type: RESET_PASSWORD_FAILED
+            type: RESET_PASSWORD_FAILED,
+            err: 'Ошибка!' 
         })).toEqual({
             ...initialState,
             resetPasswordFailed: true,
@@ -109,7 +115,10 @@ describe('user reducer', () => {
 
     it('test login user success', () => {
         expect(userReducer(initialState, {
-            type: LOGIN_SUCCESS
+            type: LOGIN_SUCCESS,
+            data: {
+                user: testUser
+            }
         })).toEqual({
             ...initialState,
             isAuth: true,
@@ -120,7 +129,8 @@ describe('user reducer', () => {
 
     it('test login user failed', () => {
         expect(userReducer(initialState, {
-            type: LOGIN_FAILED
+            type: LOGIN_FAILED,
+            err: 'Произошла ошибка при авторизации'
         })).toEqual({
             ...initialState,
             loginFailed: true,
@@ -172,7 +182,10 @@ describe('user reducer', () => {
 
     it('test get user success', () => {
         expect(userReducer(initialState, {
-            type: GET_USER_SUCCESS
+            type: GET_USER_SUCCESS,
+            data: {
+                user: testUser
+            }
         })).toEqual({
             ...initialState,
             isAuth: true,
@@ -201,7 +214,10 @@ describe('user reducer', () => {
 
     it('test update user success', () => {
         expect(userReducer(initialState, {
-            type: UPDATE_USER_SUCCESS
+            type: UPDATE_USER_SUCCESS,
+            data: {
+                user: testUser
+            }
         })).toEqual({
             ...initialState,
             isAuth: true,
