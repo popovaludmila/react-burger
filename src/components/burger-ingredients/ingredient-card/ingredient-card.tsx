@@ -38,7 +38,7 @@ const IngredientCard = ({item}:TIngredientCardProps):JSX.Element => {
 
   return (
     <div>
-      <Link to={ `/${INGREDIENTS}/${_id}`} state={{background: location}}
+      <Link data-test="product" to={ `/${INGREDIENTS}/${_id}`} state={{background: location}}
       ref={dragRef} className={`${ingredientCardStyles.item} mb-10`} >
         {count ? <Counter count={count} size="default" extraClass="m-1" /> : null}
         

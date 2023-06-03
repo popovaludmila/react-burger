@@ -10,7 +10,7 @@ export const BurgerSample = ({text, margin, isHover}:TBurgerSampleProps):JSX.Ele
     const border = isHover ? "solid lightgreen" : "";
 
     return (
-        <li className={`${burgerSampletStyles.ingredient} mr-4 ${margin}`} style={{border}}> 
+        <li data-test="burger_constructor_area" className={`${burgerSampletStyles.ingredient} mr-4 ${margin}`} style={{border}}> 
             <span>{text}</span>
         </li>
     )

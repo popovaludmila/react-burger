@@ -61,7 +61,7 @@ const BurgerConstructor = ():JSX.Element => {
                
                 
                 <li className={`${burgerConstructorStyles.item} pr-2`}>
-                    <ul className={`${burgerConstructorStyles.fillings}`}>
+                    <ul data-test="fillings" className={`${burgerConstructorStyles.fillings}`}>
                         {hasIngredients ? constructorIngredient : <BurgerSample text={"Добавить начинку"} margin="" isHover={!isBun && isHover}/>} 
                     </ul>
                 </li>

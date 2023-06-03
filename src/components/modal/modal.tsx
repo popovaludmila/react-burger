@@ -39,15 +39,15 @@ const Modal = ({children, modalTitle, onCloseClick}: TModalProps): JSX.Element =
 
     return ReactDOM.createPortal(   
         <>
-            <div className={`${modalStyles.container}`}>
+            <div className={`${modalStyles.container}`} data-test="modal">
                 <div className={`${modalStyles.content}`}>
 
                     {modalTitle !== null &&
                         <div className={`${modalStyles.title}`}>
-                                <h3 className="text text_type_main-large">
-                                    {modalTitle}
-                                </h3>
-                                <button className={`${modalStyles.close}`} onClick={onClick}>
+                            <h3 className="text text_type_main-large">
+                                {modalTitle}
+                            </h3>
+                            <button data-test="close" className={`${modalStyles.close}`} onClick={onClick}>
                                 <CloseIcon type="primary" />
                             </button>
                         </div>
@@ -59,9 +59,9 @@ const Modal = ({children, modalTitle, onCloseClick}: TModalProps): JSX.Element =
                                 <h3 className="text text_type_main-large">
                                     {modalTitle}
                                 </h3>
-                                <button className={`${modalStyles.close}`} onClick={onClick}>
-                                <CloseIcon type="primary" />
-                            </button>
+                                <button data-test="close" className={`${modalStyles.close}`} onClick={onClick}>
+                                    <CloseIcon type="primary" />
+                                </button>
                         </div>
                     }
                     {children}

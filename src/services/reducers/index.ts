@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import { constructorReducer } from "./burder-constructor";
+import { constructorReducer } from "./burger-constructor";
 import { orderFeedReducer } from "./order-feed";
 import { userReducer } from "./user";
 import { userOrdersReducer } from "./user-orders";
